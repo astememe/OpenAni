@@ -8,7 +8,8 @@
     android:layout_height="wrap_content"
     android:background="@color/white"
     app:cardCornerRadius="10dp"
-    android:layout_margin="20dp"
+    android:layout_marginTop="20dp"
+    android:layout_marginHorizontal="10dp"
     app:layout_constraintTop_toTopOf="parent"
     app:layout_constraintBottom_toBottomOf="parent"
     app:layout_constraintStart_toStartOf="parent"
@@ -99,7 +100,7 @@
                             android:layout_marginLeft="5dp" />
 
                         <TextView
-                            android:id="@+id/texto_flecha_arriba"
+                            android:id="@+id/cantidad_seeders"
                             android:layout_width="wrap_content"
                             android:layout_height="20dp"
                             android:text="117"
@@ -114,7 +115,7 @@
                             android:layout_marginLeft="5dp" />
 
                         <TextView
-                            android:id="@+id/texto_flecha_abajo"
+                            android:id="@+id/cantidad_leechers"
                             android:layout_width="wrap_content"
                             android:layout_height="20dp"
                             android:text="117"
@@ -124,6 +125,7 @@
 
                     </LinearLayout>
                     <androidx.cardview.widget.CardView
+
                         android:layout_width="250dp"
                         android:layout_height="65dp"
                         android:layout_gravity="center"
@@ -133,6 +135,7 @@
                         android:layout_marginTop="10dp"
                         >
                         <ImageButton
+                            android:id="imagebutton_download"
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
                             android:layout_marginTop="-4dp"
@@ -143,12 +146,12 @@
                             android:src="@drawable/fondo_boton"
                             android:scaleType="centerCrop"
                             app:tint="@color/black"
-
                             android:backgroundTint="@color/naranja_descargar"
                             >
 
                         </ImageButton>
                         <TextView
+                            android:id="texto_download"
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
                             android:text="Download"
@@ -227,6 +230,7 @@
                             app:layout_constraintRight_toRightOf="parent"
                             />
                         <TextView
+                            android:id="@+id/cantidad_likes"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:text="10"
@@ -251,6 +255,7 @@
                             app:layout_constraintRight_toRightOf="parent"
                             />
                         <TextView
+                            android:id="@+id/cantidad_dislikes"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:text="1"
