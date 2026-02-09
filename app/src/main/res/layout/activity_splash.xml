@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/splashMain"
+    tools:context=".SplashScreen">
+    <androidx.constraintlayout.widget.Guideline
+        android:layout_width="wrap_content"
+
+        android:layout_height="wrap_content"
+        android:id="@+id/SplashLh1"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.36"
+        />
+
+    <ImageView
+        android:id="@+id/splashImagenFondo"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:scaleType="centerCrop"
+        android:src="@drawable/splashscreen_fondo"
+        >
+    </ImageView>
+    <ImageView
+        android:id="@+id/splashLogo"
+        android:layout_width="154dp"
+        android:layout_height="201dp"
+        android:src="@drawable/logotipo_mini"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent">
+    </ImageView>
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/app_name"
+        android:textColor="@color/black"
+        app:layout_constraintTop_toBottomOf="@+id/splashLogo"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        android:fontFamily=""
+        android:textSize="30sp"
+        />
+
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>
