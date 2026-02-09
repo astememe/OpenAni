@@ -14,20 +14,26 @@
         android:orientation="horizontal"
         app:layout_constraintGuide_percent="0.36"
         />
-
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/black">
+    </View>
     <ImageView
         android:id="@+id/splashImagenFondo"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:scaleType="centerCrop"
         android:src="@drawable/splashscreen_fondo"
+        android:alpha="0.3"
         >
+
     </ImageView>
     <ImageView
         android:id="@+id/splashLogo"
-        android:layout_width="154dp"
-        android:layout_height="201dp"
-        android:src="@drawable/logotipo_mini"
+        android:layout_width="268dp"
+        android:layout_height="268dp"
+        android:src="@drawable/logotipo_splash_screen"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -37,11 +43,11 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/app_name"
-        android:textColor="@color/black"
+        android:textColor="@color/white"
         app:layout_constraintTop_toBottomOf="@+id/splashLogo"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        android:fontFamily=""
+        android:fontFamily="@font/zud_bold"
         android:textSize="30sp"
         />
 
