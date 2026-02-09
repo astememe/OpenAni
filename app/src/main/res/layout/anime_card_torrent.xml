@@ -22,7 +22,7 @@
         android:layout_height="wrap_content"
         android:background="@drawable/fondo_boton"
         app:cardBackgroundColor="@color/black"
-
+        app:cardCornerRadius="10dp"
         >
 
         <androidx.cardview.widget.CardView
