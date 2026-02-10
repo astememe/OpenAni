@@ -87,6 +87,7 @@
                     android:background="@color/white"
                     android:textSize="20dp"
                     android:hint="Top anime 🔥."
+                    android:padding="5dp"
                     android:textAlignment="viewStart"
                     android:fontFamily="@font/share"
                     />
