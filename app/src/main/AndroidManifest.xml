@@ -15,16 +15,11 @@
         android:theme="@style/Theme.OpenAni">
         <activity
             android:name=".AccountView"
-            android:exported="false" />
+            android:exported="false" >
+        </activity>
         <activity
             android:name=".TorrentView"
-            android:exported="false" />
-        <activity
-            android:name=".MainManga"
-            android:exported="false" />
-        <activity
-            android:name=".SplashScreen"
-            android:exported="true">
+            android:exported="true" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -32,9 +27,18 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".MainActivity"
-            android:exported="false" />
+            android:name=".MainManga"
+            android:exported="false" >
 
+        </activity>
+        <activity
+            android:name=".MainAnime"
+            android:exported="true">
+        </activity>
+        <activity
+            android:name=".MainActivity"
+            android:exported="true" >
+        </activity>
     </application>
 
 </manifest>
