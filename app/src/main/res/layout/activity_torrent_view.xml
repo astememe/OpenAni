@@ -279,7 +279,6 @@
                         <include layout="@layout/card_comentario"></include>
                         <include layout="@layout/card_comentario"></include>
 
-
                     </LinearLayout>
 
                 </ScrollView>

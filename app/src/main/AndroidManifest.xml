@@ -14,6 +14,9 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.OpenAni">
         <activity
+            android:name=".AccountView"
+            android:exported="false" />
+        <activity
             android:name=".TorrentView"
             android:exported="false" />
         <activity
