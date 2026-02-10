@@ -1,7 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 
-
-
 <androidx.cardview.widget.CardView
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:android="http://schemas.android.com/apk/res/android"
@@ -126,11 +124,9 @@
 
                     </LinearLayout>
                     <androidx.cardview.widget.CardView
-
                         android:layout_width="250dp"
                         android:layout_height="65dp"
                         android:layout_gravity="center"
-                        android:background="@drawable/roundedbutton"
                         android:backgroundTint="@color/black"
                         app:cardCornerRadius="5dp"
                         android:layout_marginTop="10dp"
@@ -141,15 +137,14 @@
                             android:layout_height="match_parent"
                             android:layout_marginTop="-4dp"
                             android:layout_marginBottom="-4dp"
-                            android:layout_marginLeft="-2dp"
-                            android:layout_marginRight="-2dp"
+                            android:layout_marginLeft="-3dp"
+                            android:layout_marginRight="-3dp"
                             android:padding="0dp"
                             android:src="@drawable/fondo_boton"
                             android:scaleType="centerCrop"
                             app:tint="@color/black"
                             android:backgroundTint="@color/naranja_descargar"
                             >
-
                         </ImageButton>
                         <TextView
                             android:layout_width="match_parent"
@@ -269,11 +264,5 @@
                 </LinearLayout>
             </LinearLayout>
         </androidx.cardview.widget.CardView>
-
-
-
     </androidx.cardview.widget.CardView>
-
-
-
 </androidx.cardview.widget.CardView>
