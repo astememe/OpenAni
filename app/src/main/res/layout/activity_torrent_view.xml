@@ -14,7 +14,6 @@
         android:background="@color/azul_header"
         android:elevation="2dp"
         android:id="@+id/header"
-
         >
 
         <ImageView
@@ -247,21 +246,41 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:orientation="vertical"
+                android:layout_marginTop="7dp"
+                android:layout_gravity="center"
+                android:layout_marginBottom="7dp"
                 >
-
-                <TextView
+                <LinearLayout
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="Comments"
-                    android:textColor="@color/black"
-                    android:fontFamily="@font/zud"
-                    android:layout_marginTop="5dp"
+                    android:layout_height="27dp"
                     android:layout_marginHorizontal="30dp"
-                    android:textSize="20sp"
-
+                    android:orientation="horizontal"
                     >
 
-                </TextView>
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Comments"
+                        android:textColor="@color/black"
+                        android:fontFamily="@font/zud"
+                        android:textSize="20sp"
+                        android:layout_weight="1"
+                        android:textAlignment="textStart"
+                        />
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content">
+
+                        <io.woong.shapedimageview.CircleImageView
+                            android:layout_width="match_parent"
+                            android:layout_height="27dp"
+                            android:src="@drawable/agregar_comentario_icono"
+                            android:tint="@color/white"
+                            app:border_color="@color/black"
+                            app:border_size="1dp"
+                            />
+                    </LinearLayout>
+                </LinearLayout>
 
                 <ScrollView
                     android:layout_width="match_parent"
