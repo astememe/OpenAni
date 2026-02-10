@@ -69,7 +69,7 @@
                 android:layout_width="52dp"
                 android:layout_height="54dp"
                 android:scaleType="fitCenter"
-                android:src="@drawable/side_nav_icon"
+                android:src="@drawable/flecha_hacia_atras"
                 app:tint="@color/white">
 
             </ImageView>
