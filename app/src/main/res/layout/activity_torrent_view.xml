@@ -273,11 +273,11 @@
                         android:layout_height="wrap_content"
                         android:orientation="vertical">
 
-                        <include layout="@layout/anime_card_torrent"></include>
-                        <include layout="@layout/anime_card_torrent"></include>
-                        <include layout="@layout/anime_card_torrent"></include>
-                        <include layout="@layout/anime_card_torrent"></include>
-                        <include layout="@layout/anime_card_torrent"></include>
+                        <include layout="@layout/card_comentario"></include>
+                        <include layout="@layout/card_comentario"></include>
+                        <include layout="@layout/card_comentario"></include>
+                        <include layout="@layout/card_comentario"></include>
+                        <include layout="@layout/card_comentario"></include>
 
 
                     </LinearLayout>
