@@ -54,6 +54,7 @@
         </LinearLayout>
 
         <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/botonmenulateral"
             android:layout_width="50dp"
             android:layout_height="50dp"
             app:layout_constraintTop_toTopOf="parent"
@@ -77,6 +78,7 @@
 
         </androidx.constraintlayout.widget.ConstraintLayout>
         <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/botonestrella"
             app:layout_constraintRight_toRightOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintBottom_toBottomOf="parent"
@@ -90,7 +92,7 @@
                 app:layout_constraintTop_toTopOf="parent"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintRight_toRightOf="parent"
-                android:id="@+id/estrella_favorita_icono"
+                android:id="@+id/estrella"
                 android:layout_width="40dp"
                 android:layout_height="40dp"
                 android:layout_marginTop="4dp"
@@ -103,31 +105,31 @@
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
-    <ScrollView
+    <FrameLayout
         android:layout_width="match_parent"
+        android:id="@+id/body"
         android:layout_height="0dp"
         app:layout_constraintTop_toBottomOf="@id/header"
+        app:layout_constraintBottom_toBottomOf="parent"
+        android:orientation="vertical"
         >
 
-        <FrameLayout
-            android:layout_width="match_parent"
-            android:id="@+id/body"
-            android:layout_height="0dp"
-            app:layout_constraintTop_toBottomOf="@id/header"
-            app:layout_constraintBottom_toBottomOf="parent"
-            android:orientation="vertical"
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/header_anime_fondo"
+            android:scaleType="centerCrop"
+            android:alpha="0.2"
+            android:backgroundTint="@color/white"
             >
 
-            <ImageView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:src="@drawable/header_anime_fondo"
-                android:scaleType="centerCrop"
-                android:alpha="0.2"
-                android:backgroundTint="@color/white"
-                >
+        </ImageView>
 
-            </ImageView>
+        <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toBottomOf="@id/header"
+            >
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -150,8 +152,20 @@
 
                     </ImageView>
 
+                    <TextView
+                        android:id="@+id/descripcion"
+                        android:layout_width="200dp"
+                        android:layout_height="100dp"
+                        android:layout_gravity="center"
+                        android:layout_marginBottom="25dp"
+                        android:text="Me gusta el pito"
+                        android:textAlignment="center"
+                        >
+
+                    </TextView>
+
                     <io.woong.shapedimageview.CircleImageView
-                        android:id="@+id/foto_perfil"
+                        android:id="@+id/fotoperfil"
                         android:layout_width="150dp"
                         android:layout_height="150dp"
                         android:src="@drawable/spiderman"
@@ -163,27 +177,382 @@
 
                     </io.woong.shapedimageview.CircleImageView>
 
+                    <io.woong.shapedimageview.CircleImageView
+                        android:id="@+id/cambiarfotoperfil"
+                        android:layout_width="50dp"
+                        android:layout_height="50dp"
+                        android:layout_marginLeft="40dp"
+                        android:layout_gravity="bottom|center"
+                        app:border_size="1dp"
+                        app:border_color="@color/white"
+                        >
+
+
+                    </io.woong.shapedimageview.CircleImageView>
+
+                    <ImageView
+                        android:layout_marginLeft="40dp"
+                        android:layout_width="35dp"
+                        android:layout_height="50dp"
+                        android:src="@drawable/camara_icono" android:tint="@color/white"
+                        android:layout_gravity="bottom|center"
+                        >
+
+
+                    </ImageView>
+
+
+
+
                 </FrameLayout>
 
                 <LinearLayout
+                    android:layout_marginTop="20dp"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:orientation="vertical"
                     >
 
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical"
+                        android:layout_marginBottom="20dp"
+                        >
 
 
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:text="Username"
+                            android:layout_marginHorizontal="40dp"
+                            android:fontFamily="@font/zud"
+                            android:textSize="20sp"
+                            android:textColor="@color/black"
+                            >
+
+                        </TextView>
+
+                        <androidx.cardview.widget.CardView
+                            android:layout_width="match_parent"
+                            android:layout_height="60dp"
+                            android:backgroundTint="@color/black"
+                            android:layout_marginHorizontal="40dp"
+                            app:cardCornerRadius="10dp"
+                            >
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:orientation="horizontal"
+                                android:layout_margin="2dp"
+                                android:layout_gravity="center"
+                                android:background="@drawable/roundedbutton"
+                                android:backgroundTint="@color/amarillo_comentarios"
+                                >
+
+                                <ImageView
+                                    android:layout_marginVertical="5dp"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="match_parent"
+                                    android:layout_weight="4"
+                                    android:src="@drawable/perfil_icono"
+                                    >
+
+                                </ImageView>
+
+                                <androidx.cardview.widget.CardView
+                                    android:layout_marginVertical="5dp"
+                                    android:layout_marginEnd="5dp"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="match_parent"
+                                    android:layout_weight="1"
+                                    app:cardCornerRadius="10dp"
+                                    android:backgroundTint="@color/black"
+                                    >
+
+                                    <androidx.cardview.widget.CardView
+                                        android:layout_width="match_parent"
+                                        android:layout_height="match_parent"
+                                        android:layout_margin="2dp"
+                                        app:cardCornerRadius="10dp"
+                                        >
+
+                                        <EditText
+                                            android:id="@+id/nombreusuario"
+                                            android:layout_width="match_parent"
+                                            android:layout_height="match_parent"
+                                            android:backgroundTint="@color/white"
+                                            android:layout_marginHorizontal="10dp"
+                                            android:hint="Username"
+                                            android:textColor="@color/black"
+                                            android:fontFamily="@font/share"
+                                            android:textSize="20sp"
+                                            >
+
+
+                                        </EditText>
+
+                                    </androidx.cardview.widget.CardView>
+
+                                </androidx.cardview.widget.CardView>
+
+                            </LinearLayout>
+
+
+                        </androidx.cardview.widget.CardView>
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical"
+                        android:layout_marginBottom="20dp">
+
+
+                        <TextView
+                            android:textColor="@color/black"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:text="Email"
+                            android:layout_marginHorizontal="40dp"
+                            android:fontFamily="@font/zud"
+                            android:textSize="20sp"
+                            >
+
+                        </TextView>
+
+                        <androidx.cardview.widget.CardView
+                            android:layout_width="match_parent"
+                            android:layout_height="60dp"
+                            android:backgroundTint="@color/black"
+                            android:layout_marginHorizontal="40dp"
+                            app:cardCornerRadius="10dp"
+                            >
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:orientation="horizontal"
+                                android:layout_margin="2dp"
+                                android:layout_gravity="center"
+                                android:background="@drawable/roundedbutton"
+                                android:backgroundTint="@color/amarillo_comentarios"
+                                >
+
+                                <ImageView
+                                    android:layout_marginVertical="5dp"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="match_parent"
+                                    android:layout_weight="4"
+                                    android:src="@drawable/correo_icono"
+                                    >
+
+                                </ImageView>
+
+                                <androidx.cardview.widget.CardView
+                                    android:layout_marginVertical="5dp"
+                                    android:layout_marginEnd="5dp"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="match_parent"
+                                    android:layout_weight="1"
+                                    app:cardCornerRadius="10dp"
+                                    android:backgroundTint="@color/black"
+                                    >
+
+                                    <androidx.cardview.widget.CardView
+                                        android:layout_width="match_parent"
+                                        android:layout_height="match_parent"
+                                        android:layout_margin="2dp"
+                                        app:cardCornerRadius="10dp"
+                                        >
+
+                                        <EditText
+                                            android:id="@+id/correo"
+                                            android:layout_width="match_parent"
+                                            android:layout_height="match_parent"
+                                            android:backgroundTint="@color/white"
+                                            android:layout_marginHorizontal="10dp"
+                                            android:hint="Username"
+                                            android:textColor="@color/black"
+                                            android:fontFamily="@font/share"
+                                            android:textSize="20sp"
+                                            >
+
+
+                                        </EditText>
+
+                                    </androidx.cardview.widget.CardView>
+
+                                </androidx.cardview.widget.CardView>
+
+                            </LinearLayout>
+
+
+                        </androidx.cardview.widget.CardView>
+
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical"
+                        android:layout_marginBottom="20dp"
+                        android:layout_gravity="center"
+                        android:gravity="center"
+                        >
+
+
+                        <TextView
+                            android:textColor="@color/black"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:text="Password"
+                            android:layout_marginHorizontal="40dp"
+                            android:fontFamily="@font/zud"
+                            android:textSize="20sp"
+                            >
+
+                        </TextView>
+
+                        <androidx.cardview.widget.CardView
+                            android:layout_width="match_parent"
+                            android:layout_height="60dp"
+                            android:backgroundTint="@color/black"
+                            android:layout_marginHorizontal="40dp"
+                            app:cardCornerRadius="10dp"
+                            >
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:orientation="horizontal"
+                                android:layout_margin="2dp"
+                                android:layout_gravity="center"
+                                android:background="@drawable/roundedbutton"
+                                android:backgroundTint="@color/amarillo_comentarios"
+                                >
+
+                                <ImageView
+                                    android:layout_marginVertical="5dp"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="match_parent"
+                                    android:layout_weight="4"
+                                    android:src="@drawable/contraena_icono"
+                                    >
+
+                                </ImageView>
+
+                                <androidx.cardview.widget.CardView
+                                    android:layout_marginVertical="5dp"
+                                    android:layout_marginEnd="5dp"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="match_parent"
+                                    android:layout_weight="1"
+                                    app:cardCornerRadius="10dp"
+                                    android:backgroundTint="@color/black"
+                                    >
+
+                                    <androidx.cardview.widget.CardView
+                                        android:layout_width="match_parent"
+                                        android:layout_height="match_parent"
+                                        android:layout_margin="2dp"
+                                        app:cardCornerRadius="10dp"
+                                        >
+
+                                        <EditText
+                                            android:id="@+id/contrasena"
+                                            android:layout_width="match_parent"
+                                            android:layout_height="match_parent"
+                                            android:backgroundTint="@color/white"
+                                            android:layout_marginHorizontal="10dp"
+                                            android:hint="Username"
+                                            android:textColor="@color/black"
+                                            android:fontFamily="@font/share"
+                                            android:textSize="20sp"
+                                            >
+
+
+                                        </EditText>
+
+                                    </androidx.cardview.widget.CardView>
+
+                                </androidx.cardview.widget.CardView>
+
+                            </LinearLayout>
+
+                        </androidx.cardview.widget.CardView>
+
+                    </LinearLayout>
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/buttons"
+                    android:layout_width="match_parent"
+                    android:layout_height="60dp"
+                    android:orientation="horizontal"
+                    android:layout_marginHorizontal="20dp"
+                    android:layout_gravity="center"
+                    android:gravity="center"
+                    android:layout_marginTop="20dp"
+                    android:layout_marginBottom="20dp"
+                    >
+
+                    <androidx.constraintlayout.widget.ConstraintLayout
+                        android:id="@+id/guardarcambios"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_marginRight="10dp"
+                        app:cardCornerRadius="10dp"
+                        android:layout_weight="1"
+                        android:background="@drawable/roundedbutton"
+                        >
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:fontFamily="@font/zud_bold"
+                            android:textColor="@color/white"
+                            android:text="Save Changes"
+                            android:gravity="center"
+                            android:textSize="20sp"
+                            >
+
+                        </TextView>
+
+                    </androidx.constraintlayout.widget.ConstraintLayout>
+
+                    <androidx.constraintlayout.widget.ConstraintLayout
+                        android:id="@+id/reset"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        app:cardCornerRadius="10dp"
+                        android:layout_weight="2"
+                        android:background="@drawable/roundedbutton"
+
+                        >
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:fontFamily="@font/zud_bold"
+                            android:textColor="@color/white"
+                            android:text="Reset"
+                            android:gravity="center"
+                            android:textSize="20sp"
+                            >
+
+                        </TextView>
+
+                    </androidx.constraintlayout.widget.ConstraintLayout>
                 </LinearLayout>
 
             </LinearLayout>
 
+        </ScrollView>
 
-
-        </FrameLayout>
-
-    </ScrollView>
-
-
-
+    </FrameLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
