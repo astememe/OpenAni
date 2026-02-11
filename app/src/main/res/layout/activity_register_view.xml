@@ -217,7 +217,7 @@
                                         >
 
                                         <EditText
-                                            android:id="@+id/nombreusuario"
+                                            android:id="@+id/nombreusuario_register"
                                             android:layout_width="match_parent"
                                             android:layout_height="match_parent"
                                             android:backgroundTint="@color/white"
@@ -280,12 +280,10 @@
                                 >
 
                                 <ImageView
-                                    android:layout_marginVertical="5dp"
-                                    android:layout_width="match_parent"
+                                    android:layout_width="68dp"
                                     android:layout_height="match_parent"
-                                    android:layout_weight="4"
-                                    android:src="@drawable/correo_icono"
-                                    >
+                                    android:layout_marginVertical="5dp"
+                                    android:src="@drawable/correo_icono">
 
                                 </ImageView>
 
@@ -307,7 +305,7 @@
                                         >
 
                                         <EditText
-                                            android:id="@+id/correo"
+                                            android:id="@+id/correo_register"
                                             android:layout_width="match_parent"
                                             android:layout_height="match_parent"
                                             android:backgroundTint="@color/white"
@@ -344,6 +342,7 @@
 
 
                         <TextView
+
                             android:textColor="@color/black"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
@@ -401,7 +400,101 @@
                                         >
 
                                         <EditText
-                                            android:id="@+id/contrasena"
+                                            android:id="@+id/contrasena_register"
+                                            android:layout_width="match_parent"
+                                            android:layout_height="match_parent"
+                                            android:backgroundTint="@color/white"
+                                            android:layout_marginHorizontal="10dp"
+                                            android:hint="Username"
+                                            android:textColor="@color/black"
+                                            android:fontFamily="@font/share"
+                                            android:textSize="20sp"
+                                            >
+
+
+                                        </EditText>
+
+                                    </androidx.cardview.widget.CardView>
+
+                                </androidx.cardview.widget.CardView>
+
+                            </LinearLayout>
+
+
+                        </androidx.cardview.widget.CardView>
+
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical"
+                        android:layout_marginBottom="20dp"
+                        android:layout_gravity="center"
+                        android:gravity="center"
+                        >
+
+
+                        <TextView
+                            android:textColor="@color/black"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:text="Confirm password"
+                            android:layout_marginHorizontal="40dp"
+                            android:fontFamily="@font/zud"
+                            android:textSize="20sp"
+                            >
+
+                        </TextView>
+
+                        <androidx.cardview.widget.CardView
+                            android:layout_width="match_parent"
+                            android:layout_height="60dp"
+                            android:backgroundTint="@color/black"
+                            android:layout_marginHorizontal="40dp"
+                            app:cardCornerRadius="10dp"
+                            >
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:orientation="horizontal"
+                                android:layout_margin="2dp"
+                                android:layout_gravity="center"
+                                android:background="@drawable/roundedbutton"
+                                android:backgroundTint="@color/amarillo_comentarios"
+                                >
+
+                                <ImageView
+                                    android:layout_marginVertical="5dp"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="match_parent"
+                                    android:layout_weight="4"
+                                    android:src="@drawable/contraena_icono"
+                                    >
+
+                                </ImageView>
+
+                                <androidx.cardview.widget.CardView
+                                    android:layout_marginVertical="5dp"
+                                    android:layout_marginEnd="5dp"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="match_parent"
+                                    android:layout_weight="1"
+                                    app:cardCornerRadius="10dp"
+                                    android:backgroundTint="@color/black"
+                                    >
+
+                                    <androidx.cardview.widget.CardView
+                                        android:layout_width="match_parent"
+                                        android:layout_height="match_parent"
+                                        android:layout_margin="2dp"
+                                        app:cardCornerRadius="10dp"
+                                        >
+
+                                        <EditText
+                                            android:id="@+id/confirmar_contrasena_register"
                                             android:layout_width="match_parent"
                                             android:layout_height="match_parent"
                                             android:backgroundTint="@color/white"
@@ -445,7 +538,7 @@
                         android:id="@+id/guardarcambios"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
-                        android:layout_marginRight="10dp"
+                        android:layout_marginHorizontal="10dp"
                         app:cardCornerRadius="10dp"
                         android:layout_weight="1"
                         android:background="@drawable/roundedbutton"
@@ -458,30 +551,7 @@
                             android:textColor="@color/white"
                             android:text="Save Changes"
                             android:gravity="center"
-                            android:textSize="20sp"
-                            >
-
-                        </TextView>
-
-                    </androidx.constraintlayout.widget.ConstraintLayout>
-
-                    <androidx.constraintlayout.widget.ConstraintLayout
-                        android:id="@+id/reset"
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        app:cardCornerRadius="10dp"
-                        android:layout_weight="2"
-                        android:background="@drawable/roundedbutton"
-
-                        >
-                        <TextView
-                            android:layout_width="match_parent"
-                            android:layout_height="match_parent"
-                            android:fontFamily="@font/zud_bold"
-                            android:textColor="@color/white"
-                            android:text="Reset"
-                            android:gravity="center"
-                            android:textSize="20sp"
+                            android:textSize="25sp"
                             >
 
                         </TextView>
