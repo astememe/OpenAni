@@ -1,5 +1,6 @@
 package com.astememe.openani;
 
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
@@ -20,7 +21,7 @@ public class activity_register_view extends AppCompatActivity {
     EditText usuarioRegister;
     EditText emailRegister;
     EditText passwordRegister;
-    EditText ConfirmPasswordRegister;
+    EditText confirmPasswordRegister;
     ConstraintLayout botonRegistrarse;
 
 
@@ -39,16 +40,32 @@ public class activity_register_view extends AppCompatActivity {
         usuarioRegister = findViewById(R.id.nombreusuario_register);
         emailRegister = findViewById(R.id.correo_register);
         passwordRegister  = findViewById(R.id.contrasena_register);
-        ConfirmPasswordRegister = findViewById(R.id.confirmar_contrasena_register);
+        confirmPasswordRegister = findViewById(R.id.confirmar_contrasena_register);
         botonRegistrarse = findViewById(R.id.buttonRegistrarse);
 
         SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(this);
         SharedPreferences.Editor editor = sharedPreferences.edit();
 
         botonRegistrarse.setOnClickListener(v -> {
-            boolean comprobobar_nombre = emptyVerify(usuarioRegister);
-            boolean comprobar_email =
+            boolean comprobar_nombre = emptyVerify(usuarioRegister);
+            boolean comprobar_email = emailVerify(emailRegister);
+            boolean comprobar_contras = comprobarContrasenias(passwordRegister,confirmPasswordRegister);
+
+            boolean continuar = comprobar_nombre && comprobar_email && comprobar_contras;
+
+            if (continuar){
+                editor.putString("nombre", getValue(usuarioRegister));
+                editor.putString("email", getValue(emailRegister));
+                editor.putString("contraseña", getValue(passwordRegister));
+                editor.apply();
+
+                Intent intent = new Intent(activity_register_view.this, LoginView.class);
+                startActivity(intent);
+            }
         });
+    }
+    private String getValue(EditText et){
+        return et.getText().toString();
     }
     public boolean emptyVerify(EditText EditText){
         String text  = EditText.getText().toString();
@@ -59,14 +76,34 @@ public class activity_register_view extends AppCompatActivity {
             return true;
         }
     }
-    public boolean emailVerify(EditText EditText){
-        String email = EditText.getText().toString();
+    public boolean emailVerify(EditText emailEditText){
+        String email = emailEditText.getText().toString();
         String EMAIL_REGEX = "^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,}$";
         if(email.isEmpty()){
-            Toast.makeText(this,"Falta rellenar el email", Toast.LENGTH_SHORT).show();
+            emailEditText.setError("Falta rellenar el email");
             return false;
         }
-        return Pattern.matches(EMAIL_REGEX,email);
+        if(!Pattern.matches(EMAIL_REGEX, email)) {
+            emailEditText.setError("Email no válido");
+            return false;
+        }
+        return true;
+    }
+    public boolean comprobarContrasenias(EditText contra1, EditText contra2){
+        String firstContra = contra1.getText().toString();
+        String secondContra =  contra2.getText().toString();
+
+        if (firstContra.isEmpty()) {
+            Toast.makeText(this,"Este campo no debe estar vacío", Toast.LENGTH_SHORT).show();
+            return false;
+        }
+
+        if (!firstContra.equals(secondContra)) {
+            Toast.makeText(this,"Las contraseñas no coinciden. Por favor, vuelve a intentarlo", Toast.LENGTH_SHORT).show();
+            return false;
+        }
+
+        return true;
     }
 
 }
