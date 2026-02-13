@@ -1,10 +1,11 @@
-package com.astememe.openani;
+package com.astememe.openani.Ventanas;
 
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.activity.EdgeToEdge;
@@ -14,15 +15,18 @@ import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
+import com.astememe.openani.R;
+
 import java.util.regex.Pattern;
 
-public class activity_register_view extends AppCompatActivity {
+public class RegisterView extends AppCompatActivity {
 
     EditText usuarioRegister;
     EditText emailRegister;
     EditText passwordRegister;
     EditText confirmPasswordRegister;
-    ConstraintLayout botonRegistrarse;
+    TextView botonRegistrarse;
+    TextView tengoCuenta;
 
 
 
@@ -37,11 +41,12 @@ public class activity_register_view extends AppCompatActivity {
             return insets;
         });
 
-        usuarioRegister = findViewById(R.id.nombreusuario_register);
-        emailRegister = findViewById(R.id.correo_register);
-        passwordRegister  = findViewById(R.id.contrasena_register);
-        confirmPasswordRegister = findViewById(R.id.confirmar_contrasena_register);
-        botonRegistrarse = findViewById(R.id.buttonRegistrarse);
+        usuarioRegister = findViewById(R.id.nombreusuario_registro);
+        emailRegister = findViewById(R.id.correo_registro);
+        passwordRegister  = findViewById(R.id.contrasena_registro);
+        confirmPasswordRegister = findViewById(R.id.confirmar_contrasena_registro);
+        botonRegistrarse = findViewById(R.id.guardarcambios_register_TV);
+        tengoCuenta = findViewById(R.id.iniciarsesion_TV);
 
         SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(this);
         SharedPreferences.Editor editor = sharedPreferences.edit();
@@ -59,11 +64,16 @@ public class activity_register_view extends AppCompatActivity {
                 editor.putString("contraseña", getValue(passwordRegister));
                 editor.apply();
 
-                Intent intent = new Intent(activity_register_view.this, LoginView.class);
+                Intent intent = new Intent(RegisterView.this, LoginView.class);
                 startActivity(intent);
             }
         });
+        tengoCuenta.setOnClickListener(v -> {
+            Intent intent = new Intent(RegisterView.this,LoginView.class);
+            startActivity(intent);
+        });
     }
+
     private String getValue(EditText et){
         return et.getText().toString();
     }

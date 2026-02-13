@@ -63,7 +63,7 @@ public class LoginView extends AppCompatActivity {
 
         if (inputUsuario.equals(usuarioGuardado) && inputContrasenia.equals(contrasenaGuardada)){
             Toast.makeText(this,"Sesión iniciada correctamente.",Toast.LENGTH_SHORT).show();
-            startActivity(new Intent(LoginView.this, MainActivity.class));
+            startActivity(new Intent(LoginView.this, MainAnime.class));
             finish();
         } else {
             Toast.makeText(this, "Usuario o contraseña incorrectas", Toast.LENGTH_SHORT).show();
