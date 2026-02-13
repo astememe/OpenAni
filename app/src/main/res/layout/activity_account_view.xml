@@ -191,10 +191,12 @@
                     </io.woong.shapedimageview.CircleImageView>
 
                     <ImageView
+                        android:id="@+id/icono_camara_IV"
                         android:layout_marginLeft="40dp"
                         android:layout_width="35dp"
                         android:layout_height="50dp"
-                        android:src="@drawable/camara_icono" android:tint="@color/white"
+                        android:src="@drawable/camara_icono"
+                        android:tint="@color/white"
                         android:layout_gravity="bottom|center"
                         >
 
@@ -278,7 +280,7 @@
                                         >
 
                                         <EditText
-                                            android:id="@+id/nombreusuario"
+                                            android:id="@+id/nombreusuario_account"
                                             android:layout_width="match_parent"
                                             android:layout_height="match_parent"
                                             android:backgroundTint="@color/white"
@@ -505,7 +507,7 @@
                     >
 
                     <androidx.constraintlayout.widget.ConstraintLayout
-                        android:id="@+id/guardarcambios"
+                        android:id="@+id/guardarcambios_account"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:layout_marginRight="10dp"
@@ -529,7 +531,7 @@
                     </androidx.constraintlayout.widget.ConstraintLayout>
 
                     <androidx.constraintlayout.widget.ConstraintLayout
-                        android:id="@+id/reset"
+                        android:id="@+id/reset_account"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         app:cardCornerRadius="10dp"

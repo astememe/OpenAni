@@ -83,6 +83,7 @@
         </LinearLayout>
 
         <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/side_nav_main_manga"
             android:layout_width="50dp"
             android:layout_height="50dp"
             app:layout_constraintTop_toTopOf="parent"
@@ -152,7 +153,7 @@
                     >
 
                     <EditText
-                        android:id="@+id/searchbar"
+                        android:id="@+id/searchbar_manga"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:background="@drawable/roundedinputbox"
