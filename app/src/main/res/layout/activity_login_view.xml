@@ -354,7 +354,6 @@
                                         app:cardCornerRadius="10dp"
                                         android:layout_margin="2dp"
                                         >
-ç
                                         <EditText
                                             android:id="@+id/contrasena_login"
                                             android:layout_width="match_parent"
@@ -445,9 +444,8 @@
                         android:fontFamily="@font/share_bold"
                         android:textColor="@color/black"
                         android:layout_weight="1"
-                        android:textAlignment="textEnd"
                         android:textSize="20sp"
-                        android:layout_gravity="center"
+                        android:layout_gravity="center|end"
                         >
 
 

@@ -37,14 +37,14 @@ public class LoginView extends AppCompatActivity {
             return insets;
         });
 
-        login_usuario = findViewById(R.id.nombreusuario);
-        login_contrasenia = findViewById(R.id.contrasena);
-        button_login = findViewById(R.id.login);
+        login_usuario = findViewById(R.id.nombreusuario_login);
+        login_contrasenia = findViewById(R.id.contrasena_login);
+        button_login = findViewById(R.id.boton_login);
 
         button_login.setOnClickListener(v -> login());
         TextView loginRegistrarse = findViewById(R.id.registrarse);
         loginRegistrarse.setOnClickListener(v -> {
-            Intent intent = new Intent(LoginView.this, activity_register_view.class);
+            Intent intent = new Intent(LoginView.this, RegisterView.class);
             startActivity(intent);
         });
     }
