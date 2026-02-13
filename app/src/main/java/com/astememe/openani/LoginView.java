@@ -1,14 +1,30 @@
 package com.astememe.openani;
 
+import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.preference.Preference;
+import android.preference.PreferenceManager;
+import android.widget.Button;
+import android.widget.EditText;
+import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.constraintlayout.widget.ConstraintLayout;
+import androidx.constraintlayout.widget.ConstraintSet;
 import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
+import com.google.android.material.textfield.TextInputLayout;
+
 public class LoginView extends AppCompatActivity {
+
+    EditText login_usuario;
+    EditText login_contrasenia;
+    ConstraintLayout button_login;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -21,5 +37,38 @@ public class LoginView extends AppCompatActivity {
             return insets;
         });
 
+        login_usuario = findViewById(R.id.nombreusuario);
+        login_contrasenia = findViewById(R.id.contrasena);
+        button_login = findViewById(R.id.login);
+
+        button_login.setOnClickListener(v -> login());
+        TextView loginRegistrarse = findViewById(R.id.registrarse);
+        loginRegistrarse.setOnClickListener(v -> {
+            Intent intent = new Intent(LoginView.this, activity_register_view.class);
+            startActivity(intent);
+        });
+    }
+
+    private void login(){
+        String inputUsuario = login_usuario.getText().toString();
+        String inputContrasenia = login_contrasenia.getText().toString();
+
+        SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(this);
+        String usuarioGuardado = preferences.getString("nombre", null);
+        String contrasenaGuardada  =  preferences.getString("contraseña",  null);
+
+        if (usuarioGuardado == null){
+            Toast.makeText(this,"No hay usuarios registrados, crea una cuenta",Toast.LENGTH_SHORT).show();
+            return;
+        }
+
+        if (inputUsuario.equals(usuarioGuardado) && inputContrasenia.equals(contrasenaGuardada)){
+            Toast.makeText(this,"Sesión iniciada correctamente.",Toast.LENGTH_SHORT).show();
+            startActivity(new Intent(LoginView.this, MainActivity.class));
+            finish();
+        } else {
+            Toast.makeText(this, "Usuario o contraseña incorrectas", Toast.LENGTH_SHORT).show();
+            finish();
+        }
     }
 }
