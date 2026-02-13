@@ -38,7 +38,9 @@
         android:alpha="0.8"
         android:background="@color/black"
         tools:layout_editor_absoluteX="0dp"
-        tools:layout_editor_absoluteY="0dp"></View>
+        tools:layout_editor_absoluteY="0dp">
+
+    </View>
 
     <ImageView
         android:id="@+id/splashLogo"
@@ -48,8 +50,9 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintBottom_toTopOf="@id/v1"
-        ></ImageView>
+        app:layout_constraintBottom_toTopOf="@id/v1">
+
+    </ImageView>
 
     <TextView
         android:layout_width="wrap_content"
