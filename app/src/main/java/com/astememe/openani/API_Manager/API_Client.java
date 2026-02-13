@@ -6,7 +6,7 @@ import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
 public class API_Client {
-    public static String BASE_URL = "https://nyaaapi.onrender.com/nyaa";
+    public static String BASE_URL = "https://nyaaapi.onrender.com";
     private static Retrofit retrofit;
     public static Retrofit getClient() {
         if (retrofit == null) {
