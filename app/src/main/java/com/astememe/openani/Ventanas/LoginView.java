@@ -16,7 +16,6 @@ import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
 import com.astememe.openani.R;
-import com.astememe.openani.Ventanas.Adaptador_Evento.MainAnime;
 
 public class LoginView extends AppCompatActivity {
 
