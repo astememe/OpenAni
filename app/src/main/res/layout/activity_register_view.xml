@@ -535,7 +535,7 @@
                     >
 
                     <androidx.constraintlayout.widget.ConstraintLayout
-                        android:id="@+id/guardarcambios"
+                        android:id="@+id/buttonRegistrarse"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:layout_marginHorizontal="10dp"
@@ -549,7 +549,7 @@
                             android:layout_height="match_parent"
                             android:fontFamily="@font/zud_bold"
                             android:textColor="@color/white"
-                            android:text="Save Changes"
+                            android:text="Registrarse"
                             android:gravity="center"
                             android:textSize="25sp"
                             >
