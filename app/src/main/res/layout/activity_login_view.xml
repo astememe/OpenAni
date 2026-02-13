@@ -316,12 +316,11 @@
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
                             android:fontFamily="@font/zud_bold"
-                            android:gravity="center"
-                            android:text="Login"
                             android:textColor="@color/white"
+                            android:text="Login"
+                            android:gravity="center"
                             android:textSize="30sp"
-                            tools:layout_editor_absoluteX="0dp"
-                            tools:layout_editor_absoluteY="0dp">
+                            >
 
                         </TextView>
 
