@@ -1,0 +1,225 @@
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#F0F0F0"
+    android:fillViewport="true">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="180dp"
+            android:background="@color/azul_header">
+
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:src="@drawable/perfil_preview_fondo"
+                android:scaleType="centerCrop"
+                android:alpha="0.3"
+                >
+            </ImageView>
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:orientation="vertical"
+                android:layout_marginTop="20dp"
+                android:layout_marginStart="20dp"
+                >
+
+                <io.woong.shapedimageview.CircleImageView
+                    android:id="@+id/imagen_perfil"
+                    android:layout_width="70dp"
+                    android:layout_height="70dp"
+                    android:src="@drawable/spiderman"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintStart_toStartOf="parent" />
+
+                <TextView
+                    android:layout_gravity="center"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:gravity="center_vertical"
+                    android:text="ALEX"
+                    android:textColor="@color/white"
+                    android:textSize="28sp"
+                    android:fontFamily="@font/zud"
+                    app:layout_constraintTop_toBottomOf="@id/imagen_perfil"
+                    app:layout_constraintStart_toStartOf="@id/imagen_perfil" />
+
+            </LinearLayout>
+            
+            <ImageView
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:src="@drawable/flecha_hacia_atras"
+                android:layout_gravity="right"
+                android:layout_marginTop="30dp"
+                android:layout_marginRight="20dp"
+                >
+
+
+            </ImageView>
+        </FrameLayout>
+
+        <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <LinearLayout
+                android:layout_marginHorizontal="30dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                >
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Anime"
+                    android:textSize="40sp"
+                    android:textColor="@color/black"
+                    android:fontFamily="@font/share_bold"
+                    android:textStyle="bold"
+                    android:layout_marginVertical="10dp"/>
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="2dp"
+                    android:background="@color/azul_header" />
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <TextView
+                        app:layout_constraintTop_toTopOf="parent"
+                        android:id="@+id/music_video"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="Music Video"
+                        android:gravity="center"
+                        android:padding="10dp"
+                        android:textSize="24sp"
+                        android:fontFamily="@font/zud"
+                        android:textColor="@color/black"/>
+
+                    <TextView
+                        android:id="@+id/anime_english"
+                        app:layout_constraintTop_toBottomOf="@id/music_video"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="ENGLISH"
+                        android:gravity="center"
+                        android:padding="10dp"
+                        android:textSize="24sp"
+                        android:fontFamily="@font/zud"
+                        android:textColor="@color/black"/>
+
+                    <TextView
+                        app:layout_constraintTop_toBottomOf="@id/anime_english"
+                        android:id="@+id/anime_non_english"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="Non english"
+                        android:gravity="center"
+                        android:padding="10dp"
+                        android:textSize="24sp"
+                        android:fontFamily="@font/zud"
+                        android:textColor="@color/black"/>
+
+                    <TextView
+                        app:layout_constraintTop_toBottomOf="@id/anime_non_english"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="Original"
+                        android:gravity="center"
+                        android:padding="10dp"
+                        android:textSize="24sp"
+                        android:fontFamily="@font/zud"
+                        android:textColor="@color/black"/>
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Manga"
+                    android:textSize="40sp"
+                    android:textColor="@color/black"
+                    android:fontFamily="@font/share_bold"
+                    android:textStyle="bold"
+                    android:layout_marginVertical="10dp"/>
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="2dp"
+                    android:background="@color/azul_header" />
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <TextView
+                        app:layout_constraintTop_toTopOf="parent"
+                        android:id="@+id/manga_english"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="English"
+                        android:gravity="center"
+                        android:padding="10dp"
+                        android:textSize="24sp"
+                        android:fontFamily="@font/zud"
+                        android:textColor="@color/black"/>
+
+                    <TextView
+                        android:id="@+id/manga_non_english"
+                        app:layout_constraintTop_toBottomOf="@id/manga_english"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="Non english"
+                        android:gravity="center"
+                        android:padding="10dp"
+                        android:textSize="24sp"
+                        android:fontFamily="@font/zud"
+                        android:textColor="@color/black"/>
+
+                    <TextView
+                        app:layout_constraintTop_toBottomOf="@id/manga_non_english"
+                        android:id="@+id/original"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="Original"
+                        android:gravity="center"
+                        android:padding="10dp"
+                        android:textSize="24sp"
+                        android:fontFamily="@font/zud"
+                        android:textColor="@color/black"/>
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+                <ImageView
+                    android:layout_marginTop="50dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="200dp"
+                    android:src="@drawable/onepunch_sidebar"
+                    android:layout_gravity="center"
+                    >
+
+
+                </ImageView>
+
+
+            </LinearLayout>
+
+
+        </ScrollView>
+
+    </LinearLayout>
+</ScrollView>
