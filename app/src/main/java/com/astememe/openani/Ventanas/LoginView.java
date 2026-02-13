@@ -1,30 +1,29 @@
-package com.astememe.openani;
+package com.astememe.openani.Ventanas;
 
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
-import android.preference.Preference;
 import android.preference.PreferenceManager;
-import android.widget.Button;
 import android.widget.EditText;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.constraintlayout.widget.ConstraintLayout;
-import androidx.constraintlayout.widget.ConstraintSet;
 import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
-import com.google.android.material.textfield.TextInputLayout;
+import com.astememe.openani.R;
 
 public class LoginView extends AppCompatActivity {
 
     EditText login_usuario;
     EditText login_contrasenia;
     ConstraintLayout button_login;
+    TextView button_register;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -42,8 +41,8 @@ public class LoginView extends AppCompatActivity {
         button_login = findViewById(R.id.boton_login);
 
         button_login.setOnClickListener(v -> login());
-        TextView loginRegistrarse = findViewById(R.id.registrarse);
-        loginRegistrarse.setOnClickListener(v -> {
+        button_register = findViewById(R.id.boton_registrarse);
+        button_register.setOnClickListener(v -> {
             Intent intent = new Intent(LoginView.this, RegisterView.class);
             startActivity(intent);
         });

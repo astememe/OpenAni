@@ -15,23 +15,23 @@
         android:theme="@style/Theme.OpenAni">
 
         <activity
-            android:name=".TorrentView"
+            android:name=".Ventanas.TorrentView"
             android:exported="false">
         </activity>
         <activity
-            android:name=".MainManga"
+            android:name=".Ventanas.MainManga"
             android:exported="false">
         </activity>
         <activity
-            android:name=".MainAnime"
+            android:name=".Ventanas.MainAnime"
             android:exported="false">
         </activity>
         <activity
-            android:name=".MainActivity"
+            android:name=".Ventanas.MainActivity"
             android:exported="false">
         </activity>
         <activity
-            android:name=".LoginView"
+            android:name=".Ventanas.LoginView"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>
