@@ -88,6 +88,7 @@
                 >
 
                 <TextView
+                    android:id="@+id/anime"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="Anime"
@@ -143,6 +144,7 @@
                         android:textColor="@color/black"/>
 
                     <TextView
+                        android:id="@+id/anime_original"
                         app:layout_constraintTop_toBottomOf="@id/anime_non_english"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
@@ -157,6 +159,7 @@
 
 
                 <TextView
+                    android:id="@+id/manga"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="Manga"
@@ -201,7 +204,7 @@
 
                     <TextView
                         app:layout_constraintTop_toBottomOf="@id/manga_non_english"
-                        android:id="@+id/original"
+                        android:id="@+id/manga_original"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:text="Original"

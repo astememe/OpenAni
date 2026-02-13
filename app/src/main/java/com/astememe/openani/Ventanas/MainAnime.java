@@ -5,20 +5,17 @@ import static android.view.View.VISIBLE;
 
 import android.os.Bundle;
 import android.os.Handler;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
-import android.view.WindowManager;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.activity.EdgeToEdge;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.cardview.widget.CardView;
-import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
@@ -26,7 +23,9 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.astememe.openani.R;
 
-import java.util.zip.Inflater;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 
 public class MainAnime extends AppCompatActivity {
 
@@ -36,6 +35,18 @@ public class MainAnime extends AppCompatActivity {
     LinearLayout sombra_menu_lateral;
     View menu_lateral;
     ImageView cerrar_menu_lateral;
+
+    TextView header_categoria;
+    TextView header_subcategoria;
+
+    TextView anime;
+    TextView anime_music_video;
+    TextView anime_non_english;
+    TextView anime_original;
+    TextView manga;
+    TextView manga_english;
+    TextView manga_non_english;
+    TextView manga_original;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -51,6 +62,8 @@ public class MainAnime extends AppCompatActivity {
         barra_lateral_icono = findViewById(R.id.side_nav_main_anime);
         contenedor_menu_lateral = findViewById(R.id.contenedormenulateral);
         sombra_menu_lateral = findViewById(R.id.sombramenulateral);
+        header_categoria = findViewById(R.id.categoria);
+        header_subcategoria = findViewById(R.id.subcategoria);
 
         sombra_menu_lateral.setVisibility(INVISIBLE);
 
@@ -64,16 +77,85 @@ public class MainAnime extends AppCompatActivity {
                 sombra_menu_lateral.setVisibility(VISIBLE);
                 contenedor_menu_lateral.removeAllViews();
                 menu_lateral = inflador_menu_lateral.inflate(R.layout.menu_lateral, contenedor_menu_lateral, true);
+                Animation slide_in = AnimationUtils.loadAnimation(getApplicationContext(), R.anim.slide_in_from_left);
+                Animation slide_out = AnimationUtils.loadAnimation(getApplicationContext(), R.anim.slide_out_from_right);
+                menu_lateral.setAnimation(slide_in);
                 cerrar_menu_lateral = menu_lateral.findViewById(R.id.cerrar_menu_lateral);
+                anime = menu_lateral.findViewById(R.id.anime);
+                manga = menu_lateral.findViewById(R.id.manga);
+
+
+                List<TextView> subcategorias_anime = new ArrayList<>(Arrays.asList(
+                    anime_music_video = menu_lateral.findViewById(R.id.music_video),
+                    anime_non_english = menu_lateral.findViewById(R.id.anime_non_english),
+                    anime_original = menu_lateral.findViewById(R.id.anime_original)
+                ));
+
+                List<TextView> subcategorias_manga = new ArrayList<>(Arrays.asList(
+                        manga_english = menu_lateral.findViewById(R.id.manga_english),
+                        manga_non_english = menu_lateral.findViewById(R.id.manga_non_english),
+                        manga_original = menu_lateral.findViewById(R.id.manga_original)
+                ));
+
 
                 cerrar_menu_lateral.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        Log.d("Hola", "hola");
-                        sombra_menu_lateral.setVisibility(INVISIBLE);
-                        contenedor_menu_lateral.removeAllViews();
+                        cerrar_menu_lateral(slide_out);
                     }
                 });
+
+                anime.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        header_categoria.setText("Anime");
+                        header_subcategoria.setText("Most Recent");
+                        cerrar_menu_lateral(slide_out);
+                    }
+                });
+
+                manga.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        header_categoria.setText("Manga");
+                        header_subcategoria.setText("Most Recent");
+                        cerrar_menu_lateral(slide_out);
+                    }
+                });
+
+
+                for (TextView subcategoria: subcategorias_anime) {
+                    subcategoria.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+                            header_categoria.setText("Anime");
+                            header_subcategoria.setText(subcategoria.getText().toString());
+                            cerrar_menu_lateral(slide_out);
+                        }
+                    });
+                }
+
+                for (TextView subcategoria: subcategorias_manga) {
+                    subcategoria.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+                            header_categoria.setText("Manga");
+                            header_subcategoria.setText(subcategoria.getText().toString());
+                            cerrar_menu_lateral(slide_out);
+                        }
+                    });
+                }
+            }
+
+            public void cerrar_menu_lateral(Animation slide_out) {
+                menu_lateral.setAnimation(slide_out);
+                sombra_menu_lateral.setVisibility(INVISIBLE);
+                new Handler().postDelayed(new Runnable() {
+                    @Override
+                    public void run() {
+                        contenedor_menu_lateral.removeAllViews();
+                    }
+                }, slide_out.getDuration());
             }
         });
 
