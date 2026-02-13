@@ -273,10 +273,7 @@
                                             android:textColor="@color/black"
                                             android:fontFamily="@font/share"
                                             android:textSize="20sp"
-                                            >
-
-
-                                        </EditText>
+                                            />
 
                                     </androidx.cardview.widget.CardView>
 
@@ -339,7 +336,6 @@
                                     android:layout_weight="4"
                                     android:src="@drawable/contraena_icono"
                                     >
-
                                 </ImageView>
 
                                 <androidx.cardview.widget.CardView
@@ -355,24 +351,22 @@
                                     <androidx.cardview.widget.CardView
                                         android:layout_width="match_parent"
                                         android:layout_height="match_parent"
-                                        android:layout_margin="2dp"
                                         app:cardCornerRadius="10dp"
+                                        android:layout_margin="2dp"
                                         >
-
+ç
                                         <EditText
                                             android:id="@+id/contrasena_login"
                                             android:layout_width="match_parent"
                                             android:layout_height="match_parent"
-                                            android:backgroundTint="@color/white"
                                             android:layout_marginHorizontal="10dp"
+                                            android:backgroundTint="@color/white"
+
                                             android:hint="• • • • • • "
                                             android:textColor="@color/black"
                                             android:fontFamily="@font/share"
                                             android:textSize="20sp"
-                                            >
-
-
-                                        </EditText>
+                                            />
 
                                     </androidx.cardview.widget.CardView>
 
@@ -440,8 +434,6 @@
                         android:textSize="20sp"
                         android:layout_gravity="center"
                         >
-
-
                     </TextView>
 
                     <TextView
