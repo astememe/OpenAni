@@ -14,6 +14,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.astememe.openani.API_Manager.Data;
 import com.astememe.openani.R;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import retrofit2.Call;
@@ -23,11 +24,12 @@ public class TorrentAdapter extends RecyclerView.Adapter<TorrentAdapter.SostenDe
     Context context;
     ConstraintLayout barra_lateral_icono;
 
-    List<Data.Torrent> torrentList;
+//    List<Data.Torrent> torrentList;
+    ArrayList<TorrentModel> torrentModelArrayList;
 
-    public TorrentAdapter(Context context, List<Data.Torrent> torrentList){
+    public TorrentAdapter(Context context, ArrayList<TorrentModel> torrentModelArrayList){
         this.context = context;
-        this.torrentList = torrentList;
+        this.torrentModelArrayList = torrentModelArrayList;
     }
 
     @NonNull
@@ -41,19 +43,24 @@ public class TorrentAdapter extends RecyclerView.Adapter<TorrentAdapter.SostenDe
 
     @Override
     public void onBindViewHolder(@NonNull TorrentAdapter.SostenDeVistas holder, int position) {
-        Data.Torrent torrent =torrentList.get(position);
+        TorrentModel torrentModel =torrentModelArrayList.get(position);
 
-        holder.titulo_torrent.setText(torrent.titulo);
-        holder.magnet_boton_torrent.setText(torrent.enlace);
-        holder.tamano_torrent.setText(torrent.tamano);
-        holder.ultima_fecha_torrent.setText(torrent.fecha);
-        holder.cantidad_seeders_torrent.setText(torrent.seeders);
-        holder.cantidad_leechers_torrent.setText(torrent.leechers);
+        holder.titulo_torrent.setText(torrentModel.getTitulo_torrent());
+        holder.magnet_boton_torrent.setText(torrentModel.getMagnet_boton_torrent());
+        holder.tamano_torrent.setText(torrentModel.getTamano_torrent());
+        holder.ultima_fecha_torrent.setText(torrentModel.getUltima_fecha_torrent());
+        holder.cantidad_seeders_torrent.setText(torrentModel.getCantidad_seeders_torrent());
+        holder.cantidad_leechers_torrent.setText(torrentModel.getCantidad_leechers_torrent());
+    }
+
+    public void filtrar(ArrayList<TorrentModel> torrentArrayFiltrado){
+        this.torrentModelArrayList = torrentArrayFiltrado;
+        notifyDataSetChanged();
     }
 
     @Override
     public int getItemCount() {
-        return torrentList.size();
+        return torrentModelArrayList.size();
     }
 
     public static class SostenDeVistas extends RecyclerView.ViewHolder {

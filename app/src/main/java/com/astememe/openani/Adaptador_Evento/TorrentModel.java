@@ -3,15 +3,14 @@ package com.astememe.openani.Adaptador_Evento;
 public class TorrentModel {
 
 
-    public String titulo_torrent, tamano_torrent, ultima_fecha_torrent,
-            cantidad_seeders_torrent, cantidad_leechers_torrent, magnet_boton_torrent;
+    public String titulo_torrent, tamano_torrent, ultima_fecha_torrent, magnet_boton_torrent;
 
-    public Integer cantidad_dislikes_torrent, cantidad_likes_torrent;
+    public Integer cantidad_dislikes_torrent, cantidad_likes_torrent, cantidad_seeders_torrent, cantidad_leechers_torrent;
 
     public boolean dado_like, dado_dislike, is_favorito;
 
     public TorrentModel(String titulo_torrent, String tamano_torrent, String ultima_fecha_torrent,
-                        String cantidad_seeders_torrent, String cantidad_leechers_torrent, String magnet_boton_torrent){
+                        int cantidad_seeders_torrent, int cantidad_leechers_torrent, String magnet_boton_torrent){
         this.titulo_torrent = titulo_torrent;
         this.tamano_torrent = tamano_torrent;
         this.ultima_fecha_torrent = ultima_fecha_torrent;
@@ -32,11 +31,11 @@ public class TorrentModel {
         return ultima_fecha_torrent;
     }
 
-    public String getCantidad_seeders_torrent() {
+    public int getCantidad_seeders_torrent() {
         return cantidad_seeders_torrent;
     }
 
-    public String getCantidad_leechers_torrent() {
+    public int getCantidad_leechers_torrent() {
         return cantidad_leechers_torrent;
     }
 
@@ -44,11 +43,11 @@ public class TorrentModel {
         return magnet_boton_torrent;
     }
 
-    public Integer getCantidad_dislikes_torrent() {
+    public int getCantidad_dislikes_torrent() {
         return cantidad_dislikes_torrent;
     }
 
-    public Integer getCantidad_likes_torrent() {
+    public int getCantidad_likes_torrent() {
         return cantidad_likes_torrent;
     }
 
