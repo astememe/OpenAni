@@ -26,7 +26,7 @@
 
         <activity
             android:name=".Ventanas.MainActivity"
-            android:exported="false">
+            android:exported="true">
         </activity>
 
         <activity
@@ -40,7 +40,7 @@
 
         <activity
             android:name=".Ventanas.MainManga"
-            android:exported="false">
+            android:exported="true">
         </activity>
 
 
@@ -52,11 +52,12 @@
         <activity
             android:name=".Ventanas.SplashScreen"
             android:exported="true">
+
         </activity>
 
         <activity
             android:name=".Ventanas.TorrentView"
-            android:exported="false">
+            android:exported="true">
         </activity>
 
     </application>

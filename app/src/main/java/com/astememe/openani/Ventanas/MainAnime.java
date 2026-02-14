@@ -12,23 +12,36 @@ import android.view.animation.AnimationUtils;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.util.Log;
 
 import androidx.activity.EdgeToEdge;
-import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.astememe.openani.API_Manager.API_Client;
+import com.astememe.openani.API_Manager.API_Interface;
+import com.astememe.openani.API_Manager.Data;
 import com.astememe.openani.R;
+import com.astememe.openani.Adaptador_Evento.TorrentAdapter;
 
 import java.util.ArrayList;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+
 import java.util.Arrays;
 import java.util.List;
 
 public class MainAnime extends AppCompatActivity {
 
+    TorrentAdapter adapter;
+
+    ArrayList<Data.Torrent> torrentsModel = new ArrayList<Data.Torrent>();
+
+    API_Interface apiInterface = API_Client.getClient().create(API_Interface.class);
     ImageView barra_lateral_icono;
     LayoutInflater inflador_menu_lateral;
     LinearLayout contenedor_menu_lateral;
@@ -158,28 +171,5 @@ public class MainAnime extends AppCompatActivity {
                 }, slide_out.getDuration());
             }
         });
-
-    }
-
-
-
-
-
-
-    public static class SostenDeVistas extends RecyclerView.ViewHolder {
-
-        TextView titulo_torrent, tamano_torrent, ultima_fecha_torrent, cantidad_seeders_torrent, cantidad_leechers_torrent, cantidad_likes_torrent, cantidad_dislikes_torrent, magnet_boton_torrent;
-
-        public SostenDeVistas(@NonNull View itemView) {
-            super(itemView);
-            titulo_torrent = itemView.findViewById(R.id.titulo_torrent);
-            tamano_torrent = itemView.findViewById(R.id.tamano_torrent);
-            ultima_fecha_torrent = itemView.findViewById(R.id.fecha_actualizacion_torrent);
-            cantidad_seeders_torrent = itemView.findViewById(R.id.cantidad_seeders);
-            cantidad_leechers_torrent = itemView.findViewById(R.id.cantidad_leechers);
-            cantidad_likes_torrent = itemView.findViewById(R.id.cantidad_likes);
-            cantidad_dislikes_torrent = itemView.findViewById(R.id.cantidad_dislikes);
-            magnet_boton_torrent = itemView.findViewById(R.id.magnet_boton);
-        }
     }
 }

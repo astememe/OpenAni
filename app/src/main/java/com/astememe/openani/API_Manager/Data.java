@@ -11,7 +11,7 @@ public class Data {
     int count;
 
     @SerializedName("data")
-    List<Torrent> torrents = new ArrayList<>();
+    public List<Torrent> torrents = new ArrayList<>();
 
     public class Torrent {
         @SerializedName("category")
