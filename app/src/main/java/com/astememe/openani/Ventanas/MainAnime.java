@@ -3,6 +3,7 @@ package com.astememe.openani.Ventanas;
 import static android.view.View.INVISIBLE;
 import static android.view.View.VISIBLE;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.view.LayoutInflater;
@@ -48,6 +49,8 @@ public class MainAnime extends AppCompatActivity {
     TextView manga_non_english;
     TextView manga_original;
 
+    ImageView foto_perfil;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -83,6 +86,7 @@ public class MainAnime extends AppCompatActivity {
                 cerrar_menu_lateral = menu_lateral.findViewById(R.id.cerrar_menu_lateral);
                 anime = menu_lateral.findViewById(R.id.anime);
                 manga = menu_lateral.findViewById(R.id.manga);
+                foto_perfil = menu_lateral.findViewById(R.id.imagen_perfil);
 
 
                 List<TextView> subcategorias_anime = new ArrayList<>(Arrays.asList(
@@ -102,6 +106,14 @@ public class MainAnime extends AppCompatActivity {
                     @Override
                     public void onClick(View v) {
                         cerrar_menu_lateral(slide_out);
+                    }
+                });
+
+                foto_perfil.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        Intent intent = new Intent(MainAnime.this, AccountView.class);
+                        startActivity(intent);
                     }
                 });
 
