@@ -1,5 +1,6 @@
 package com.astememe.openani.Ventanas;
 
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
@@ -10,6 +11,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.activity.EdgeToEdge;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.core.graphics.Insets;
@@ -56,16 +58,38 @@ public class LoginView extends AppCompatActivity {
         String usuarioGuardado = preferences.getString("nombre", null);
         String contrasenaGuardada  =  preferences.getString("contraseña",  null);
 
-        if (usuarioGuardado == null){
-            Toast.makeText(this,"No hay usuarios registrados, crea una cuenta",Toast.LENGTH_SHORT).show();
-            return;
-        }
-
         if (inputUsuario.equals(usuarioGuardado) && inputContrasenia.equals(contrasenaGuardada)){
             Toast.makeText(this,"Sesión iniciada correctamente.",Toast.LENGTH_SHORT).show();
             startActivity(new Intent(LoginView.this, MainAnime.class));
-        } else {
-            Toast.makeText(this, "Usuario o contraseña incorrectas", Toast.LENGTH_SHORT).show();
+            finish();
+        } else if (inputUsuario.isEmpty() || inputContrasenia.isEmpty()) {
+            mostrarErrorVacio();
         }
+        else {
+            mostrarError();
+        }
+    }
+    private void mostrarError(){
+        new AlertDialog.Builder(this)
+                .setTitle("Error de login")
+                .setMessage("No se ha encontrado el nombre de usuario "+login_usuario.getText().toString()+". Prueba introducir otro nombre de usuario o también puedes registrarte si no tienes una cuenta.")
+                .setIcon(R.drawable.alert)
+                .setPositiveButton("Registrarse", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        Intent intent = new Intent(LoginView.this, RegisterView.class);
+                        startActivity(intent);
+                    }
+                })
+                .setNegativeButton("Volver a intentarlo", null)
+                .show();
+    }
+    private void mostrarErrorVacio(){
+        new AlertDialog.Builder(this)
+                .setTitle("Ingresa tus datos")
+                .setMessage("faltan datos por rellenar, por favor ingrésalos.")
+                .setIcon(R.drawable.alert)
+                .setPositiveButton("aceptar", null)
+                .show();
     }
 }
