@@ -26,6 +26,7 @@
             android:layout_height="match_parent"
             android:layout_margin="2.5dp"
             app:cardCornerRadius="5dp"
+            app:cardBackgroundColor="@color/white"
             >
             <LinearLayout
                 android:layout_width="match_parent"
@@ -37,17 +38,22 @@
                     android:layout_height="wrap_content"
                     android:orientation="vertical"
                     android:layout_weight="2.5">
-                    <TextView
-                        android:id="@+id/Titulo_Torrent"
+                    <HorizontalScrollView
                         android:layout_width="match_parent"
-                        android:layout_height="45dp"
-                        android:padding="10dp"
-                        android:text="Watashi wa konichiwa"
-                        android:textSize="24dp"
-                        android:textColor="@color/black"
-                        android:fontFamily="@font/zud"
-                        android:layout_marginBottom="4dp"
-                        />
+                        android:layout_height="match_parent"
+                        >
+                        <TextView
+                            android:id="@+id/titulo_torrent"
+                            android:layout_width="wrap_content"
+                            android:layout_height="45dp"
+                            android:padding="10dp"
+                            android:text="Watashi wa konichiwa"
+                            android:textSize="24dp"
+                            android:textColor="@color/black"
+                            android:fontFamily="@font/zud"
+                            android:layout_marginBottom="4dp"
+                            />
+                    </HorizontalScrollView>
                     <androidx.constraintlayout.widget.ConstraintLayout
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
@@ -151,7 +157,11 @@
                             android:textSize="25sp"
                             />
                     </androidx.cardview.widget.CardView>
-
+                    <TextView
+                        android:id="@+id/magnet_boton"
+                        android:layout_width="0dp"
+                        android:layout_height="0dp"
+                        />
                 </LinearLayout>
 
                 <androidx.constraintlayout.widget.ConstraintLayout

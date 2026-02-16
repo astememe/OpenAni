@@ -272,7 +272,7 @@
                                             android:layout_height="match_parent"
                                             android:layout_marginHorizontal="10dp"
                                             android:backgroundTint="@color/white"
-
+                                            android:password="true"
                                             android:hint="• • • • • • "
                                             android:textColor="@color/black"
                                             android:fontFamily="@font/share"

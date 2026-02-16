@@ -6,21 +6,19 @@ import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
 public class API_Client {
-    public static String BASE_URL = "https://nyaaapi.onrender.com/nyaa";
+    public static String BASE_URL = "https://nyaaapi.onrender.com";
     private static Retrofit retrofit;
-    public static Retrofit getClient() {
+    public static Retrofit getRetrofitInstance() {
         if (retrofit == null) {
-            HttpLoggingInterceptor interceptor = new HttpLoggingInterceptor();
-            interceptor.setLevel(HttpLoggingInterceptor.Level.BODY);
-            OkHttpClient client = new OkHttpClient.Builder()
-                    .addInterceptor(interceptor)
-                    .build();
             retrofit = new Retrofit.Builder()
                     .baseUrl(BASE_URL)
                     .addConverterFactory(GsonConverterFactory.create())
-                    .client(client)
                     .build();
         }
         return retrofit;
+    }
+
+    public static API_Interface getAPI_Interface() {
+        return getRetrofitInstance().create(API_Interface.class);
     }
 }
