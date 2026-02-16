@@ -107,13 +107,17 @@ public class RegisterView extends AppCompatActivity {
             Toast.makeText(this,"Este campo no debe estar vacío", Toast.LENGTH_SHORT).show();
             return false;
         }
+        if (!firstContra.matches("^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*[@#$%^&+=!]).{8,}$")) {
+            Toast.makeText(this, "La contraseña debe tener al menos 8 caracteres, incluir mayúsculas, minúsculas, números y un símbolo", Toast.LENGTH_LONG).show();
 
+            return false;
+        }
         if (!firstContra.equals(secondContra)) {
             Toast.makeText(this,"Las contraseñas no coinciden. Por favor, vuelve a intentarlo", Toast.LENGTH_SHORT).show();
             return false;
         }
-
         return true;
+
     }
 
 }
