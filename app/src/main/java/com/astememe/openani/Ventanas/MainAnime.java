@@ -222,7 +222,7 @@ public class MainAnime extends AppCompatActivity {
                         filtrarPorNombre(s.toString(), header_categoria.getText().toString().toLowerCase(), header_subcategoria.getText().toString(), adapter);;
                     }
                 };
-                buscarDelayer.postDelayed(buscar, 500);
+                buscarDelayer.postDelayed(buscar, 800);
             }
         });
     }

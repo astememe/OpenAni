@@ -72,9 +72,10 @@ public class Data {
             return leechers;
         }
 
-        public void setLeechers(int leechers) {
-            this.leechers = leechers;
+        public int getSeeders() {
+            return seeders;
         }
+
     }
 
 }
