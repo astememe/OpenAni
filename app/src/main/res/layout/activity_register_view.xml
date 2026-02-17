@@ -385,6 +385,7 @@
                                             android:textColor="@color/black"
                                             android:fontFamily="@font/share"
                                             android:textSize="20sp"
+                                            android:password="true"
                                             />
 
                                     </androidx.cardview.widget.CardView>
@@ -476,6 +477,7 @@
                                             android:textColor="@color/black"
                                             android:fontFamily="@font/share"
                                             android:textSize="20sp"
+                                            android:password="true"
                                             >
 
 
