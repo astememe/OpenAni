@@ -86,9 +86,9 @@ public class LoginView extends AppCompatActivity {
     private void mostrarErrorVacio(){
         new AlertDialog.Builder(this)
                 .setTitle("Ingresa tus datos")
-                .setMessage("faltan datos por rellenar, por favor ingrésalos.")
+                .setMessage("Faltan datos por rellenar, por favor ingrésalos.")
                 .setIcon(R.drawable.alert)
-                .setPositiveButton("aceptar", null)
+                .setPositiveButton("Aceptar", null)
                 .show();
     }
 }
