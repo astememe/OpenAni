@@ -1,8 +1,10 @@
 package com.astememe.openani.Ventanas;
 
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.TextView;
 
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
@@ -14,6 +16,24 @@ import androidx.core.view.WindowInsetsCompat;
 import com.astememe.openani.R;
 
 public class TorrentView extends AppCompatActivity {
+
+
+    Context context = this;
+    Bundle extras;
+    String titulo;
+    String tamano;
+    String fecha;
+    String seeders;
+    String leechers;
+    String categoria;
+    String enlace;
+
+    TextView titulo_torrent;
+    TextView tamano_torrent;
+    TextView ultima_fecha_torrent;
+    TextView categoria_torrent;
+
+    ConstraintLayout boton_descargar;
 
     ConstraintLayout flechaAtras;
     @Override

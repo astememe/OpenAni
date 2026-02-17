@@ -4,6 +4,7 @@ import static androidx.core.content.ContextCompat.startActivity;
 
 import android.content.Context;
 import android.content.Intent;
+import android.os.Bundle;
 import android.text.Layout;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -29,7 +30,6 @@ import retrofit2.Callback;
 public class TorrentAdapter extends RecyclerView.Adapter<TorrentAdapter.SostenDeVistas> {
 
     Context context;
-    ConstraintLayout barra_lateral_icono;
     List<Data.Torrent> torrentList;
 
     public TorrentAdapter(Context context, List<Data.Torrent> torrentList){
@@ -52,8 +52,25 @@ public class TorrentAdapter extends RecyclerView.Adapter<TorrentAdapter.SostenDe
         holder.magnet_boton_torrent.setText(torrent.getEnlace());
         holder.tamano_torrent.setText(torrent.getTamano());
         holder.ultima_fecha_torrent.setText(torrent.getFecha());
+        holder.cantidad_seeders_torrent.setText(String.valueOf(torrent.getSeeders()));
+        holder.cantidad_leechers_torrent.setText(String.valueOf(torrent.getLeechers()));
+        holder.cantidad_likes_torrent.setText("0");
+        holder.cantidad_dislikes_torrent.setText("0");
 
-//        holder.magnet_boton_torrent.setText(torrent.enlace);
+        holder.image_boton_download.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(context, TorrentView.class);
+                intent.putExtra("titulo", torrent.getTitulo());
+                intent.putExtra("tamano", torrent.getTamano());
+                intent.putExtra("fecha", torrent.getFecha());
+                intent.putExtra("seeders", torrent.getSeeders());
+                intent.putExtra("leechers", torrent.getLeechers());
+                intent.putExtra("categoria", torrent.getCategoria());
+                intent.putExtra("enlace", torrent.getEnlace());
+                context.startActivity(intent);
+            }
+        });
 
     }
 

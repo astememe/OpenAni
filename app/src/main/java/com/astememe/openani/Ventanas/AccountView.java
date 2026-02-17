@@ -15,6 +15,10 @@ import com.astememe.openani.R;
 
 public class AccountView extends AppCompatActivity {
 
+
+    //https://www.geeksforgeeks.org/android/how-to-select-an-image-from-gallery-in-android/
+    //https://www.reddit.com/r/learnprogramming/comments/q5xelq/should_i_convert_an_image_uri_to_a_blobbytearray/
+
     ConstraintLayout botonAtras;
 
     @Override
