@@ -124,7 +124,15 @@
             >
 
         </ImageView>
+        <LinearLayout
+            android:id="@+id/contenedorMenuFotoPerfil"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom"
+            android:orientation="vertical"
+            >
 
+        </LinearLayout>
         <ScrollView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -163,7 +171,6 @@
                         >
 
                     </TextView>
-
                     <io.woong.shapedimageview.CircleImageView
                         android:id="@+id/fotoperfil"
                         android:layout_width="150dp"
