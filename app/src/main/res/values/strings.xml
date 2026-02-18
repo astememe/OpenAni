@@ -1,4 +1,5 @@
 <resources>
     <string name="app_name">OpenAni</string>
     <string name="title_activity_main2">MainActivity2</string>
+    <string name="invitado"><u>Iniciar como invitado</u></string>
 </resources>

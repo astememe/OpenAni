@@ -294,8 +294,8 @@
                 <LinearLayout
                     android:id="@+id/buttons"
                     android:layout_width="match_parent"
-                    android:layout_height="60dp"
-                    android:orientation="horizontal"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
                     android:layout_marginHorizontal="100dp"
                     android:layout_gravity="center"
                     android:gravity="center"
@@ -308,7 +308,6 @@
                         android:layout_width="match_parent"
                         android:layout_height="50dp"
                         app:cardCornerRadius="10dp"
-                        android:layout_weight="1"
                         android:background="@drawable/roundedbutton"
                         >
 
@@ -325,6 +324,20 @@
                         </TextView>
 
                     </androidx.constraintlayout.widget.ConstraintLayout>
+
+                    <TextView
+                        android:id="@+id/invitado"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/invitado"
+                        android:fontFamily="@font/share_bold"
+                        android:textColor="@color/naranja_descargar"
+                        android:textSize="20sp"
+                        android:layout_gravity="center"
+                        android:layout_marginTop="15dp"
+                        >
+
+                    </TextView>
                 </LinearLayout>
 
                 <LinearLayout
@@ -354,7 +367,7 @@
                         android:id="@+id/contrasenaolvidada"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:text="Se ha olvidado la contraseña?"
+                        android:text="Ha olvidado la contraseña?"
                         android:textAlignment="center"
                         android:fontFamily="@font/share_bold"
                         android:textColor="@color/black"
