@@ -18,6 +18,8 @@ import androidx.core.view.WindowInsetsCompat;
 import com.astememe.openani.R;
 
 import java.util.regex.Pattern;
+import java.security.SecureRandom;
+import java.util.HexFormat;
 
 public class RegisterView extends AppCompatActivity {
 
@@ -27,8 +29,6 @@ public class RegisterView extends AppCompatActivity {
     EditText confirmPasswordRegister;
     TextView botonRegistrarse;
     TextView tengoCuenta;
-
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -40,7 +40,6 @@ public class RegisterView extends AppCompatActivity {
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
             return insets;
         });
-
         usuarioRegister = findViewById(R.id.nombreusuario_registro);
         emailRegister = findViewById(R.id.correo_registro);
         passwordRegister  = findViewById(R.id.contrasena_registro);
