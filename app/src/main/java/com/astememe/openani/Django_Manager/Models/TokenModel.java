@@ -9,13 +9,9 @@ public class TokenModel {
     @SerializedName("refresh")
     public String refresh;
 
-    @SerializedName("success")
-    public boolean success;
-
     public TokenModel(String token, String refresh, boolean success) {
         this.token = token;
         this.refresh = refresh;
-        this.success = success;
     }
 
     public String getToken() {
@@ -24,9 +20,5 @@ public class TokenModel {
 
     public String getRefresh() {
         return refresh;
-    }
-
-    public boolean isSuccess() {
-        return success;
     }
 }

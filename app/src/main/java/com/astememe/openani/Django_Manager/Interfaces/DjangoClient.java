@@ -19,4 +19,15 @@ public class DjangoClient {
     public static TorrentsInterface getAPI_Interface() {
         return getRetrofitInstance().create(TorrentsInterface.class);
     }
+
+    public static RegisterInterface getRegisterAPI_Interface() {
+        return getRetrofitInstance().create(RegisterInterface.class);
+    }
+    public static UserInterface getUserAPI_Interface() {
+        return getRetrofitInstance().create(UserInterface.class);
+    }
+
+    public static LoginInterface getLoginAPI_Interface() {
+        return getRetrofitInstance().create(LoginInterface.class);
+    }
 }

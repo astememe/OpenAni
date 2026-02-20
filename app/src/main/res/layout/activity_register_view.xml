@@ -70,11 +70,20 @@
             android:alpha="0.2"
             >
         </ImageView>
-
+        <LinearLayout
+            android:id="@+id/contenedorMenuFotoPerfilRegister"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom"
+            android:orientation="vertical"
+            android:elevation="10dp"
+            >
+        </LinearLayout>
         <ScrollView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             app:layout_constraintTop_toBottomOf="@id/header"
+
             >
 
             <LinearLayout

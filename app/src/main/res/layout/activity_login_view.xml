@@ -62,6 +62,7 @@
         app:layout_constraintTop_toBottomOf="@id/header"
         app:layout_constraintBottom_toBottomOf="parent"
         android:orientation="vertical"
+        android:background="@color/white"
         >
 
         <ImageView
@@ -74,7 +75,6 @@
             >
 
         </ImageView>
-
         <ScrollView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -170,9 +170,12 @@
                                         android:layout_height="match_parent"
                                         android:layout_margin="2dp"
                                         app:cardCornerRadius="10dp"
+                                        android:backgroundTint="@color/white"
                                         >
 
                                         <EditText
+                                            android:background="@color/white"
+                                            android:windowSoftInputMode="adjustPan"
                                             android:id="@+id/nombreusuario_login"
                                             android:layout_width="match_parent"
                                             android:layout_height="match_parent"
@@ -182,6 +185,7 @@
                                             android:textColor="@color/black"
                                             android:fontFamily="@font/share"
                                             android:textSize="20sp"
+
                                             >
 
 
@@ -257,7 +261,8 @@
                                     android:layout_height="match_parent"
                                     android:layout_weight="1"
                                     app:cardCornerRadius="10dp"
-                                    android:backgroundTint="@color/black"
+                                    android:backgroundTint="@color/white"
+
                                     >
 
                                     <androidx.cardview.widget.CardView
@@ -265,8 +270,11 @@
                                         android:layout_height="match_parent"
                                         app:cardCornerRadius="10dp"
                                         android:layout_margin="2dp"
+                                        android:backgroundTint="@color/white"
                                         >
                                         <EditText
+                                            android:background="@color/white"
+                                            android:windowSoftInputMode="adjustPan"
                                             android:id="@+id/contrasena_login"
                                             android:layout_width="match_parent"
                                             android:layout_height="match_parent"

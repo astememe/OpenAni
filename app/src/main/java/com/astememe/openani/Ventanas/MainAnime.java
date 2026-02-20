@@ -249,7 +249,6 @@ public class MainAnime extends AppCompatActivity {
                             header_categoria.setText("Manga");
                             header_subcategoria.setText(textoSub);
                             filtrarPorNombre(busqueda.getText().toString(), "manga", textoSub, adapter);
-
                             cerrar_menu_lateral(slide_out);
                         }
                     });
