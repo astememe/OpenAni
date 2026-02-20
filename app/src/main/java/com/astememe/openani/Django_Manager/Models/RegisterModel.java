@@ -1,64 +1,53 @@
 package com.astememe.openani.Django_Manager.Models;
 
-
 import com.google.gson.annotations.SerializedName;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class RegisterModel {
-    @SerializedName("success")
-    boolean success;
 
-    @SerializedName("user")
-    UserData user;
+    @SerializedName("userRegisters")
+    public List<UserRegister> userRegisters = new ArrayList<>();
 
-    @SerializedName("access")
-    String access;
-
-    @SerializedName("refresh")
-    String refresh;
-
-    public boolean isSuccess() {
-        return success;
-    }
-
-    public UserData getUser() {
-        return user;
-    }
-
-    public String getAccess() {
-        return access;
-    }
-
-    public String getRefresh() {
-        return refresh;
-    }
-
-    public RegisterModel(boolean success, UserData user, String access, String refresh) {
-        this.success = success;
-        this.user = user;
-        this.access = access;
-        this.refresh = refresh;
-    }
-
-    public static class UserData {
+    public static class UserRegister {
         @SerializedName("username")
-        String username;
-
+        public String name;
         @SerializedName("email")
-        String email;
-
+        public String email;
         @SerializedName("imagen")
-        String imagen;
+        public String imagen_perfil;
+        @SerializedName("password")
+        public String password;
+        @SerializedName("confirm_password")
+        public String confirm_password;
 
-        public String getUsername() {
-            return username;
+        public String getName() {
+            return name;
         }
 
         public String getEmail() {
             return email;
         }
 
-        public String getImagen() {
-            return imagen;
+        public String getImagen_perfil() {
+            return imagen_perfil;
+        }
+
+        public String getPassword() {
+            return password;
+        }
+
+        public String getConfirm_password() {
+            return confirm_password;
+        }
+
+        public UserRegister(String name, String email, String imagen_perfil, String password, String confirm_password) {
+            this.name = name;
+            this.email = email;
+            this.imagen_perfil = imagen_perfil;
+            this.password = password;
+            this.confirm_password = confirm_password;
         }
     }
 }

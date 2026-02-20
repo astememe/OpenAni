@@ -19,17 +19,13 @@ import android.widget.Toast;
 
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
-import com.astememe.openani.API_Manager.APIClient;
-import com.astememe.openani.API_Manager.DataModel;
 import com.astememe.openani.Django_Manager.Interfaces.DjangoClient;
-import com.astememe.openani.Django_Manager.Interfaces.RegisterInterface;
+import com.astememe.openani.Django_Manager.Models.UserDataModel;
 import com.astememe.openani.Django_Manager.Models.RegisterModel;
-import com.astememe.openani.Django_Manager.Models.UserModel;
 import com.astememe.openani.R;
 
 import java.util.ArrayList;
@@ -91,7 +87,7 @@ public class RegisterView extends AppCompatActivity {
             }
         });
         tengoCuenta.setOnClickListener(v -> {
-            Intent intent = new Intent(RegisterView.this,LoginView.class);
+            Intent intent = new Intent(RegisterView.this,MainAnime.class);
             startActivity(intent);
         });
         infladorDeCambiarFoto = LayoutInflater.from(this);
@@ -208,16 +204,16 @@ public class RegisterView extends AppCompatActivity {
         String inputContrasenia = passwordRegister.getText().toString();
         String inputConfirmarContrasenia = confirmPasswordRegister.getText().toString();
 
-        UserModel.User user = new UserModel.User(inputUsuario, inputEmail, "naruto", inputContrasenia, inputConfirmarContrasenia);
+        RegisterModel.UserRegister userRegister = new RegisterModel.UserRegister(inputUsuario, inputEmail, "naruto", inputContrasenia, inputConfirmarContrasenia);
 
-        DjangoClient.getRegisterAPI_Interface().register(user).enqueue(new Callback<RegisterModel>() {
+        DjangoClient.getRegisterAPI_Interface().register(userRegister).enqueue(new Callback<UserDataModel>() {
             @Override
-            public void onResponse(Call<RegisterModel> call, Response<RegisterModel> response) {
+            public void onResponse(Call<UserDataModel> call, Response<UserDataModel> response) {
                 if (response.isSuccessful()) {
                     SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(RegisterView.this);
 
-                    RegisterModel registerModel = response.body();
-                    RegisterModel.UserData userData = registerModel.getUser();
+                    UserDataModel userDataModel = response.body();
+                    UserDataModel.UserData userData = userDataModel.getUser();
                     String username = userData.getUsername();
                     String email = userData.getEmail();
                     String imagen = userData.getImagen();
@@ -225,8 +221,8 @@ public class RegisterView extends AppCompatActivity {
                     preferences.edit().putString("nombre", username).apply();
                     preferences.edit().putString("email", email).apply();
                     preferences.edit().putString("imagen", imagen).apply();
-                    preferences.edit().putString("access", registerModel.getAccess()).apply();
-                    preferences.edit().putString("refresh", registerModel.getRefresh()).apply();
+                    preferences.edit().putString("access", userDataModel.getAccess()).apply();
+                    preferences.edit().putString("refresh", userDataModel.getRefresh()).apply();
                     preferences.edit().putBoolean("invitado", false).apply();
 
                     Toast.makeText(RegisterView.this, "Registro exitoso", Toast.LENGTH_LONG).show();
@@ -235,7 +231,7 @@ public class RegisterView extends AppCompatActivity {
             }
 
             @Override
-            public void onFailure(Call<RegisterModel> call, Throwable t) {
+            public void onFailure(Call<UserDataModel> call, Throwable t) {
                 Log.d("Error", t.getMessage());
             }
         });
