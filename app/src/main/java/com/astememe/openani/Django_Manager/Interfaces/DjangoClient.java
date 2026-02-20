@@ -26,4 +26,8 @@ public class DjangoClient {
     public static UserInterface getUserAPI_Interface() {
         return getRetrofitInstance().create(UserInterface.class);
     }
+
+    public static LoginInterface getLoginAPI_Interface() {
+        return getRetrofitInstance().create(LoginInterface.class);
+    }
 }

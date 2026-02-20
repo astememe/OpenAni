@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
+import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.TextView;
@@ -18,7 +19,15 @@ import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
+import com.astememe.openani.Django_Manager.Interfaces.DjangoClient;
+import com.astememe.openani.Django_Manager.Models.LoginModel;
+import com.astememe.openani.Django_Manager.Models.TokenModel;
+import com.astememe.openani.Django_Manager.Models.UserDataModel;
 import com.astememe.openani.R;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 public class LoginView extends AppCompatActivity {
 
@@ -27,6 +36,9 @@ public class LoginView extends AppCompatActivity {
     ConstraintLayout button_login;
     TextView button_register;
     TextView button_invitado;
+
+    boolean token_recieved;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -65,41 +77,43 @@ public class LoginView extends AppCompatActivity {
         startActivity(new Intent(LoginView.this, MainAnime.class));
     }
 
-    private void login(){
+    private void login() {
+        token_recieved = false;
         String inputUsuario = login_usuario.getText().toString();
         String inputContrasenia = login_contrasenia.getText().toString();
 
         SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(this);
-
         preferences.edit().putBoolean("invitado", false).apply();
-        String usuarioGuardado = preferences.getString("nombre", null);
-        String contrasenaGuardada  =  preferences.getString("contraseña",  null);
 
-        if (inputUsuario.equals(usuarioGuardado) && inputContrasenia.equals(contrasenaGuardada)){
-            Toast.makeText(this,"Sesión iniciada correctamente.",Toast.LENGTH_SHORT).show();
-            startActivity(new Intent(LoginView.this, MainAnime.class));
-            finish();
-        } else if (inputUsuario.isEmpty() || inputContrasenia.isEmpty()) {
+        if (inputUsuario.isEmpty() || inputContrasenia.isEmpty()) {
             mostrarErrorVacio();
-        }
-        else {
-            mostrarError();
-        }
-    }
-    private void mostrarError(){
-        new AlertDialog.Builder(this)
-                .setTitle("Error de login")
-                .setMessage("No se ha encontrado el nombre de usuario "+login_usuario.getText().toString()+". Prueba introducir otro nombre de usuario o también puedes registrarte si no tienes una cuenta.")
-                .setIcon(R.drawable.alert)
-                .setPositiveButton("Registrarse", new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                        Intent intent = new Intent(LoginView.this, RegisterView.class);
-                        startActivity(intent);
+        } else {
+            LoginModel login = new LoginModel(inputUsuario, inputContrasenia);
+
+            DjangoClient.getLoginAPI_Interface().loginUser(login).enqueue(new Callback<TokenModel>() {
+
+                @Override
+                public void onResponse(Call<TokenModel> call, Response<TokenModel> response) {
+                    if (response.isSuccessful()) {
+                        TokenModel tokenModel = response.body();
+                        String token = tokenModel.getToken();
+                        String refresh = tokenModel.getRefresh();
+                        preferences.edit().putString("token", token).apply();
+                        preferences.edit().putString("refresh", refresh).apply();
+                        token_recieved = true;
+                        Log.d("Token", token);
+
+                        obtenerDatosPerfil(token);
                     }
-                })
-                .setNegativeButton("Volver a intentarlo", null)
-                .show();
+                }
+
+                @Override
+                public void onFailure(Call<TokenModel> call, Throwable t) {
+                    Log.d("Error", t.getMessage());
+                    token_recieved = false;
+                }
+            });
+        }
     }
     private void mostrarErrorVacio(){
         new AlertDialog.Builder(this)
@@ -108,5 +122,33 @@ public class LoginView extends AppCompatActivity {
                 .setIcon(R.drawable.alert)
                 .setPositiveButton("Aceptar", null)
                 .show();
+    }
+
+    private void obtenerDatosPerfil(String token) {
+        SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(this);
+
+        DjangoClient.getUserAPI_Interface().getProfile("Bearer " + token).enqueue(new Callback<UserDataModel.UserData>() {
+            @Override
+            public void onResponse(Call<UserDataModel.UserData> call, Response<UserDataModel.UserData> response) {
+                if (response.isSuccessful() && response.body() != null) {
+                    UserDataModel.UserData userData = response.body();
+
+                    preferences.edit()
+                            .putString("nombre", userData.getUsername())
+                            .putString("email", userData.getEmail())
+                            .putString("imagen", userData.getImagen())
+                            .putString("descripcion", userData.getDescripcion())
+                            .apply();
+
+                    startActivity(new Intent(LoginView.this, MainAnime.class));
+                    finish();
+                }
+            }
+
+            @Override
+            public void onFailure(Call<UserDataModel.UserData> call, Throwable t) {
+                Log.e("Error Perfil", t.getMessage());
+            }
+        });
     }
 }
