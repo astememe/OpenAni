@@ -3,9 +3,12 @@ package com.astememe.openani.Ventanas;
 import static android.view.View.INVISIBLE;
 import static android.view.View.VISIBLE;
 
+import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.os.Handler;
+import android.preference.PreferenceManager;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.util.Log;
@@ -21,6 +24,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.activity.EdgeToEdge;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
@@ -28,8 +32,10 @@ import androidx.core.view.WindowInsetsCompat;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.astememe.openani.API_Manager.API_Client;
-import com.astememe.openani.API_Manager.Data;
+import com.astememe.openani.API_Manager.APIClient;
+import com.astememe.openani.API_Manager.DataModel;
+import com.astememe.openani.Django_Manager.Interfaces.DjangoClient;
+import com.astememe.openani.Django_Manager.Models.TorrentsModel;
 import com.astememe.openani.R;
 import com.astememe.openani.Adaptador_Evento.TorrentAdapter;
 
@@ -47,7 +53,8 @@ public class MainAnime extends AppCompatActivity {
 
     TorrentAdapter adapter;
     EditText busqueda;
-    List<Data.Torrent> torrentList = new ArrayList<>();
+    List<DataModel.Torrent> torrentList = new ArrayList<>();
+    List<TorrentsModel.TorrentBBDD> torrentsbbdd = new ArrayList<>();
     RecyclerView torrentRecycle;
     ImageView barra_lateral_icono;
     LayoutInflater inflador_menu_lateral;
@@ -70,6 +77,7 @@ public class MainAnime extends AppCompatActivity {
     TextView manga_non_english;
     TextView manga_original;
     ImageView foto_perfil;
+    TextView nombre_usuario;
     ImageButton boton_descargar;
 
     Handler buscarDelayer = new Handler();
@@ -85,6 +93,11 @@ public class MainAnime extends AppCompatActivity {
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
             return insets;
         });
+        Boolean esInvitado = esInvitado();
+        SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(this);
+
+        String nombre_de_usuario = preferences.getString("nombre", "Invitado");
+
         torrentRecycle = findViewById(R.id.torrentRecycle);
         fillTorrents("anime");
         torrentRecycle.setLayoutManager(new GridLayoutManager(this, 1));
@@ -99,6 +112,29 @@ public class MainAnime extends AppCompatActivity {
         sombra_menu_lateral = findViewById(R.id.sombramenulateral);
         header_categoria = findViewById(R.id.categoria);
         header_subcategoria = findViewById(R.id.subcategoria);
+
+        header_categoria.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                DjangoClient.getAPI_Interface().getTorrents().enqueue(new Callback<TorrentsModel>() {
+                    @Override
+                    public void onResponse(Call<TorrentsModel> call, Response<TorrentsModel> response) {
+                        torrentsbbdd.clear();
+                        torrentsbbdd.addAll(response.body().torrentsbbdd);
+                        Log.d("Respuesta", response.body().torrentsbbdd.toString());
+                    }
+
+                    @Override
+                    public void onFailure(Call<TorrentsModel> call, Throwable t) {
+                        Log.e("Error_API", "Causa real: " + t.getMessage());
+                        t.printStackTrace();
+                    }
+                });
+                for (TorrentsModel.TorrentBBDD torrent: torrentsbbdd) {
+                    Log.d("Respuesta", torrent.getEnlace_bbdd());
+                }
+            }
+        });
 
         sombra_menu_lateral.setVisibility(INVISIBLE);
 
@@ -120,6 +156,14 @@ public class MainAnime extends AppCompatActivity {
                 anime = menu_lateral.findViewById(R.id.anime);
                 manga = menu_lateral.findViewById(R.id.manga);
                 foto_perfil = menu_lateral.findViewById(R.id.imagen_perfil);
+                nombre_usuario = menu_lateral.findViewById(R.id.nombre_usuario);
+
+                if (esInvitado()) {
+                    nombre_usuario.setText("Invitado");
+                } else {
+                    nombre_usuario.setText(nombre_de_usuario);
+                }
+
 
                 sombra_menu_lateral.setOnClickListener(new View.OnClickListener() {
                     @Override
@@ -154,8 +198,12 @@ public class MainAnime extends AppCompatActivity {
                 foto_perfil.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        Intent intent = new Intent(MainAnime.this, AccountView.class);
-                        startActivity(intent);
+                        if (esInvitado()) {
+                            errorInvitado();
+                        } else {
+                            Intent intent = new Intent(MainAnime.this, AccountView.class);
+                            startActivity(intent);
+                        }
                     }
                 });
 
@@ -242,9 +290,9 @@ public class MainAnime extends AppCompatActivity {
         });
     }
     private void fillTorrents(String categoria) {
-        API_Client.getAPI_Interface().getByCategory(categoria).enqueue(new Callback<Data>() {
+        APIClient.getAPI_Interface().getByCategory(categoria).enqueue(new Callback<DataModel>() {
             @Override
-            public void onResponse(Call<Data> call, Response<Data> response) {
+            public void onResponse(Call<DataModel> call, Response<DataModel> response) {
                 torrentList.clear();
                 if (response.isSuccessful() && response.body() != null) {
                     torrentList.addAll(response.body().torrents);
@@ -254,7 +302,7 @@ public class MainAnime extends AppCompatActivity {
             }
 
             @Override
-            public void onFailure(Call<Data> call, Throwable t) {
+            public void onFailure(Call<DataModel> call, Throwable t) {
                 Toast.makeText(getApplicationContext(), t.getLocalizedMessage(), Toast.LENGTH_SHORT).show();
             }
         });
@@ -267,9 +315,9 @@ public class MainAnime extends AppCompatActivity {
             return;
         }
         if (convertirSubcategoria(subcategoria).isEmpty()) {
-            API_Client.getAPI_Interface().getByNameandCategory(Map.of("q", texto, "category", categoria.toLowerCase())).enqueue(new Callback<Data>() {
+            APIClient.getAPI_Interface().getByNameandCategory(Map.of("q", texto, "category", categoria.toLowerCase())).enqueue(new Callback<DataModel>() {
                 @Override
-                public void onResponse(Call<Data> call, Response<Data> response) {
+                public void onResponse(Call<DataModel> call, Response<DataModel> response) {
                     torrentList.clear();
                     if (response.isSuccessful() && response.body() != null) {
                         torrentList.addAll(response.body().torrents);
@@ -278,14 +326,14 @@ public class MainAnime extends AppCompatActivity {
                 }
 
                 @Override
-                public void onFailure(Call<Data> call, Throwable t) {
+                public void onFailure(Call<DataModel> call, Throwable t) {
                     Log.d("Error", "Error");
                 }
             });
         } else {
-            API_Client.getAPI_Interface().getByNameandCategoryandSubCategory(Map.of("q", texto, "category", categoria, "sub_category", convertirSubcategoria(subcategoria), "sort", "seeders", "order", "desc")).enqueue(new Callback<Data>() {
+            APIClient.getAPI_Interface().getByNameandCategoryandSubCategory(Map.of("q", texto, "category", categoria, "sub_category", convertirSubcategoria(subcategoria), "sort", "seeders", "order", "desc")).enqueue(new Callback<DataModel>() {
                 @Override
-                public void onResponse(Call<Data> call, Response<Data> response) {
+                public void onResponse(Call<DataModel> call, Response<DataModel> response) {
                     Log.d("Respuesta", response.toString());
                     torrentList.clear();
                     if (response.isSuccessful() && response.body() != null) {
@@ -295,7 +343,7 @@ public class MainAnime extends AppCompatActivity {
                 }
 
                 @Override
-                public void onFailure(Call<Data> call, Throwable t) {
+                public void onFailure(Call<DataModel> call, Throwable t) {
                     Log.d("Error", "Error");
                 }
             });
@@ -305,7 +353,7 @@ public class MainAnime extends AppCompatActivity {
     private String convertirSubcategoria(String header_subcategoria) {
         String subcategoria = "";
         if (header_subcategoria.equals("Music Video")) {
-            subcategoria = "music-video";
+            subcategoria = "amv";
         } else if (header_subcategoria.equals("English")) {
             subcategoria = "eng";
         } else if (header_subcategoria.equals("Non English")) {
@@ -315,5 +363,33 @@ public class MainAnime extends AppCompatActivity {
         }
 
         return subcategoria;
+    }
+
+    private boolean esInvitado() {
+        SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(this);
+        return preferences.getBoolean("invitado", false);
+    }
+
+    private void errorInvitado() {
+        new AlertDialog.Builder(this)
+                .setTitle("Logged in as Guest")
+                .setMessage("Please log in or make an account.")
+                .setIcon(R.drawable.alert)
+                .setPositiveButton("Registrarse", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        Intent intent = new Intent(MainAnime.this, RegisterView.class);
+                        startActivity(intent);
+                    }
+                })
+                .setNeutralButton("Login", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        Intent intent = new Intent(MainAnime.this, LoginView.class);
+                        startActivity(intent);
+                    }
+                })
+                .setNegativeButton("Close", null)
+                .show();
     }
 }

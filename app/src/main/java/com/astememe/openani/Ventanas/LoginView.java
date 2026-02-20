@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
+import android.view.View;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -25,6 +26,7 @@ public class LoginView extends AppCompatActivity {
     EditText login_contrasenia;
     ConstraintLayout button_login;
     TextView button_register;
+    TextView button_invitado;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -40,6 +42,7 @@ public class LoginView extends AppCompatActivity {
         login_usuario = findViewById(R.id.nombreusuario_login);
         login_contrasenia = findViewById(R.id.contrasena_login);
         button_login = findViewById(R.id.boton_login);
+        button_invitado = findViewById(R.id.invitado);
 
         button_login.setOnClickListener(v -> login());
         button_register = findViewById(R.id.boton_registrarse);
@@ -47,6 +50,19 @@ public class LoginView extends AppCompatActivity {
             Intent intent = new Intent(LoginView.this, RegisterView.class);
             startActivity(intent);
         });
+
+        button_invitado.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                login_invitado();
+            }
+        });
+    }
+
+    private void login_invitado() {
+        SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(this);
+        preferences.edit().putBoolean("invitado", true).apply();
+        startActivity(new Intent(LoginView.this, MainAnime.class));
     }
 
     private void login(){
@@ -54,6 +70,8 @@ public class LoginView extends AppCompatActivity {
         String inputContrasenia = login_contrasenia.getText().toString();
 
         SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(this);
+
+        preferences.edit().putBoolean("invitado", false).apply();
         String usuarioGuardado = preferences.getString("nombre", null);
         String contrasenaGuardada  =  preferences.getString("contraseña",  null);
 
