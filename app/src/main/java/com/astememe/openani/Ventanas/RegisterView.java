@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
+import android.util.Log;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -15,9 +16,19 @@ import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
+import com.astememe.openani.API_Manager.APIClient;
+import com.astememe.openani.API_Manager.DataModel;
+import com.astememe.openani.Django_Manager.Interfaces.DjangoClient;
+import com.astememe.openani.Django_Manager.Interfaces.RegisterInterface;
+import com.astememe.openani.Django_Manager.Models.RegisterModel;
+import com.astememe.openani.Django_Manager.Models.UserModel;
 import com.astememe.openani.R;
 
 import java.util.regex.Pattern;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 public class RegisterView extends AppCompatActivity {
 
@@ -48,9 +59,6 @@ public class RegisterView extends AppCompatActivity {
         botonRegistrarse = findViewById(R.id.guardarcambios_register_TV);
         tengoCuenta = findViewById(R.id.iniciarsesion_TV);
 
-        SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(this);
-        SharedPreferences.Editor editor = sharedPreferences.edit();
-
         botonRegistrarse.setOnClickListener(v -> {
             boolean comprobar_nombre = emptyVerify(usuarioRegister);
             boolean comprobar_email = emailVerify(emailRegister);
@@ -59,11 +67,7 @@ public class RegisterView extends AppCompatActivity {
             boolean continuar = comprobar_nombre && comprobar_email && comprobar_contras;
 
             if (continuar){
-                editor.putString("nombre", getValue(usuarioRegister));
-                editor.putString("email", getValue(emailRegister));
-                editor.putString("contraseña", getValue(passwordRegister));
-                editor.apply();
-
+                registerUser();
                 Intent intent = new Intent(RegisterView.this, LoginView.class);
                 startActivity(intent);
             }
@@ -107,8 +111,8 @@ public class RegisterView extends AppCompatActivity {
             Toast.makeText(this,"Este campo no debe estar vacío", Toast.LENGTH_SHORT).show();
             return false;
         }
-        if (!firstContra.matches("^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*[@#$%^&+=!]).{8,}$")) {
-            Toast.makeText(this, "La contraseña debe tener al menos 8 caracteres, incluir mayúsculas, minúsculas, números y un símbolo", Toast.LENGTH_LONG).show();
+        if (!firstContra.matches("^(?=.*[0-9])(?=.*[a-z]).{6,}$")) {
+            Toast.makeText(this, "La contraseña debe tener al menos 6 caracteres y un número", Toast.LENGTH_LONG).show();
 
             return false;
         }
@@ -118,6 +122,45 @@ public class RegisterView extends AppCompatActivity {
         }
         return true;
 
+    }
+
+    public void registerUser() {
+        String inputUsuario = usuarioRegister.getText().toString();
+        String inputEmail = emailRegister.getText().toString();
+        String inputContrasenia = passwordRegister.getText().toString();
+        String inputConfirmarContrasenia = confirmPasswordRegister.getText().toString();
+
+        UserModel.User user = new UserModel.User(inputUsuario, inputEmail, "naruto", inputContrasenia, inputConfirmarContrasenia);
+
+        DjangoClient.getRegisterAPI_Interface().register(user).enqueue(new Callback<RegisterModel>() {
+            @Override
+            public void onResponse(Call<RegisterModel> call, Response<RegisterModel> response) {
+                if (response.isSuccessful()) {
+                    SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(RegisterView.this);
+
+                    RegisterModel registerModel = response.body();
+                    RegisterModel.UserData userData = registerModel.getUser();
+                    String username = userData.getUsername();
+                    String email = userData.getEmail();
+                    String imagen = userData.getImagen();
+
+                    preferences.edit().putString("nombre", username).apply();
+                    preferences.edit().putString("email", email).apply();
+                    preferences.edit().putString("imagen", imagen).apply();
+                    preferences.edit().putString("access", registerModel.getAccess()).apply();
+                    preferences.edit().putString("refresh", registerModel.getRefresh()).apply();
+                    preferences.edit().putBoolean("invitado", false).apply();
+
+                    Toast.makeText(RegisterView.this, "Registro exitoso", Toast.LENGTH_LONG).show();
+
+                }
+            }
+
+            @Override
+            public void onFailure(Call<RegisterModel> call, Throwable t) {
+                Log.d("Error", t.getMessage());
+            }
+        });
     }
 
 }
