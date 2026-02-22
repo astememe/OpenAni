@@ -140,6 +140,11 @@ public class LoginView extends AppCompatActivity {
                             .putString("descripcion", userData.getDescripcion())
                             .apply();
 
+                    Log.d("Perfil", userData.getUsername());
+                    Log.d("Correo", userData.getEmail());
+                    Log.d("Imagen", userData.getImagen());
+                    Log.d("Descripcion", userData.getDescripcion());
+
                     startActivity(new Intent(LoginView.this, MainAnime.class));
                     finish();
                 }

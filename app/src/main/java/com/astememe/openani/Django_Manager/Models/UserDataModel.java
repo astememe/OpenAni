@@ -49,7 +49,7 @@ public class UserDataModel {
         @SerializedName("imagen")
         String imagen;
 
-        @SerializedName("descricpcion")
+        @SerializedName("descripcion")
         String descripcion;
 
         public String getUsername() {

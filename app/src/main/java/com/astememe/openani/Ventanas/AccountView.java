@@ -4,12 +4,16 @@ import static android.view.LayoutInflater.from;
 
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.net.Uri;
+import android.content.SharedPreferences;
 import android.graphics.Bitmap;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.os.Handler;
 import android.preference.PreferenceManager;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.widget.EditText;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.ImageView;
@@ -32,6 +36,10 @@ import java.util.List;
 
 import io.woong.shapedimageview.CircleImageView;
 
+import java.io.File;
+
+import io.woong.shapedimageview.CircleImageView;
+
 public class AccountView extends AppCompatActivity {
 
 
@@ -39,6 +47,9 @@ public class AccountView extends AppCompatActivity {
     //https://www.reddit.com/r/learnprogramming/comments/q5xelq/should_i_convert_an_image_uri_to_a_blobbytearray/
 
     ConstraintLayout botonAtras;
+    EditText descripcion;
+    CircleImageView fotoPerfil;
+
     View menuCambiarFoto;
 
     ImageView cerrarMenu;
@@ -46,7 +57,9 @@ public class AccountView extends AppCompatActivity {
     View botonCambiarFoto;
     LayoutInflater infladorDeCambiarFoto;
     LinearLayout layoutInflateAcountViewReference;
+
     protected void onCreate(Bundle savedInstanceState) {
+        SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(this);
         super.onCreate(savedInstanceState);
         EdgeToEdge.enable(this);
         setContentView(R.layout.activity_account_view);
@@ -55,12 +68,29 @@ public class AccountView extends AppCompatActivity {
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
             return insets;
         });
+        fotoPerfil = findViewById(R.id.fotoperfil);
+        descripcion = findViewById(R.id.descripcion);
 
         layoutInflateAcountViewReference = findViewById(R.id.contenedorMenuFotoPerfil);
         botonAtras = findViewById(R.id.flechaAtrasAcountView);
+        descripcion.setText(preferences.getString("descripcion", "Escriba su descripción aquí"));
         botonCambiarFoto = findViewById(R.id.cambiarfotoperfil);
-
         infladorDeCambiarFoto = LayoutInflater.from(this);
+
+        botonAtras.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(AccountView.this, MainAnime.class);
+                startActivity(intent);
+            }
+        });
+        if (preferences.getString("imagen", "").isEmpty()) {
+            fotoPerfil.setImageResource(R.drawable.spiderman);
+        } else {
+            Uri uri = Uri.parse("android.resource://" + this.getPackageName() + "/drawable/foto_de_perfil_" + preferences.getString("imagen", ""));
+            fotoPerfil.setImageURI(uri);
+        }
+
         botonCambiarFoto.setOnClickListener(v -> {
             layoutInflateAcountViewReference.removeAllViews();
             botonCambiarFoto = infladorDeCambiarFoto.inflate(R.layout.change_photo_of_profile, layoutInflateAcountViewReference, true);
@@ -91,14 +121,14 @@ public class AccountView extends AppCompatActivity {
                         TextView nombreFoto = v.findViewById(R.id.idImagen);
                         String valor = nombreFoto.getText().toString();
                         SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
-                        sharedPreferences.edit().putString("foto_perfil", valor).apply();
+                        sharedPreferences.edit().putString("imagen", valor).apply();
                         desplazarMenu(slide_out);
                     }
                 });
             };
         });
+    }
 
-        }
     public void desplazarMenu(Animation slide_out) {
         botonCambiarFoto.setAnimation(slide_out);
         new Handler().postDelayed(new Runnable() {
@@ -108,5 +138,4 @@ public class AccountView extends AppCompatActivity {
             }
         }, slide_out.getDuration());
     }
-
-    }
+}
