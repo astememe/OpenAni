@@ -77,8 +77,6 @@ public class AccountView extends AppCompatActivity {
         botonCambiarFoto = findViewById(R.id.cambiarfotoperfil);
         infladorDeCambiarFoto = LayoutInflater.from(this);
 
-        preferences.edit()
-
         botonAtras.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
