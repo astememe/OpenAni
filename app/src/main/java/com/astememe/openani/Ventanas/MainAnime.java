@@ -6,6 +6,7 @@ import static android.view.View.VISIBLE;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
 import android.preference.PreferenceManager;
@@ -160,8 +161,10 @@ public class MainAnime extends AppCompatActivity {
 
                 if (esInvitado()) {
                     nombre_usuario.setText("Invitado");
+                    foto_perfil.setImageResource(R.drawable.foto_perfil_default);
                 } else {
                     nombre_usuario.setText(nombre_de_usuario);
+                    foto_perfil.setImageURI(Uri.parse("android.resource://" + getPackageName() + "/drawable/foto_de_perfil_" + preferences.getString("imagen", "")));
                 }
 
 

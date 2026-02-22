@@ -6,7 +6,9 @@
     android:layout_height="350dp"
     android:background="@color/azul_header"
     android:fillViewport="true"
-    android:orientation="horizontal">
+    android:orientation="horizontal"
+    tools:ignore="DuplicateIds">
+
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -46,7 +48,8 @@
                         android:id="@+id/idImagen"
                         android:layout_width="0dp"
                         android:layout_height="0dp"
-                        android:text="kaneki">
+                        android:text="kaneki"
+                        >
 
                     </TextView>
                     <io.woong.shapedimageview.CircleImageView
@@ -99,7 +102,7 @@
                         android:id="@+id/idImagen"
                         android:layout_width="0dp"
                         android:layout_height="0dp"
-                        android:text="jinwoo"
+                        android:text="jin_woo"
                         tools:ignore="DuplicateIds">
 
                     </TextView>
@@ -134,7 +137,7 @@
                         android:id="@+id/idImagen"
                         android:layout_width="0dp"
                         android:layout_height="0dp"
-                        android:text="goku">
+                        android:text="goku_ssj2">
 
                     </TextView>
                     <io.woong.shapedimageview.CircleImageView
@@ -161,7 +164,7 @@
                         android:id="@+id/idImagen"
                         android:layout_width="0dp"
                         android:layout_height="0dp"
-                        android:text="gohan">
+                        android:text="gohan_ssj2">
 
                     </TextView>
                     <io.woong.shapedimageview.CircleImageView
@@ -188,7 +191,7 @@
                         android:id="@+id/idImagen"
                         android:layout_width="0dp"
                         android:layout_height="0dp"
-                        android:text="nicorobin">
+                        android:text="nico_robin">
 
                     </TextView>
                     <io.woong.shapedimageview.CircleImageView
@@ -300,13 +303,6 @@
                 android:orientation="horizontal"
                 android:gravity="center"
                 >
-                <TextView
-                    android:id="@+id/idImagen"
-                    android:layout_width="0dp"
-                    android:layout_height="0dp"
-                    android:text="personajeTR">
-
-                </TextView>
                 <LinearLayout
                     android:id="@+id/contenedorPersonajeTR"
                     android:layout_weight="1"
@@ -324,6 +320,13 @@
                         app:border_color="@color/black"
                         android:layout_gravity="center">
                     </io.woong.shapedimageview.CircleImageView>
+                    <TextView
+                        android:id="@+id/idImagen"
+                        android:layout_width="0dp"
+                        android:layout_height="0dp"
+                        android:text="tokio_revengers">
+
+                    </TextView>
 
                 </LinearLayout>
 
@@ -365,7 +368,7 @@
                         android:id="@+id/idImagen"
                         android:layout_width="0dp"
                         android:layout_height="0dp"
-                        android:text="gojo">
+                        android:text="satoru_gojo">
 
                     </TextView>
                     <io.woong.shapedimageview.CircleImageView
