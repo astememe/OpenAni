@@ -108,6 +108,7 @@
     <FrameLayout
         android:layout_width="match_parent"
         android:id="@+id/body"
+        android:background="@color/white"
         android:layout_height="0dp"
         app:layout_constraintTop_toBottomOf="@id/header"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -284,6 +285,7 @@
                                     >
 
                                     <androidx.cardview.widget.CardView
+                                        android:backgroundTint="@color/white"
                                         android:layout_width="match_parent"
                                         android:layout_height="match_parent"
                                         android:layout_margin="2dp"
@@ -376,6 +378,7 @@
                                     >
 
                                     <androidx.cardview.widget.CardView
+                                        android:backgroundTint="@color/white"
                                         android:layout_width="match_parent"
                                         android:layout_height="match_parent"
                                         android:layout_margin="2dp"
@@ -472,6 +475,7 @@
                                     >
 
                                     <androidx.cardview.widget.CardView
+                                        android:backgroundTint="@color/white"
                                         android:layout_width="match_parent"
                                         android:layout_height="match_parent"
                                         android:layout_margin="2dp"
@@ -507,7 +511,7 @@
 
                 <LinearLayout
                     android:id="@+id/buttons"
-                    android:layout_width="match_parent"
+                    android:layout_width="200dp"
                     android:layout_height="60dp"
                     android:orientation="horizontal"
                     android:layout_marginHorizontal="20dp"
@@ -521,7 +525,6 @@
                         android:id="@+id/guardarcambios_account"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
-                        android:layout_marginRight="10dp"
                         app:cardCornerRadius="10dp"
                         android:layout_weight="1"
                         android:background="@drawable/roundedbutton"
@@ -533,29 +536,6 @@
                             android:fontFamily="@font/zud_bold"
                             android:textColor="@color/white"
                             android:text="Save Changes"
-                            android:gravity="center"
-                            android:textSize="20sp"
-                            >
-
-                        </TextView>
-
-                    </androidx.constraintlayout.widget.ConstraintLayout>
-
-                    <androidx.constraintlayout.widget.ConstraintLayout
-                        android:id="@+id/reset_account"
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        app:cardCornerRadius="10dp"
-                        android:layout_weight="2"
-                        android:background="@drawable/roundedbutton"
-
-                        >
-                        <TextView
-                            android:layout_width="match_parent"
-                            android:layout_height="match_parent"
-                            android:fontFamily="@font/zud_bold"
-                            android:textColor="@color/white"
-                            android:text="Reset"
                             android:gravity="center"
                             android:textSize="20sp"
                             >

@@ -261,7 +261,7 @@
                                     android:layout_height="match_parent"
                                     android:layout_weight="1"
                                     app:cardCornerRadius="10dp"
-                                    android:backgroundTint="@color/white"
+                                    android:backgroundTint="@color/black"
 
                                     >
 
@@ -381,7 +381,7 @@
                         android:textColor="@color/black"
                         android:layout_weight="1"
                         android:textSize="20sp"
-                        android:layout_gravity="center|end"
+                        android:layout_gravity="center|end|center_vertical"
                         >
 
 
