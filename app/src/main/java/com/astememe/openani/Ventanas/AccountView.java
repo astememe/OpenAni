@@ -57,6 +57,7 @@ public class AccountView extends AppCompatActivity {
     View botonCambiarFoto;
     LayoutInflater infladorDeCambiarFoto;
     LinearLayout layoutInflateAcountViewReference;
+
     protected void onCreate(Bundle savedInstanceState) {
         SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(this);
         super.onCreate(savedInstanceState);
@@ -76,6 +77,8 @@ public class AccountView extends AppCompatActivity {
         botonCambiarFoto = findViewById(R.id.cambiarfotoperfil);
         infladorDeCambiarFoto = LayoutInflater.from(this);
 
+        preferences.edit()
+
         botonAtras.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -86,7 +89,7 @@ public class AccountView extends AppCompatActivity {
         if (preferences.getString("imagen", "").isEmpty()) {
             fotoPerfil.setImageResource(R.drawable.spiderman);
         } else {
-            Uri uri = Uri.parse("android.resource://"+this.getPackageName()+"/drawable/foto_de_perfil_" + preferences.getString("imagen", ""));
+            Uri uri = Uri.parse("android.resource://" + this.getPackageName() + "/drawable/foto_de_perfil_" + preferences.getString("imagen", ""));
             fotoPerfil.setImageURI(uri);
         }
 
@@ -120,7 +123,7 @@ public class AccountView extends AppCompatActivity {
                         TextView nombreFoto = v.findViewById(R.id.idImagen);
                         String valor = nombreFoto.getText().toString();
                         SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
-                        sharedPreferences.edit().putString("foto_perfil", valor).apply();
+                        sharedPreferences.edit().putString("imagen", valor).apply();
                         desplazarMenu(slide_out);
                     }
                 });
@@ -136,5 +139,5 @@ public class AccountView extends AppCompatActivity {
                 layoutInflateAcountViewReference.removeAllViews();
             }
         }, slide_out.getDuration());
-        }
+    }
 }
