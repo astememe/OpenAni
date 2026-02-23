@@ -7,7 +7,7 @@ public class UserUpdateModel {
     public String imagen;
     public String descripcion;
 
-    public UserUpdateModel(String username, String email, String password, String imagen) {
+    public UserUpdateModel(String username, String email, String password, String imagen, String descripcion) {
         this.username = username;
         this.email = email;
         this.password = password;

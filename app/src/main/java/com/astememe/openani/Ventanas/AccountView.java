@@ -108,7 +108,7 @@ public class AccountView extends AppCompatActivity {
                     password = null;
                 }
 
-                UserUpdateModel userUpdateModel = new UserUpdateModel(username, email, password, imagen);
+                UserUpdateModel userUpdateModel = new UserUpdateModel(username, email, password, imagen, descripcion);
                 String token = "Bearer " + preferences.getString("token", "");
 
                 guardarCambios();
@@ -184,7 +184,7 @@ public class AccountView extends AppCompatActivity {
         editor.putString("descripcion", nuevaDescripcion);
         editor.putString("imagen", nuevaImagen);
 
-        UserUpdateModel userUpdateModel = new UserUpdateModel(nuevoNombre, nuevoCorreo, nuevaContrasena, nuevaImagen);
+        UserUpdateModel userUpdateModel = new UserUpdateModel(nuevoNombre, nuevoCorreo, nuevaContrasena, nuevaImagen, nuevaDescripcion);
 
         DjangoClient.getUserAPI_Interface().updateProfile(token, userUpdateModel).enqueue(new retrofit2.Callback<UserDataModel>() {
 

@@ -30,4 +30,8 @@ public class DjangoClient {
     public static LoginInterface getLoginAPI_Interface() {
         return getRetrofitInstance().create(LoginInterface.class);
     }
+
+    public static PasswordResetInterface getResetPasswordAPI_Interface() {
+        return getRetrofitInstance().create(PasswordResetInterface.class);
+    }
 }
