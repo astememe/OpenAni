@@ -258,7 +258,7 @@
                                     android:layout_width="match_parent"
                                     android:layout_height="match_parent"
                                     android:layout_marginVertical="5dp"
-                                    android:layout_weight="4"
+                                    android:layout_weight="3"
                                     android:src="@drawable/token_outline">
 
                                 </ImageView>
@@ -268,7 +268,7 @@
                                     android:layout_marginEnd="5dp"
                                     android:layout_width="match_parent"
                                     android:layout_height="match_parent"
-                                    android:layout_weight="1"
+                                    android:layout_weight="2"
                                     app:cardCornerRadius="10dp"
                                     android:backgroundTint="@color/black"
                                     >
@@ -297,7 +297,32 @@
                                     </androidx.cardview.widget.CardView>
 
                                 </androidx.cardview.widget.CardView>
+                                <androidx.constraintlayout.widget.ConstraintLayout
+                                    android:id="@+id/generar_code"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="match_parent"
+                                    android:layout_marginHorizontal="10dp"
+                                    app:cardCornerRadius="10dp"
+                                    android:layout_weight="2.5"
+                                    android:background="@drawable/roundedbutton"
+                                    android:layout_margin="5dp"
+                                    >
 
+
+                                    <TextView
+                                        android:id="@+id/generar_code_textView"
+                                        android:layout_width="match_parent"
+                                        android:layout_height="match_parent"
+                                        android:fontFamily="@font/zud_bold"
+                                        android:textColor="@color/white"
+                                        android:text="Generate"
+                                        android:gravity="center"
+                                        android:textSize="15sp"
+                                        >
+
+                                    </TextView>
+
+                                </androidx.constraintlayout.widget.ConstraintLayout>
                             </LinearLayout>
 
                         </androidx.cardview.widget.CardView>
