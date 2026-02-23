@@ -38,4 +38,8 @@ public class DjangoClient {
     public static ComentarioInterface getComentario_Interface() {
         return getRetrofitInstance().create(ComentarioInterface.class);
     }
+
+    public static TorrentsInterface getTorrentsAPI_Interface() {
+        return getRetrofitInstance().create(TorrentsInterface.class);
+    }
 }

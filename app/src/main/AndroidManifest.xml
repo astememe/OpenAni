@@ -16,6 +16,9 @@
         android:usesCleartextTraffic="true"
         tools:ignore="GoogleAppIndexingWarning">
         <activity
+            android:name=".Ventanas.FavoriteView"
+            android:exported="false" />
+        <activity
             android:name=".Ventanas.RecuperarContrasenaView"
             android:exported="false" />
 
@@ -25,53 +28,35 @@
 
         <activity
             android:name=".Ventanas.AccountView"
-            android:exported="true">
-        </activity>
-
+            android:exported="true" />
         <activity
             android:name=".Ventanas.LoginView"
-            android:exported="true">
-        </activity>
-
+            android:exported="true" />
         <activity
             android:name=".Ventanas.MainActivity"
-            android:exported="true">
-        </activity>
-
+            android:exported="true" />
         <activity
             android:name=".Ventanas.MainAnime"
-            android:exported="true">
-
-
-        </activity>
-
+            android:exported="true" />
         <activity
             android:name=".Ventanas.MainManga"
-            android:exported="true">
-        </activity>
-
-
+            android:exported="true" />
         <activity
             android:name=".Ventanas.RegisterView"
             android:exported="true"
-            android:windowSoftInputMode="adjustPan"
-            >
-        </activity>
-
+            android:windowSoftInputMode="adjustPan" />
         <activity
             android:name=".Ventanas.SplashScreen"
             android:exported="true">
             <intent-filter>
-                <action android:name="android.intent.action.MAIN"/>
+                <action android:name="android.intent.action.MAIN" />
+
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-
         <activity
             android:name=".Ventanas.TorrentView"
-            android:exported="true">
-        </activity>
-
+            android:exported="true" />
     </application>
 
 </manifest>
