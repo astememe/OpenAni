@@ -1,13 +1,13 @@
-package com.astememe.openani.Ventanas;
+    package com.astememe.openani.Ventanas;
 
-import android.content.Intent;
+    import android.content.Intent;
 import android.content.SharedPreferences;
 import android.net.Uri;
 
 import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.os.Handler;
-import android.view.LayoutInflater;
+    import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.EditText;
 import android.view.animation.Animation;
@@ -29,9 +29,9 @@ import com.astememe.openani.Django_Manager.Models.UserDataModel;
 import com.astememe.openani.Django_Manager.Models.UserUpdateModel;
 import com.astememe.openani.R;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
+    import java.util.ArrayList;
+    import java.util.Arrays;
+    import java.util.List;
 
 import io.woong.shapedimageview.CircleImageView;
 import retrofit2.Call;
@@ -47,6 +47,10 @@ public class AccountView extends AppCompatActivity {
     ConstraintLayout botonAtras;
     EditText descripcion, nombreUsuario, correo, contrasena;
     CircleImageView fotoPerfil;
+
+    View menuCambiarFoto;
+
+    ImageView cerrarMenu;
     LinearLayout primeraFoto, segundaFoto, terceraFoto, cuartaFoto, quintaFoto, sextaFoto, septimaFoto, octavaFoto, novenaFoto, decimaFoto, decimoPrimeraFoto, decimoSegundaFoto, decimoTerceraFoto, decimoCuartaFoto, decimoQuintaFoto;
     View botonCambiarFoto;
     LayoutInflater infladorDeCambiarFoto;
@@ -104,7 +108,7 @@ public class AccountView extends AppCompatActivity {
                     password = null;
                 }
 
-                UserUpdateModel userUpdateModel = new UserUpdateModel(username, email, password, imagen, descripcion);
+                UserUpdateModel userUpdateModel = new UserUpdateModel(username, email, password, imagen);
                 String token = "Bearer " + preferences.getString("token", "");
 
                 guardarCambios();
@@ -178,7 +182,7 @@ public class AccountView extends AppCompatActivity {
         editor.putString("descripcion", nuevaDescripcion);
         editor.putString("imagen", nuevaImagen);
 
-        UserUpdateModel userUpdateModel = new UserUpdateModel(nuevoNombre, nuevoCorreo, nuevaContrasena, nuevaImagen, nuevaDescripcion);
+        UserUpdateModel userUpdateModel = new UserUpdateModel(nuevoNombre, nuevoCorreo, nuevaContrasena, nuevaImagen);
 
         DjangoClient.getUserAPI_Interface().updateProfile(token, userUpdateModel).enqueue(new retrofit2.Callback<UserDataModel>() {
 
