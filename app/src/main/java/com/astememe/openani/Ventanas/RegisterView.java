@@ -30,6 +30,10 @@ import com.astememe.openani.Django_Manager.Models.RegisterModel;
 import com.astememe.openani.Django_Manager.Models.UserUpdateModel;
 import com.astememe.openani.R;
 
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -90,8 +94,6 @@ public class RegisterView extends AppCompatActivity {
 
             if (continuar){
                 registerUser();
-                Intent intent = new Intent(RegisterView.this, LoginView.class);
-                startActivity(intent);
             }
         });
 
@@ -235,6 +237,33 @@ public class RegisterView extends AppCompatActivity {
                     preferences.edit().putBoolean("invitado", false).apply();
                     Toast.makeText(RegisterView.this, "Registro exitoso", Toast.LENGTH_LONG).show();
 
+                    Intent intent = new Intent(RegisterView.this, LoginView.class);
+                    startActivity(intent);
+
+                }
+                else {
+                    try {
+                        JSONObject errores = new JSONObject(response.errorBody().string());
+                        if (errores.has("username")) {
+                            usuarioRegister.setError(errores.getJSONArray("username").getString(0));
+                        }
+                        if (errores.has("email")) {
+                            emailRegister.setError(errores.getJSONArray("email").getString(0));
+                        }
+                        if (errores.has("password")) {
+                            passwordRegister.setError(errores.getJSONArray("password").getString(0));
+                        }
+                        if (errores.has("confirm_password")) {
+                            confirmPasswordRegister.setError(errores.getJSONArray("confirm_password").getString(0));
+                        }
+                        if (errores.has("non_field_errors")) {
+                            confirmPasswordRegister.setError(errores.getJSONArray("non_field_errors").getString(0));
+                        }
+                    } catch (JSONException e) {
+                        throw new RuntimeException(e);
+                    } catch (IOException e) {
+                        throw new RuntimeException(e);
+                    }
                 }
             }
 

@@ -15,13 +15,17 @@
         android:theme="@style/Theme.OpenAni"
         android:usesCleartextTraffic="true"
         tools:ignore="GoogleAppIndexingWarning">
+        <activity
+            android:name=".RecuperarContrasenaActivity"
+            android:exported="false" />
+
         <uses-library
             android:name="org.apache.http.legacy"
             android:required="false" />
+
         <activity
             android:name=".Ventanas.AccountView"
             android:exported="true">
-
         </activity>
 
         <activity
@@ -52,16 +56,15 @@
             android:exported="true"
             android:windowSoftInputMode="adjustPan"
             >
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN"/>
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
         </activity>
 
         <activity
             android:name=".Ventanas.SplashScreen"
             android:exported="true">
-
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN"/>
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
         </activity>
 
         <activity
@@ -70,4 +73,5 @@
         </activity>
 
     </application>
+
 </manifest>
