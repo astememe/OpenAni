@@ -4,6 +4,7 @@ import static android.view.View.INVISIBLE;
 
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
 import android.preference.PreferenceManager;
@@ -26,6 +27,7 @@ import androidx.core.view.WindowInsetsCompat;
 import com.astememe.openani.Django_Manager.Interfaces.DjangoClient;
 import com.astememe.openani.Django_Manager.Models.UserDataModel;
 import com.astememe.openani.Django_Manager.Models.RegisterModel;
+import com.astememe.openani.Django_Manager.Models.UserUpdateModel;
 import com.astememe.openani.R;
 
 import org.json.JSONException;
@@ -51,9 +53,10 @@ public class RegisterView extends AppCompatActivity {
     EditText confirmPasswordRegister;
     TextView botonRegistrarse;
     TextView tengoCuenta;
-    View cambiarFoto;
+    CircleImageView cambiarFoto;
     LinearLayout primeraFoto, segundaFoto, terceraFoto, cuartaFoto, quintaFoto, sextaFoto, septimaFoto, octavaFoto, novenaFoto, decimaFoto, decimoPrimeraFoto, decimoSegundaFoto, decimoTerceraFoto, decimoCuartaFoto, decimoQuintaFoto;
-    CircleImageView botonCambiarFoto;
+    View botonCambiarFoto;
+    CircleImageView fotoPerfil;
     LayoutInflater infladorDeCambiarFoto;
     LinearLayout layoutInflateRegisterViewReference;
 
@@ -61,12 +64,14 @@ public class RegisterView extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         EdgeToEdge.enable(this);
+        SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(this);
         setContentView(R.layout.activity_register_view);
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main), (v, insets) -> {
             Insets systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars());
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
             return insets;
         });
+        fotoPerfil = findViewById(R.id.fotoperfil_registro);
         layoutInflateRegisterViewReference = findViewById(R.id.contenedorMenuFotoPerfilRegister);
         usuarioRegister = findViewById(R.id.nombreusuario_registro);
         emailRegister = findViewById(R.id.correo_registro);
@@ -75,6 +80,9 @@ public class RegisterView extends AppCompatActivity {
         botonRegistrarse = findViewById(R.id.guardarcambios_register_TV);
         tengoCuenta = findViewById(R.id.iniciarsesion_TV);
         botonCambiarFoto = findViewById(R.id.cambiarfotoperfil_registro);
+
+        Uri uri = Uri.parse("android.resource://" + this.getPackageName() + "/drawable/foto_de_perfil_" + preferences.getString("imagen", ""));
+        fotoPerfil.setImageURI(uri);
 
         botonRegistrarse.setOnClickListener(v -> {
             boolean comprobar_nombre = emptyVerify(usuarioRegister);
@@ -88,6 +96,7 @@ public class RegisterView extends AppCompatActivity {
                 registerUser();
             }
         });
+
         tengoCuenta.setOnClickListener(v -> {
             Intent intent = new Intent(RegisterView.this,MainAnime.class);
             startActivity(intent);
@@ -95,28 +104,28 @@ public class RegisterView extends AppCompatActivity {
         infladorDeCambiarFoto = LayoutInflater.from(this);
         botonCambiarFoto.setOnClickListener(v ->{
             layoutInflateRegisterViewReference.removeAllViews();
-            cambiarFoto = infladorDeCambiarFoto.inflate(R.layout.change_photo_of_profile,layoutInflateRegisterViewReference, true);
+            botonCambiarFoto = infladorDeCambiarFoto.inflate(R.layout.change_photo_of_profile,layoutInflateRegisterViewReference, true);
             Animation slide_in = AnimationUtils.loadAnimation(getApplicationContext(), R.anim.slide_up);
             Animation slide_out = AnimationUtils.loadAnimation(getApplicationContext(), R.anim.slide_down);
-            cambiarFoto.setAnimation(slide_in);
+            botonCambiarFoto.setAnimation(slide_in);
 
 
             List<LinearLayout> fotosDePerfil = new ArrayList<>(Arrays.asList(
-                    primeraFoto = cambiarFoto.findViewById(R.id.contenedorKaneki),
-                    segundaFoto = cambiarFoto.findViewById(R.id.contenedorJotaro),
-                    terceraFoto = cambiarFoto.findViewById(R.id.contenedorJinWoo),
-                    cuartaFoto = cambiarFoto.findViewById(R.id.contenedorGoku),
-                    quintaFoto = cambiarFoto.findViewById(R.id.contenedorGohan),
-                    sextaFoto = cambiarFoto.findViewById(R.id.contenedorNicoRobin),
-                    septimaFoto = cambiarFoto.findViewById(R.id.contenedorToga),
-                    octavaFoto = cambiarFoto.findViewById(R.id.contenedorKakashi),
-                    novenaFoto = cambiarFoto.findViewById(R.id.contenedorNaruto),
-                    decimaFoto = cambiarFoto.findViewById(R.id.contenedorPersonajeTR),
-                    decimoPrimeraFoto = cambiarFoto.findViewById(R.id.contenedorSasuke),
-                    decimoSegundaFoto = cambiarFoto.findViewById(R.id.contenedorGojo),
-                    decimoTerceraFoto= cambiarFoto.findViewById(R.id.contenedorMelodias),
-                    decimoCuartaFoto= cambiarFoto.findViewById(R.id.contenedorMikasa),
-                    decimoQuintaFoto= cambiarFoto.findViewById(R.id.contenedorLuffy)
+                    primeraFoto = botonCambiarFoto.findViewById(R.id.contenedorKaneki),
+                    segundaFoto = botonCambiarFoto.findViewById(R.id.contenedorJotaro),
+                    terceraFoto = botonCambiarFoto.findViewById(R.id.contenedorJinWoo),
+                    cuartaFoto = botonCambiarFoto.findViewById(R.id.contenedorGoku),
+                    quintaFoto = botonCambiarFoto.findViewById(R.id.contenedorGohan),
+                    sextaFoto = botonCambiarFoto.findViewById(R.id.contenedorNicoRobin),
+                    septimaFoto = botonCambiarFoto.findViewById(R.id.contenedorToga),
+                    octavaFoto = botonCambiarFoto.findViewById(R.id.contenedorKakashi),
+                    novenaFoto = botonCambiarFoto.findViewById(R.id.contenedorNaruto),
+                    decimaFoto = botonCambiarFoto.findViewById(R.id.contenedorPersonajeTR),
+                    decimoPrimeraFoto = botonCambiarFoto.findViewById(R.id.contenedorSasuke),
+                    decimoSegundaFoto = botonCambiarFoto.findViewById(R.id.contenedorGojo),
+                    decimoTerceraFoto= botonCambiarFoto.findViewById(R.id.contenedorMelodias),
+                    decimoCuartaFoto= botonCambiarFoto.findViewById(R.id.contenedorMikasa),
+                    decimoQuintaFoto= botonCambiarFoto.findViewById(R.id.contenedorLuffy)
             ));
             for (LinearLayout foto: fotosDePerfil) {
                 foto.setOnClickListener(new View.OnClickListener() {
@@ -125,8 +134,8 @@ public class RegisterView extends AppCompatActivity {
                         TextView nombreFoto = v.findViewById(R.id.idImagen);
                         String valor = nombreFoto.getText().toString();
                         SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
-                        sharedPreferences.edit().putString("foto_perfil", valor).apply();
-                        Log.d("id", valor);
+                        sharedPreferences.edit().putString("imagen", valor).apply();
+                        fotoPerfil.setImageURI(Uri.parse("android.resource://" + getPackageName() + "/drawable/foto_de_perfil_" + valor));
                         desplazarMenu(slide_out);
                     }
                 });
@@ -136,7 +145,7 @@ public class RegisterView extends AppCompatActivity {
 
         }
     public void desplazarMenu(Animation slide_out) {
-        cambiarFoto.setAnimation(slide_out);
+        botonCambiarFoto.setAnimation(slide_out);
         new Handler().postDelayed(new Runnable() {
             @Override
             public void run() {
@@ -226,7 +235,6 @@ public class RegisterView extends AppCompatActivity {
                     preferences.edit().putString("access", userDataModel.getAccess()).apply();
                     preferences.edit().putString("refresh", userDataModel.getRefresh()).apply();
                     preferences.edit().putBoolean("invitado", false).apply();
-
                     Toast.makeText(RegisterView.this, "Registro exitoso", Toast.LENGTH_LONG).show();
 
                     Intent intent = new Intent(RegisterView.this, LoginView.class);
@@ -265,5 +273,6 @@ public class RegisterView extends AppCompatActivity {
             }
         });
     }
+
 
 }
