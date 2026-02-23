@@ -135,7 +135,9 @@ public class RegisterView extends AppCompatActivity {
                         String valor = nombreFoto.getText().toString();
                         SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
                         sharedPreferences.edit().putString("imagen", valor).apply();
-                        fotoPerfil.setImageURI(Uri.parse("android.resource://" + getPackageName() + "/drawable/foto_de_perfil_" + valor));
+                        Uri uri = Uri.parse("android.resource://" + getPackageName() + "/drawable/foto_de_perfil_" + valor);
+                        fotoPerfil.setImageDrawable(null);
+                        fotoPerfil.setImageURI(uri);
                         desplazarMenu(slide_out);
                     }
                 });

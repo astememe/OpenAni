@@ -52,8 +52,6 @@ public class TorrentAdapter extends RecyclerView.Adapter<TorrentAdapter.SostenDe
         holder.ultima_fecha_torrent.setText(torrent.getFecha());
         holder.cantidad_seeders_torrent.setText(String.valueOf(torrent.getSeeders()));
         holder.cantidad_leechers_torrent.setText(String.valueOf(torrent.getLeechers()));
-        holder.cantidad_likes_torrent.setText("0");
-        holder.cantidad_dislikes_torrent.setText("0");
 
         holder.image_boton_download.setOnClickListener(new View.OnClickListener() {
             @Override
