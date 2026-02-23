@@ -5,7 +5,7 @@
     android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".RecuperarContrasenaActivity">
+    tools:context=".Ventanas.RecuperarContrasenaActivity">
 
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -191,7 +191,7 @@
 
                                         <EditText
                                             android:windowSoftInputMode="adjustPan"
-                                            android:id="@+id/correo_registro"
+                                            android:id="@+id/correo_recuperar"
                                             android:layout_width="match_parent"
                                             android:layout_height="match_parent"
                                             android:backgroundTint="@color/white"
@@ -283,7 +283,7 @@
 
                                         <EditText
                                             android:windowSoftInputMode="adjustPan"
-                                            android:id="@+id/contrasena_registro"
+                                            android:id="@+id/codigo_recuperar"
                                             android:layout_width="match_parent"
                                             android:layout_height="match_parent"
                                             android:backgroundTint="@color/white"
@@ -377,7 +377,7 @@
                                         <EditText
                                             android:background="@color/white"
                                             android:windowSoftInputMode="adjustPan"
-                                            android:id="@+id/contrasena_login"
+                                            android:id="@+id/password_recuperar"
                                             android:layout_width="match_parent"
                                             android:layout_height="match_parent"
                                             android:layout_marginHorizontal="10dp"
