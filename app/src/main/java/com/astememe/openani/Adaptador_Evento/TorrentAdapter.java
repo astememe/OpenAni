@@ -96,9 +96,9 @@ public class TorrentAdapter extends RecyclerView.Adapter<TorrentAdapter.SostenDe
         holder.estrella_favorita_icono.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (!preferences.getBoolean("invitado", false)) {
+                token = "Bearer " + preferences.getString("token", "");
+                if (!preferences.getBoolean("invitado", false) && !listaFavoritos.contains(torrent.getEnlace())) {
                     FavoriteModel.FavoriteTorrentModel favoriteTorrentModel = new FavoriteModel.FavoriteTorrentModel(preferences.getString("nombre", "Invitado"), torrent.getTitulo(), torrent.getEnlace(), torrent.getTamano(), torrent.getFecha(), Integer.toString(torrent.getSeeders()), Integer.toString(torrent.getLeechers()));
-                    token = "Bearer " + preferences.getString("token", "");
                     DjangoClient.getTorrentsAPI_Interface().postFavorite(token, favoriteTorrentModel).enqueue(new Callback<Void>() {
                         @Override
                         public void onResponse(Call<Void> call, Response<Void> response) {
@@ -116,8 +116,24 @@ public class TorrentAdapter extends RecyclerView.Adapter<TorrentAdapter.SostenDe
                             Log.d("Error", t.getMessage());
                         }
                     });
-                } else {
+                } else if (preferences.getBoolean("invitado", false)){
                     Toast.makeText(context, "Debes iniciar sesión para agregar un torrent a favoritos", Toast.LENGTH_SHORT).show();
+                } else {
+                    DjangoClient.getTorrentsAPI_Interface().deleteFavorite(token, preferences.getString("nombre", ""), torrent.getEnlace()).enqueue(new Callback<Void>() {
+                        @Override
+                        public void onResponse(Call<Void> call, Response<Void> response) {
+                            Log.d("Respuesta", "Torrent eliminado de favoritos");
+                            holder.estrella_favorita_icono.setImageResource(R.drawable.estrella_favorito_icono);
+                            listaFavoritos.remove(torrent.getEnlace());
+                            notifyDataSetChanged();
+                        }
+
+                        @Override
+                        public void onFailure(Call<Void> call, Throwable t) {
+                            Log.d("Error", t.getMessage());
+                            Toast.makeText(context, "Error al eliminar el torrent", Toast.LENGTH_LONG);
+                        }
+                    });
                 }
             }
         });

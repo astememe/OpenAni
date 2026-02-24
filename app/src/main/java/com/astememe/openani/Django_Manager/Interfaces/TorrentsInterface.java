@@ -5,6 +5,7 @@ import com.astememe.openani.Django_Manager.Models.TorrentsModel;
 
 import retrofit2.Call;
 import retrofit2.http.Body;
+import retrofit2.http.DELETE;
 import retrofit2.http.GET;
 import retrofit2.http.Header;
 import retrofit2.http.POST;
@@ -22,4 +23,7 @@ public interface TorrentsInterface {
 
     @POST("favorito/")
     Call<Void> postFavorite(@Header("Authorization") String token, @Body FavoriteModel.FavoriteTorrentModel favorite);
+
+    @DELETE("favorito/")
+    Call<Void> deleteFavorite(@Header("Authorization") String token, @Query("nombre_usuario") String nombre, @Query("magnet") String torrent);
 }
