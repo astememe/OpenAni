@@ -6,26 +6,23 @@ import java.util.List;
 
 
 public class FavoriteModel {
-    @SerializedName("favoritos")
+    @SerializedName("torrents")
     List<FavoriteTorrentModel> favoritos;
 
     public static class FavoriteTorrentModel {
         @SerializedName("nombre_usuario")
         private String nombre_usuario;
 
-        @SerializedName("nombre_torrent")
+        @SerializedName("title")
         private String nombre_torrent;
 
-        @SerializedName("categoria")
-        private String categoria;
-
-        @SerializedName("enlace")
+        @SerializedName("magnet")
         private String enlace;
 
-        @SerializedName("tamano")
+        @SerializedName("size")
         private String tamano;
 
-        @SerializedName("fecha")
+        @SerializedName("time")
         private String fecha;
 
         @SerializedName("seeders")
@@ -62,7 +59,7 @@ public class FavoriteModel {
             return leechers;
         }
 
-        public FavoriteModel(String nombre_usuario, String nombre_torrent, String enlace, String tamano, String fecha, String seeders, String leechers) {
+        public FavoriteTorrentModel(String nombre_usuario, String nombre_torrent, String enlace, String tamano, String fecha, String seeders, String leechers) {
             this.nombre_usuario = nombre_usuario;
             this.nombre_torrent = nombre_torrent;
             this.enlace = enlace;

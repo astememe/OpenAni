@@ -7,16 +7,10 @@ import java.util.List;
 
 public class DataModel {
 
-    @SerializedName("count")
-    int count;
-
     @SerializedName("data")
     public List<Torrent> torrents = new ArrayList<>();
 
     public class Torrent {
-        @SerializedName("category")
-        public String categoria;
-
         @SerializedName("title")
         public String titulo;
 
@@ -36,17 +30,12 @@ public class DataModel {
         public int leechers;
 
         public Torrent(String categoria, String titulo, String enlace, String tamano, String fecha, int seeders, int leechers) {
-            this.categoria = categoria;
             this.titulo = titulo;
             this.enlace = enlace;
             this.tamano = tamano;
             this.fecha = fecha;
             this.seeders = seeders;
             this.leechers = leechers;
-        }
-
-        public String getCategoria() {
-            return categoria;
         }
 
         public String getTitulo() {

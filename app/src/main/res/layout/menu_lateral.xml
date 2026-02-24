@@ -217,6 +217,23 @@
 
                 </androidx.constraintlayout.widget.ConstraintLayout>
 
+                <TextView
+                    android:id="@+id/favorites"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Favorites"
+                    android:textSize="40sp"
+                    android:textColor="@color/black"
+                    android:fontFamily="@font/share_bold"
+                    android:textStyle="bold"
+                    android:layout_marginVertical="10dp"/>
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="2dp"
+                    android:background="@color/azul_header" />
+
+
                 <ImageView
                     android:layout_marginTop="50dp"
                     android:layout_width="match_parent"

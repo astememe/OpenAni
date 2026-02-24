@@ -16,9 +16,6 @@ public class TorrentsModel {
         @SerializedName("nombre")
         public String nombre_bbdd;
 
-        @SerializedName("categoria")
-        public String categoria_bbdd;
-
         @SerializedName("enlace")
         public String enlace_bbdd;
 
@@ -34,22 +31,14 @@ public class TorrentsModel {
         @SerializedName("leechers")
         public String leechers_bbdd;
 
-        @SerializedName("likes")
-        public String likes_bbdd;
-
-        @SerializedName("dislikes")
-        public String dislikes_bbdd;
 
         public TorrentBBDD(String nombre, String categoria, String enlace, String tamano, String fecha, String seeders, String leechers, String likes, String dislikes) {
             this.nombre_bbdd = nombre;
-            this.categoria_bbdd = categoria;
             this.enlace_bbdd = enlace;
             this.tamano_bbdd = tamano;
             this.fecha_bbdd = fecha;
             this.seeders_bbdd = seeders;
             this.leechers_bbdd = leechers;
-            this.likes_bbdd = likes;
-            this.dislikes_bbdd = dislikes;
         }
 
         public int getId_bbdd() {
@@ -58,10 +47,6 @@ public class TorrentsModel {
 
         public String getNombre_bbdd() {
             return nombre_bbdd;
-        }
-
-        public String getCategoria_bbdd() {
-            return categoria_bbdd;
         }
 
         public String getEnlace_bbdd() {
@@ -84,13 +69,6 @@ public class TorrentsModel {
             return leechers_bbdd;
         }
 
-        public String getLikes_bbdd() {
-            return likes_bbdd;
-        }
-
-        public String getDislikes_bbdd() {
-            return dislikes_bbdd;
-        }
     }
 
 }

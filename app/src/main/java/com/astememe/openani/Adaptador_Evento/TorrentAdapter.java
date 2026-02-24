@@ -26,6 +26,7 @@ import com.astememe.openani.R;
 import com.astememe.openani.Ventanas.FavoriteView;
 import com.astememe.openani.Ventanas.TorrentView;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import retrofit2.Call;
@@ -37,14 +38,18 @@ public class TorrentAdapter extends RecyclerView.Adapter<TorrentAdapter.SostenDe
 
     Context context;
     List<DataModel.Torrent> torrentList;
-    List<FavoriteModel> favoritos;
-
     SharedPreferences preferences;
     String token;
+    private List<String> listaFavoritos = new ArrayList<>();
 
     public TorrentAdapter(Context context, List<DataModel.Torrent> torrentList){
         this.context = context;
         this.torrentList = torrentList;
+    }
+
+    public void setFavoritos(List<String> magnets) {
+        this.listaFavoritos = magnets;
+        notifyDataSetChanged();
     }
 
     @NonNull
@@ -66,6 +71,12 @@ public class TorrentAdapter extends RecyclerView.Adapter<TorrentAdapter.SostenDe
         holder.cantidad_seeders_torrent.setText(String.valueOf(torrent.getSeeders()));
         holder.cantidad_leechers_torrent.setText(String.valueOf(torrent.getLeechers()));
 
+        if (listaFavoritos.contains(torrent.getEnlace())) {
+            holder.estrella_favorita_icono.setImageResource(R.drawable.estrella_favorito_rellena);
+        } else {
+            holder.estrella_favorita_icono.setImageResource(R.drawable.estrella_favorito_icono);
+        }
+
         holder.image_boton_download.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -75,7 +86,6 @@ public class TorrentAdapter extends RecyclerView.Adapter<TorrentAdapter.SostenDe
                 intent.putExtra("fecha", torrent.getFecha());
                 intent.putExtra("seeders", torrent.getSeeders());
                 intent.putExtra("leechers", torrent.getLeechers());
-                intent.putExtra("categoria", torrent.getCategoria());
                 intent.putExtra("enlace", torrent.getEnlace());
                 context.startActivity(intent);
             }
@@ -94,6 +104,8 @@ public class TorrentAdapter extends RecyclerView.Adapter<TorrentAdapter.SostenDe
                                 Log.d("Respuesta", "Torrent agregado a favoritos");
                                 holder.estrella_favorita_icono.setImageResource(R.drawable.estrella_favorito_rellena);
                                 System.out.println(holder.estrella_favorita_icono.getDrawable());
+
+                                listaFavoritos.add(torrent.getEnlace());
                             }
                         }
 
@@ -135,12 +147,5 @@ public class TorrentAdapter extends RecyclerView.Adapter<TorrentAdapter.SostenDe
             contenedor_estrella_favorita = itemView.findViewById(R.id.contenedor_estrella_favorita);
             estrella_favorita_icono = itemView.findViewById(R.id.estrella_favorita_icono);
         }
-    }
-
-    public void rellenarFavoritos() {
-        token = "Bearer " + preferences.getString("token", "");
-        DjangoClient.getTorrentsAPI_Interface().getFavorites(preferences.getString("nombre", ""));
-
-        //SEGUIR AQUÍ
     }
 }

@@ -1,4 +1,5 @@
 package com.astememe.openani.Django_Manager.Interfaces;
+import com.astememe.openani.API_Manager.DataModel;
 import com.astememe.openani.Django_Manager.Models.FavoriteModel;
 import com.astememe.openani.Django_Manager.Models.TorrentsModel;
 
@@ -17,7 +18,7 @@ public interface TorrentsInterface {
     Call<Void> postTorrent(@Body TorrentsModel.TorrentBBDD torrent);
 
     @GET("favorito/")
-    Call<TorrentsModel> getFavorites(@Query("nombre_usuario") String nombre);
+    Call<DataModel> getFavorites(@Header("Authorization") String token, @Query("nombre_usuario") String nombre);
 
     @POST("favorito/")
     Call<Void> postFavorite(@Header("Authorization") String token, @Body FavoriteModel.FavoriteTorrentModel favorite);

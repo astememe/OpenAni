@@ -45,6 +45,7 @@ import java.util.ArrayList;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
+import retrofit2.http.Header;
 
 import java.util.Arrays;
 import java.util.List;
@@ -68,21 +69,16 @@ public class MainAnime extends AppCompatActivity {
     TextView header_categoria;
     TextView header_subcategoria;
 
-    TextView anime;
-    TextView anime_music_video;
-    TextView anime_english;
-    TextView anime_non_english;
-    TextView anime_original;
-    TextView manga;
-    TextView manga_english;
-    TextView manga_non_english;
-    TextView manga_original;
+    TextView anime, anime_music_video, anime_english, anime_non_english, anime_original, manga, manga_english, manga_non_english, manga_original,  nombre_usuario, favorites;
     ImageView foto_perfil;
-    TextView nombre_usuario;
     ImageButton boton_descargar;
 
     Handler buscarDelayer = new Handler();
     Runnable buscar;
+
+    String token;
+    SharedPreferences preferences;
+    List<String> magnetsFavoritos = new ArrayList<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -95,7 +91,7 @@ public class MainAnime extends AppCompatActivity {
             return insets;
         });
         Boolean esInvitado = esInvitado();
-        SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(this);
+        preferences = PreferenceManager.getDefaultSharedPreferences(this);
 
         String nombre_de_usuario = preferences.getString("nombre", "Invitado");
 
@@ -103,6 +99,7 @@ public class MainAnime extends AppCompatActivity {
         fillTorrents("anime");
         torrentRecycle.setLayoutManager(new GridLayoutManager(this, 1));
         adapter = new TorrentAdapter(this, torrentList);
+        obtenerListaFavoritos();
         torrentRecycle.setAdapter(adapter);
         busqueda = findViewById(R.id.searchbar_anime);
 
@@ -158,6 +155,7 @@ public class MainAnime extends AppCompatActivity {
                 manga = menu_lateral.findViewById(R.id.manga);
                 foto_perfil = menu_lateral.findViewById(R.id.imagen_perfil);
                 nombre_usuario = menu_lateral.findViewById(R.id.nombre_usuario);
+                favorites = menu_lateral.findViewById(R.id.favorites);
 
                 if (esInvitado()) {
                     nombre_usuario.setText("Invitado");
@@ -166,6 +164,16 @@ public class MainAnime extends AppCompatActivity {
                     nombre_usuario.setText(nombre_de_usuario);
                     foto_perfil.setImageURI(Uri.parse("android.resource://" + getPackageName() + "/drawable/foto_de_perfil_" + preferences.getString("imagen", "")));
                 }
+
+                favorites.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        header_categoria.setText("Favorites");
+                        header_subcategoria.setText("");
+                        fillFavorites();
+                        cerrar_menu_lateral(slide_out);
+                    }
+                });
 
 
                 sombra_menu_lateral.setOnClickListener(new View.OnClickListener() {
@@ -310,6 +318,52 @@ public class MainAnime extends AppCompatActivity {
         });
     }
 
+    private void fillFavorites() {
+        token = "Bearer " + preferences.getString("token", "");
+        DjangoClient.getTorrentsAPI_Interface().getFavorites(token, preferences.getString("nombre", "")).enqueue(new Callback<DataModel>() {
+            @Override
+            public void onResponse(Call<DataModel> call, Response<DataModel> response) {
+                torrentList.clear();
+                if (response.isSuccessful() && response.body() != null) {
+                    torrentList.addAll(response.body().torrents);
+                }
+                adapter.notifyDataSetChanged();
+            }
+
+            @Override
+            public void onFailure(Call<DataModel> call, Throwable t) {
+                Toast.makeText(getApplicationContext(), t.getLocalizedMessage(), Toast.LENGTH_SHORT).show();
+            }
+        });
+    }
+
+    private void obtenerListaFavoritos() {
+        if (esInvitado()) {
+            return;
+        }
+
+        String token = "Bearer " + preferences.getString("token", "");
+        String usuario = preferences.getString("nombre", "");
+
+        DjangoClient.getTorrentsAPI_Interface().getFavorites(token, usuario).enqueue(new Callback<DataModel>() {
+            @Override
+            public void onResponse(Call<DataModel> call, Response<DataModel> response) {
+                if (response.isSuccessful() && response.body() != null) {
+                    magnetsFavoritos.clear();
+                    for (DataModel.Torrent t : response.body().torrents) {
+                        magnetsFavoritos.add(t.getEnlace());
+                    }
+                    adapter.setFavoritos(magnetsFavoritos);
+                }
+            }
+
+            @Override
+            public void onFailure(Call<DataModel> call, Throwable t) {
+                Log.e("Favoritos", "Error cargando lista de favoritos");
+            }
+        });
+    }
+
     private void filtrarPorNombre(String texto, String categoria, String subcategoria, TorrentAdapter adapter) {
         torrentList.clear();
         if (texto.isEmpty() && subcategoria == "most recent") {
@@ -368,7 +422,7 @@ public class MainAnime extends AppCompatActivity {
     }
 
     private boolean esInvitado() {
-        SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(this);
+        preferences = PreferenceManager.getDefaultSharedPreferences(this);
         return preferences.getBoolean("invitado", false);
     }
 
