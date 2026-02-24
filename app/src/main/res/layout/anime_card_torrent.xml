@@ -46,16 +46,18 @@
                         <LinearLayout
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:orientation="vertical">
+                            android:orientation="vertical"
+                            android:layout_weight="1">
                             <HorizontalScrollView
+                                android:scrollbars="none"
                                 android:layout_width="match_parent"
                                 android:layout_height="match_parent"
                                 >
-
                                 <TextView
                                     android:id="@+id/titulo_torrent"
-                                    android:layout_width="wrap_content"
+                                    android:layout_width="0dp"
                                     android:layout_height="45dp"
+
                                     android:layout_marginBottom="4dp"
                                     android:fontFamily="@font/zud"
                                     android:padding="10dp"
@@ -67,6 +69,8 @@
 
                         </LinearLayout>
                         <LinearLayout
+                            android:layout_weight="30"
+                            android:id="@+id/contenedor_estrella_favorita"
                             android:orientation="vertical"
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
