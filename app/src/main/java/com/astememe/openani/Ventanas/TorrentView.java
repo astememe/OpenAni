@@ -27,6 +27,7 @@ import com.astememe.openani.R;
 import java.util.ArrayList;
 import java.util.List;
 
+import io.woong.shapedimageview.CircleImageView;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -54,6 +55,8 @@ public class TorrentView extends AppCompatActivity {
     RecyclerView recyclerComentarios;
     ComentarioAdapter comentarioAdapter;
     List<ComentarioModel.ComentarioTorrent> listaComentarios = new ArrayList<>();
+
+    CircleImageView anadir_comentario;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -84,10 +87,19 @@ public class TorrentView extends AppCompatActivity {
         ultima_fecha_torrent = findViewById(R.id.fecha_actualizacion_torrent_especificaciones);
         categoria_torrent = findViewById(R.id.categoria_especificaciones);
 
+        anadir_comentario = findViewById(R.id.anadir_comentario);
+
         titulo_torrent.setText(titulo);
         categoria_torrent.setText("Category: " + categoria);
         tamano_torrent.setText("Size:" + tamano);
         ultima_fecha_torrent.setText("Date: " + fecha);
+
+        anadir_comentario.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+            }
+        });
 
         boton_descargar.setOnClickListener(new View.OnClickListener() {
             @Override

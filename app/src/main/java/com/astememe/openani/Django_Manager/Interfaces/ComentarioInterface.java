@@ -12,5 +12,5 @@ public interface ComentarioInterface {
     Call<ComentarioModel> getComentario(@Query("nombre_torrent") String nombre_torrent);
 
     @POST("comentarios/")
-    Call<ComentarioModel> postComentario(@Body ComentarioModel comentario);
+    Call<ComentarioModel> postComentario(@Body ComentarioModel.ComentarioTorrent comentario);
 }
