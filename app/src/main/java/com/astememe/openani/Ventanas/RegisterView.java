@@ -60,11 +60,13 @@ public class RegisterView extends AppCompatActivity {
     LayoutInflater infladorDeCambiarFoto;
     LinearLayout layoutInflateRegisterViewReference;
 
+    SharedPreferences preferences;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         EdgeToEdge.enable(this);
-        SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(this);
+        preferences = PreferenceManager.getDefaultSharedPreferences(this);
         setContentView(R.layout.activity_register_view);
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main), (v, insets) -> {
             Insets systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars());
@@ -133,8 +135,7 @@ public class RegisterView extends AppCompatActivity {
                     public void onClick(View v) {
                         TextView nombreFoto = v.findViewById(R.id.idImagen);
                         String valor = nombreFoto.getText().toString();
-                        SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
-                        sharedPreferences.edit().putString("imagen", valor).apply();
+                        preferences.edit().putString("imagen", valor).apply();
                         Uri uri = Uri.parse("android.resource://" + getPackageName() + "/drawable/foto_de_perfil_" + valor);
                         fotoPerfil.setImageDrawable(null);
                         fotoPerfil.setImageURI(uri);
@@ -217,14 +218,13 @@ public class RegisterView extends AppCompatActivity {
         String inputContrasenia = passwordRegister.getText().toString();
         String inputConfirmarContrasenia = confirmPasswordRegister.getText().toString();
 
-        RegisterModel.UserRegister userRegister = new RegisterModel.UserRegister(inputUsuario, inputEmail, "naruto", inputContrasenia, inputConfirmarContrasenia);
+
+        RegisterModel.UserRegister userRegister = new RegisterModel.UserRegister(inputUsuario, inputEmail, preferences.getString("imagen", "naruto"), inputContrasenia, inputConfirmarContrasenia);
 
         DjangoClient.getRegisterAPI_Interface().register(userRegister).enqueue(new Callback<UserDataModel>() {
             @Override
             public void onResponse(Call<UserDataModel> call, Response<UserDataModel> response) {
                 if (response.isSuccessful()) {
-                    SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(RegisterView.this);
-
                     UserDataModel userDataModel = response.body();
                     UserDataModel.UserData userData = userDataModel.getUser();
                     String username = userData.getUsername();

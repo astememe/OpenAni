@@ -49,6 +49,7 @@
                     >
 
                     <io.woong.shapedimageview.CircleImageView
+                        android:id="@+id/img_perfil"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:src="@drawable/spiderman"
@@ -62,6 +63,7 @@
                         />
                 </androidx.constraintlayout.widget.ConstraintLayout>
                 <TextView
+                    android:id="@+id/nombre_usuario"
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
                     android:text="Alejandro_676767"
@@ -89,15 +91,14 @@
                     app:cardCornerRadius="10dp"
                     android:layout_margin="1dp"
                     >
-                    <EditText
-                        android:id="@+id/comentario_EditText"
+                    <TextView
+                        android:id="@+id/comentario_texto"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:background="@color/white"
                         android:textSize="20dp"
                         android:hint="Comentario..."
-                        android:padding="5dp"
-                        android:textAlignment="viewStart"
+                        android:padding="10dp"
                         android:fontFamily="@font/share"
                         />
                 </androidx.cardview.widget.CardView>

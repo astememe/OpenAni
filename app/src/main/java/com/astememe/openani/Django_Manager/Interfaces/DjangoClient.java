@@ -34,4 +34,12 @@ public class DjangoClient {
     public static PasswordResetInterface getResetPasswordAPI_Interface() {
         return getRetrofitInstance().create(PasswordResetInterface.class);
     }
+
+    public static ComentarioInterface getComentario_Interface() {
+        return getRetrofitInstance().create(ComentarioInterface.class);
+    }
+
+    public static TorrentsInterface getTorrentsAPI_Interface() {
+        return getRetrofitInstance().create(TorrentsInterface.class);
+    }
 }

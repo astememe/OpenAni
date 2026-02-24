@@ -7,6 +7,7 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.os.Handler;
+    import android.util.Log;
     import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.EditText;
@@ -29,6 +30,10 @@ import com.astememe.openani.Django_Manager.Models.UserDataModel;
 import com.astememe.openani.Django_Manager.Models.UserUpdateModel;
 import com.astememe.openani.R;
 
+    import org.json.JSONException;
+    import org.json.JSONObject;
+
+    import java.io.IOException;
     import java.util.ArrayList;
     import java.util.Arrays;
     import java.util.List;
@@ -191,14 +196,31 @@ public class AccountView extends AppCompatActivity {
             @Override
             public void onResponse(Call<UserDataModel> call, Response<UserDataModel> response) {
                 editor.apply();
-
-                Toast.makeText(AccountView.this, "¡Cambios guardados con éxito!", Toast.LENGTH_SHORT).show();
-                finish();
+                if (response.isSuccessful()) {
+                    Toast.makeText(AccountView.this, "¡Cambios guardados con éxito!", Toast.LENGTH_SHORT).show();
+                } else {
+                    try {
+                        JSONObject errores = new JSONObject(response.errorBody().string());
+                        if (errores.has("password")) {
+                            contrasena.setError(errores.getJSONArray("password").getString(0));
+                        }
+                        if (errores.has("email")) {
+                            correo.setError(errores.getJSONArray("email").getString(0));
+                        }
+                        if (errores.has("username")) {
+                            nombreUsuario.setError(errores.getJSONArray("username").getString(0));
+                        }
+                    } catch (JSONException e) {
+                        throw new RuntimeException(e);
+                    } catch (IOException e) {
+                        throw new RuntimeException(e);
+                    }
+                }
             }
 
             @Override
             public void onFailure(Call<UserDataModel> call, Throwable t) {
-                Toast.makeText(AccountView.this, "Error: El usuario ya existen", Toast.LENGTH_LONG).show();
+                Toast.makeText(AccountView.this, "Error: El usuario ya existe", Toast.LENGTH_LONG).show();
             }
         });
 

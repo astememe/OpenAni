@@ -37,6 +37,8 @@ public class LoginView extends AppCompatActivity {
     TextView button_register;
     TextView button_invitado;
 
+    TextView contrasena_olvidada;
+
     boolean token_recieved;
 
 
@@ -58,6 +60,17 @@ public class LoginView extends AppCompatActivity {
 
         button_login.setOnClickListener(v -> login());
         button_register = findViewById(R.id.boton_registrarse);
+
+        contrasena_olvidada = findViewById(R.id.contrasena_olvidada);
+
+        contrasena_olvidada.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(LoginView.this, RecuperarContrasenaView.class);
+                startActivity(intent);
+            }
+        });
+
         button_register.setOnClickListener(v -> {
             Intent intent = new Intent(LoginView.this, RegisterView.class);
             startActivity(intent);
