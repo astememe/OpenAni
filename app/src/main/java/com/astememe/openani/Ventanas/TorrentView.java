@@ -15,6 +15,7 @@ import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
+import com.astememe.openani.Django_Manager.Interfaces.DjangoClient;
 import com.astememe.openani.R;
 
 public class TorrentView extends AppCompatActivity {
@@ -87,6 +88,8 @@ public class TorrentView extends AppCompatActivity {
                 startActivity(intent);
             }
         });
+
+//        DjangoClient.getComentario_Interface().getComentario()
 
     }
 }
