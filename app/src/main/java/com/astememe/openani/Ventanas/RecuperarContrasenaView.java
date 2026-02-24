@@ -3,6 +3,7 @@ package com.astememe.openani.Ventanas;
 import static android.view.View.INVISIBLE;
 import static android.view.View.VISIBLE;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -37,7 +38,7 @@ public class RecuperarContrasenaView extends AppCompatActivity {
     EditText correo_recuperar, codigo_recuperar, password_recuperar;
     ConstraintLayout generar_codigo;
     ConstraintLayout aceptar_recuperar;
-
+    ConstraintLayout flechaAtras;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -59,7 +60,15 @@ public class RecuperarContrasenaView extends AppCompatActivity {
         aceptar_recuperar.setVisibility(INVISIBLE);
         password_recuperar.setVisibility(INVISIBLE);
 
+        flechaAtras =  findViewById(R.id.flecha_volver_title);
 
+        flechaAtras.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(RecuperarContrasenaView.this, RegisterView.class);
+                startActivity(intent);
+            }
+        });
         generar_codigo.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
