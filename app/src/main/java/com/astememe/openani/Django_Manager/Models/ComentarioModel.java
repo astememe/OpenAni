@@ -8,7 +8,6 @@ public class ComentarioModel {
     @SerializedName("nombre_torrent")
     public String nombre_torrent;
     @SerializedName("nombre_usuario")
-
     public String nombre_usuario;
     @SerializedName("imagen_usuario")
     public String imagen_usuario;

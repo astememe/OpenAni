@@ -121,7 +121,6 @@ public class TorrentAdapter extends RecyclerView.Adapter<TorrentAdapter.SostenDe
         LinearLayout contenedor_estrella_favorita;
         ImageView estrella_favorita_icono;
 
-
         public SostenDeVistas(@NonNull View itemView) {
             super(itemView);
             titulo_torrent = itemView.findViewById(R.id.titulo_torrent);
