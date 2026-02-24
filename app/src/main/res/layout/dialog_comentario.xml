@@ -1,0 +1,23 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:padding="20dp">
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Escribe tu comentario"
+        android:textStyle="bold"
+        android:textSize="18sp" />
+
+    <EditText
+        android:id="@+id/edit_comentario_texto"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Comentario..."
+        android:lines="3"
+        android:gravity="top"
+        android:layout_margin="10dp"
+        />
+</LinearLayout>

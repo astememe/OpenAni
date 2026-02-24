@@ -276,5 +276,4 @@ public class RegisterView extends AppCompatActivity {
         });
     }
 
-
 }

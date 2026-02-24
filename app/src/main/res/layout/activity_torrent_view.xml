@@ -292,16 +292,22 @@
                     >
 
                     <LinearLayout
+                        android:id="@+id/linear_layout_comentarios"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:orientation="vertical">
+                        <ScrollView
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:orientation="vertical">
 
-                        <include layout="@layout/card_comentario"></include>
-                        <include layout="@layout/card_comentario"></include>
-                        <include layout="@layout/card_comentario"></include>
-                        <include layout="@layout/card_comentario"></include>
-                        <include layout="@layout/card_comentario"></include>
-
+                            <androidx.recyclerview.widget.RecyclerView
+                                android:id="@+id/ComentariosRecycler"
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:elevation="10dp"
+                                />
+                        </ScrollView>
                     </LinearLayout>
 
                 </ScrollView>

@@ -30,5 +30,4 @@ public interface APIInterface {
     @GET("/nyaa")
     Call<DataModel> getByNameandCategoryandSubCategory(@QueryMap Map<String, String> filters);
 
-
 }

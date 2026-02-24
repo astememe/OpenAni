@@ -4,8 +4,10 @@ import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
@@ -14,9 +16,21 @@ import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
+import com.astememe.openani.Adaptador_Evento.ComentarioAdapter;
 import com.astememe.openani.Django_Manager.Interfaces.DjangoClient;
+import com.astememe.openani.Django_Manager.Models.ComentarioModel;
 import com.astememe.openani.R;
+
+import java.util.ArrayList;
+import java.util.List;
+
+import io.woong.shapedimageview.CircleImageView;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 public class TorrentView extends AppCompatActivity {
 
@@ -38,7 +52,11 @@ public class TorrentView extends AppCompatActivity {
 
     ConstraintLayout boton_descargar;
     ConstraintLayout flechaAtras;
+    RecyclerView recyclerComentarios;
+    ComentarioAdapter comentarioAdapter;
+    List<ComentarioModel.ComentarioTorrent> listaComentarios = new ArrayList<>();
 
+    CircleImageView anadir_comentario;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -50,7 +68,9 @@ public class TorrentView extends AppCompatActivity {
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
             return insets;
         });
+
         extras = getIntent().getExtras();
+        titulo_torrent = findViewById(R.id.titulo_torrent_especificaciones);
 
         titulo = extras.getString("titulo");
         tamano = extras.getString("tamano");
@@ -67,10 +87,19 @@ public class TorrentView extends AppCompatActivity {
         ultima_fecha_torrent = findViewById(R.id.fecha_actualizacion_torrent_especificaciones);
         categoria_torrent = findViewById(R.id.categoria_especificaciones);
 
+        anadir_comentario = findViewById(R.id.anadir_comentario);
+
         titulo_torrent.setText(titulo);
         categoria_torrent.setText("Category: " + categoria);
         tamano_torrent.setText("Size:" + tamano);
         ultima_fecha_torrent.setText("Date: " + fecha);
+
+        anadir_comentario.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+            }
+        });
 
         boton_descargar.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -89,7 +118,28 @@ public class TorrentView extends AppCompatActivity {
             }
         });
 
-//        DjangoClient.getComentario_Interface().getComentario()
+        recyclerComentarios = findViewById(R.id.ComentariosRecycler);
+        recyclerComentarios.setLayoutManager(new LinearLayoutManager(this));
 
+        titulo = getIntent().getStringExtra("titulo");
+        obtenerComentarios(titulo);
+
+    }
+    private void obtenerComentarios(String nombre){
+        DjangoClient.getComentario_Interface().getComentario(nombre).enqueue(new Callback<ComentarioModel>() {
+            @Override
+            public void onResponse(Call<ComentarioModel> call, Response<ComentarioModel> response) {
+                if (response.isSuccessful() && response.body() != null) {
+                    List<ComentarioModel.ComentarioTorrent> lista = response.body().comentarioModellist;
+                    comentarioAdapter = new ComentarioAdapter(TorrentView.this, lista);
+                    recyclerComentarios.setAdapter(comentarioAdapter);
+                }
+            }
+
+            @Override
+            public void onFailure(Call<ComentarioModel> call, Throwable t) {
+                Log.e("API_ERROR", t.getMessage());
+            }
+        });
     }
 }
