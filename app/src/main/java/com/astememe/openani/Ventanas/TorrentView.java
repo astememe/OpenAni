@@ -157,11 +157,11 @@ public class TorrentView extends AppCompatActivity {
             @Override
             public void onClick(DialogInterface dialog, int which) {
                 texto = input.getText().toString();
-
+                Toast.makeText(getApplicationContext(),"Tu comentario ha sido añadido.", Toast.LENGTH_SHORT).show();
             }
         });
         builder.setNegativeButton("Cancelar",null);
         builder.show();
-        Log.d("texto",texto);
+
     }
 }
