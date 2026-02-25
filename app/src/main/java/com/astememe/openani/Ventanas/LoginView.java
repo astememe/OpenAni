@@ -25,6 +25,11 @@ import com.astememe.openani.Django_Manager.Models.TokenModel;
 import com.astememe.openani.Django_Manager.Models.UserDataModel;
 import com.astememe.openani.R;
 
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.io.IOException;
+
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -160,6 +165,16 @@ public class LoginView extends AppCompatActivity {
 
                     startActivity(new Intent(LoginView.this, MainAnime.class));
                     finish();
+
+                }
+                else {
+                    try {
+                        JSONObject errores = new JSONObject(response.errorBody().string());
+                    } catch (JSONException e) {
+                        throw new RuntimeException(e);
+                    } catch (IOException e) {
+                        throw new RuntimeException(e);
+                    }
                 }
             }
 
