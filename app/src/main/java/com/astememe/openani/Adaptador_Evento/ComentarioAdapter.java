@@ -3,6 +3,7 @@ import android.content.Context;
 import android.content.SharedPreferences;
 import android.net.Uri;
 import android.os.Build;
+import android.preference.PreferenceManager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -41,6 +42,7 @@ public class ComentarioAdapter extends RecyclerView.Adapter<ComentarioAdapter.So
 
     @Override
     public void onBindViewHolder(@NonNull SostenDeVistas_C holder, int position) {
+        preferences = PreferenceManager.getDefaultSharedPreferences(context);
         ComentarioModel.ComentarioTorrent comentarioModel = comentarios.get(position);
         Uri uri = Uri.parse("android.resource://" + context.getPackageName() + "/drawable/foto_de_perfil_" + preferences.getString("imagen", ""));
 
@@ -63,7 +65,7 @@ public class ComentarioAdapter extends RecyclerView.Adapter<ComentarioAdapter.So
         public SostenDeVistas_C(@NonNull View itemView){
             super(itemView);
 
-            nombre_usuario_comentario = itemView.findViewById(R.id.nombre_usuario);
+            nombre_usuario_comentario = itemView.findViewById(R.id.nombre_usuario_comentario);
             img_perfil = itemView.findViewById(R.id.img_perfil);
             comentario_texto = itemView.findViewById(R.id.comentario_texto);
             comentario_fecha_publicacion = itemView.findViewById(R.id.comentario_fecha_publicacion);
