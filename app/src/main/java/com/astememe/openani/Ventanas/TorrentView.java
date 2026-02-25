@@ -48,7 +48,6 @@ public class TorrentView extends AppCompatActivity {
     String leechers;
     String categoria;
     String enlace;
-
     TextView titulo_torrent;
     TextView tamano_torrent;
     TextView ultima_fecha_torrent;
@@ -57,6 +56,7 @@ public class TorrentView extends AppCompatActivity {
     ConstraintLayout boton_descargar;
     ConstraintLayout flechaAtras;
     RecyclerView recyclerComentarios;
+    String texto;
     ComentarioAdapter comentarioAdapter;
     List<ComentarioModel.ComentarioTorrent> listaComentarios = new ArrayList<>();
 
@@ -158,15 +158,12 @@ public class TorrentView extends AppCompatActivity {
         builder.setPositiveButton("Aceptar", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
-                String texto = input.getText().toString();
-                Toast.makeText(getApplicationContext(), "Texto: " + texto, Toast.LENGTH_SHORT).show();
-
-                Log.d("texto",texto);
+                texto = input.getText().toString();
 
             }
         });
         builder.setNegativeButton("Cancelar",null);
         builder.show();
-
+        Log.d("texto",texto);
     }
 }
