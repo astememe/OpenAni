@@ -1,11 +1,15 @@
 package com.astememe.openani.Ventanas;
 
+import android.app.AlertDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
+import android.text.InputType;
 import android.util.Log;
 import android.view.View;
+import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -71,7 +75,6 @@ public class TorrentView extends AppCompatActivity {
 
         extras = getIntent().getExtras();
         titulo_torrent = findViewById(R.id.titulo_torrent_especificaciones);
-
         titulo = extras.getString("titulo");
         tamano = extras.getString("tamano");
         fecha = extras.getString("fecha");
@@ -95,7 +98,7 @@ public class TorrentView extends AppCompatActivity {
         anadir_comentario.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                mostrarMensajeComent();
             }
         });
 
@@ -139,5 +142,29 @@ public class TorrentView extends AppCompatActivity {
                 Log.e("API_ERROR", t.getMessage());
             }
         });
+    }
+    private void mostrarMensajeComent(){
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setTitle("Escribe tu comentario");
+
+        final EditText input = new EditText(this);
+        input.setHint("Escribe aquí");
+
+        input.setInputType(InputType.TYPE_CLASS_TEXT);
+        builder.setView(input);
+
+        builder.setPositiveButton("Aceptar", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                String texto = input.getText().toString();
+                Toast.makeText(getApplicationContext(), "Texto: " + texto, Toast.LENGTH_SHORT).show();
+
+                Log.d("texto",texto);
+
+            }
+        });
+        builder.setNegativeButton("Cancelar",null);
+        builder.show();
+
     }
 }
