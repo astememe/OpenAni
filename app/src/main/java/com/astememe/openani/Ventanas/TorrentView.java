@@ -4,8 +4,11 @@ import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.net.Uri;
+import android.os.Build;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.text.InputType;
 import android.util.Log;
 import android.view.View;
@@ -28,17 +31,24 @@ import com.astememe.openani.Django_Manager.Interfaces.DjangoClient;
 import com.astememe.openani.Django_Manager.Models.ComentarioModel;
 import com.astememe.openani.R;
 
+import java.text.SimpleDateFormat;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
+import java.util.Locale;
+import java.util.zip.Inflater;
 
 import io.woong.shapedimageview.CircleImageView;
+import okhttp3.ResponseBody;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
 public class TorrentView extends AppCompatActivity {
 
-
+    SharedPreferences preferences;
     Context context = this;
     Bundle extras;
     String titulo;
@@ -48,15 +58,17 @@ public class TorrentView extends AppCompatActivity {
     String leechers;
     String categoria;
     String enlace;
+    String fecha_string;
     TextView titulo_torrent;
     TextView tamano_torrent;
     TextView ultima_fecha_torrent;
-    TextView categoria_torrent;
 
     ConstraintLayout boton_descargar;
     ConstraintLayout flechaAtras;
     RecyclerView recyclerComentarios;
     String texto;
+    String nombre;
+    String imagen;
     ComentarioAdapter comentarioAdapter;
     List<ComentarioModel.ComentarioTorrent> listaComentarios = new ArrayList<>();
 
@@ -64,6 +76,9 @@ public class TorrentView extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        preferences = PreferenceManager.getDefaultSharedPreferences(this);
+        nombre = preferences.getString("nombre", "");
+        imagen = preferences.getString("imagen", "");
         super.onCreate(savedInstanceState);
         EdgeToEdge.enable(this);
         setContentView(R.layout.activity_torrent_view);
@@ -83,6 +98,11 @@ public class TorrentView extends AppCompatActivity {
         categoria = extras.getString("categoria");
         enlace = extras.getString("enlace");
 
+        recyclerComentarios = findViewById(R.id.ComentariosRecycler);
+        comentarioAdapter = new ComentarioAdapter(this, listaComentarios);
+
+        recyclerComentarios.setAdapter(comentarioAdapter);
+
         boton_descargar = findViewById(R.id.boton_descarga);
 
         titulo_torrent = findViewById(R.id.titulo_torrent_especificaciones);
@@ -94,6 +114,7 @@ public class TorrentView extends AppCompatActivity {
         titulo_torrent.setText(titulo);
         tamano_torrent.setText("Size:" + tamano);
         ultima_fecha_torrent.setText("Date: " + fecha);
+        obtenerComentarios(titulo);
 
         anadir_comentario.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -123,7 +144,6 @@ public class TorrentView extends AppCompatActivity {
         recyclerComentarios.setLayoutManager(new LinearLayoutManager(this));
 
         titulo = getIntent().getStringExtra("titulo");
-        obtenerComentarios(titulo);
 
     }
     private void obtenerComentarios(String nombre){
@@ -131,9 +151,9 @@ public class TorrentView extends AppCompatActivity {
             @Override
             public void onResponse(Call<ComentarioModel> call, Response<ComentarioModel> response) {
                 if (response.isSuccessful() && response.body() != null) {
-                    List<ComentarioModel.ComentarioTorrent> lista = response.body().comentarioModellist;
-                    comentarioAdapter = new ComentarioAdapter(TorrentView.this, lista);
-                    recyclerComentarios.setAdapter(comentarioAdapter);
+                    listaComentarios.clear();
+                    listaComentarios.addAll(response.body().comentarioModellist);
+                    comentarioAdapter.notifyDataSetChanged();
                 }
             }
 
@@ -156,8 +176,27 @@ public class TorrentView extends AppCompatActivity {
         builder.setPositiveButton("Aceptar", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
+                SimpleDateFormat fecha_formato = new SimpleDateFormat("yyyy-MM-dd", Locale.getDefault());
+                fecha_string = fecha_formato.format(new Date());
                 texto = input.getText().toString();
-                Toast.makeText(getApplicationContext(),"Tu comentario ha sido añadido.", Toast.LENGTH_SHORT).show();
+                ComentarioModel.ComentarioTorrent comentarioTorrent = new ComentarioModel.ComentarioTorrent(titulo, nombre, imagen, texto, fecha_string);
+                DjangoClient.getComentario_Interface().postComentario(comentarioTorrent).enqueue(new Callback<ComentarioModel>() {
+                    @Override
+                    public void onResponse(Call<ComentarioModel> call, Response<ComentarioModel> response) {
+                        if (response.isSuccessful()){
+                            listaComentarios.add(comentarioTorrent);
+                        } else {
+                            Log.d("comentarioError", "Error al comentar");
+                        }
+                        comentarioAdapter.notifyDataSetChanged();
+                    }
+
+                    @Override
+                    public void onFailure(Call<ComentarioModel> call, Throwable t) {
+                        Log.d("ERROR", "error al crear comentario");
+                    }
+                });
+//                Toast.makeText(getApplicationContext(),"Tu comentario ha sido añadido.", Toast.LENGTH_SHORT).show();
             }
         });
         builder.setNegativeButton("Cancelar",null);

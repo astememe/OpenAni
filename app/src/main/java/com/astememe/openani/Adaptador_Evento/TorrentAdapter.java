@@ -97,6 +97,7 @@ public class TorrentAdapter extends RecyclerView.Adapter<TorrentAdapter.SostenDe
         holder.estrella_favorita_icono.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                Log.d("DEBUG", "Aquí está el fav");
                 token = "Bearer " + preferences.getString("token", "");
                 if (!preferences.getBoolean("invitado", false) && !listaFavoritos.contains(torrent.getEnlace())) {
                     FavoriteModel.FavoriteTorrentModel favoriteTorrentModel = new FavoriteModel.FavoriteTorrentModel(preferences.getString("nombre", "Invitado"), torrent.getTitulo(), torrent.getEnlace(), torrent.getTamano(), torrent.getFecha(), Integer.toString(torrent.getSeeders()), Integer.toString(torrent.getLeechers()));
