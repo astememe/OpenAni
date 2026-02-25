@@ -170,6 +170,15 @@ public class LoginView extends AppCompatActivity {
                 else {
                     try {
                         JSONObject errores = new JSONObject(response.errorBody().string());
+                        if (errores.has("username")){
+                            login_usuario.setError(errores.getJSONArray("username").getString(0));
+                        }
+                        if (errores.has("password")) {
+                            login_contrasenia.setError(errores.getJSONArray("password").getString(0));
+                        }
+                        if (errores.has("non_field_errors")) {
+                            login_contrasenia.setError(errores.getJSONArray("non_field_errors").getString(0));
+                        }
                     } catch (JSONException e) {
                         throw new RuntimeException(e);
                     } catch (IOException e) {

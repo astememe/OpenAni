@@ -90,7 +90,6 @@ public class MainAnime extends AppCompatActivity {
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
             return insets;
         });
-        Boolean esInvitado = esInvitado();
         preferences = PreferenceManager.getDefaultSharedPreferences(this);
 
         String nombre_de_usuario = preferences.getString("nombre", "Invitado");

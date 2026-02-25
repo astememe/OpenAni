@@ -270,12 +270,6 @@
                             />
                     </LinearLayout>
                 </LinearLayout>
-
-                <ScrollView
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    >
-
                     <LinearLayout
                         android:id="@+id/linear_layout_comentarios"
                         android:layout_width="match_parent"
@@ -294,12 +288,7 @@
                                 />
                         </ScrollView>
                     </LinearLayout>
-
-                </ScrollView>
-
             </LinearLayout>
-
-
         </LinearLayout>
 
     </FrameLayout>
