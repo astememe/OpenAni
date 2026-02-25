@@ -168,6 +168,10 @@ public class MainAnime extends AppCompatActivity {
                 favorites.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
+                        if (esInvitado()) {
+                            errorInvitado();
+                            return;
+                        }
                         header_categoria.setText("Favorites");
                         header_subcategoria.setText("");
                         fillFavorites();
