@@ -10,7 +10,7 @@
     android:orientation="horizontal"
     tools:ignore="DuplicateIds">
 
-    <ScrollView
+    <androidx.core.widget.NestedScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:scrollbars="none"
@@ -478,5 +478,5 @@
             android:gravity="center"
             />
         </LinearLayout>
-    </ScrollView>
+    </androidx.core.widget.NestedScrollView>
 </LinearLayout>
