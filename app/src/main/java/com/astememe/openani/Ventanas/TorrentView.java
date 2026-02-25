@@ -196,7 +196,6 @@ public class TorrentView extends AppCompatActivity {
                         Log.d("ERROR", "error al crear comentario");
                     }
                 });
-//                Toast.makeText(getApplicationContext(),"Tu comentario ha sido añadido.", Toast.LENGTH_SHORT).show();
             }
         });
         builder.setNegativeButton("Cancelar",null);

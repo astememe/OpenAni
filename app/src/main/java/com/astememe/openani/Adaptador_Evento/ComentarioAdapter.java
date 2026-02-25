@@ -44,7 +44,7 @@ public class ComentarioAdapter extends RecyclerView.Adapter<ComentarioAdapter.So
     public void onBindViewHolder(@NonNull SostenDeVistas_C holder, int position) {
         preferences = PreferenceManager.getDefaultSharedPreferences(context);
         ComentarioModel.ComentarioTorrent comentarioModel = comentarios.get(position);
-        Uri uri = Uri.parse("android.resource://" + context.getPackageName() + "/drawable/foto_de_perfil_" + preferences.getString("imagen", ""));
+        Uri uri = Uri.parse("android.resource://" + context.getPackageName() + "/drawable/foto_de_perfil_" + comentarios.get(position).imagen_usuario);
 
 
         holder.nombre_usuario_comentario.setText(comentarioModel.getNombre_usuario());
