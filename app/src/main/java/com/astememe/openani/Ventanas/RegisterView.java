@@ -100,7 +100,7 @@ public class RegisterView extends AppCompatActivity {
         });
 
         tengoCuenta.setOnClickListener(v -> {
-            Intent intent = new Intent(RegisterView.this,MainAnime.class);
+            Intent intent = new Intent(RegisterView.this,LoginView.class);
             startActivity(intent);
         });
         infladorDeCambiarFoto = LayoutInflater.from(this);

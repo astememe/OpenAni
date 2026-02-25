@@ -88,12 +88,10 @@ public class TorrentView extends AppCompatActivity {
         titulo_torrent = findViewById(R.id.titulo_torrent_especificaciones);
         tamano_torrent = findViewById(R.id.tamano_torrent_especificaciones);
         ultima_fecha_torrent = findViewById(R.id.fecha_actualizacion_torrent_especificaciones);
-        categoria_torrent = findViewById(R.id.categoria_especificaciones);
 
         anadir_comentario = findViewById(R.id.anadir_comentario);
 
         titulo_torrent.setText(titulo);
-        categoria_torrent.setText("Category: " + categoria);
         tamano_torrent.setText("Size:" + tamano);
         ultima_fecha_torrent.setText("Date: " + fecha);
 
