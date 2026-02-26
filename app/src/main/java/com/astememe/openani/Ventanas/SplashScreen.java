@@ -44,6 +44,7 @@ public class SplashScreen extends AppCompatActivity {
                 .transition(DrawableTransitionOptions.withCrossFade(2000))
                 .into(fondo);
         launchNextActivity();
+        finish();
     }
 
     public void launchNextActivity(){

@@ -131,7 +131,11 @@ public class TorrentView extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(enlace.toString()));
-                startActivity(intent);
+                if (intent.resolveActivity(getPackageManager()) != null) {
+                    startActivity(intent);
+                } else {
+                    Toast.makeText(context, "Please download a torrent manager first", Toast.LENGTH_LONG).show();
+                }
             }
         });
 
