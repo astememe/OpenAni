@@ -34,8 +34,6 @@ public class SplashScreen extends AppCompatActivity {
             return insets;
         });
         splashLogo = findViewById(R.id.splashLogo);
-        Animation aparicion = AnimationUtils.loadAnimation(this,R.anim.aparecer);
-
 
         fondo = findViewById(R.id.splashImagenFondo);
         Glide.with(this)
@@ -44,7 +42,6 @@ public class SplashScreen extends AppCompatActivity {
                 .transition(DrawableTransitionOptions.withCrossFade(2000))
                 .into(fondo);
         launchNextActivity();
-        finish();
     }
 
     public void launchNextActivity(){
@@ -53,6 +50,7 @@ public class SplashScreen extends AppCompatActivity {
             public void run() {
                 Intent intent = new Intent(SplashScreen.this,LoginView.class);
                 startActivity(intent);
+                SplashScreen.this.finish();
             }
         }, 4000);
     }
