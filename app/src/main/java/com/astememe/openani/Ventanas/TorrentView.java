@@ -119,6 +119,10 @@ public class TorrentView extends AppCompatActivity {
         anadir_comentario.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                if (preferences.getBoolean("invitado", true)) {
+                    Toast.makeText(getApplicationContext(), "You must Log In to comment", Toast.LENGTH_LONG).show();
+                    return;
+                }
                 mostrarMensajeComent();
             }
         });
