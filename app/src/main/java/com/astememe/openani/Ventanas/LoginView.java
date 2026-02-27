@@ -105,6 +105,8 @@ public class LoginView extends AppCompatActivity {
 
         if (inputUsuario.isEmpty() || inputContrasenia.isEmpty()) {
             mostrarErrorVacio();
+        } else if (inputContrasenia.length() < 6 || !inputContrasenia.matches(".*\\d.*")){
+            login_contrasenia.setError("La contraseña debe tener al menos 6 caracteres y al menos un número");
         } else {
             LoginModel login = new LoginModel(inputUsuario, inputContrasenia);
 
@@ -122,6 +124,17 @@ public class LoginView extends AppCompatActivity {
                         Log.d("Token", token);
 
                         obtenerDatosPerfil(token);
+                    } else {
+                        try {
+                            JSONObject errores = new JSONObject(response.errorBody().string());
+                            if (errores.has("detail")) {
+                                login_usuario.setError("Usuario o contraseña incorrectos");
+                            }
+                        } catch (JSONException e) {
+                            throw new RuntimeException(e);
+                        } catch (IOException e) {
+                            throw new RuntimeException(e);
+                        }
                     }
                 }
 
@@ -166,24 +179,6 @@ public class LoginView extends AppCompatActivity {
                     startActivity(new Intent(LoginView.this, MainAnime.class));
                     finish();
 
-                }
-                else {
-                    try {
-                        JSONObject errores = new JSONObject(response.errorBody().string());
-                        if (errores.has("username")){
-                            login_usuario.setError(errores.getJSONArray("username").getString(0));
-                        }
-                        if (errores.has("password")) {
-                            login_contrasenia.setError(errores.getJSONArray("password").getString(0));
-                        }
-                        if (errores.has("non_field_errors")) {
-                            login_contrasenia.setError(errores.getJSONArray("non_field_errors").getString(0));
-                        }
-                    } catch (JSONException e) {
-                        throw new RuntimeException(e);
-                    } catch (IOException e) {
-                        throw new RuntimeException(e);
-                    }
                 }
             }
 

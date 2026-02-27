@@ -119,7 +119,7 @@ public class TorrentAdapter extends RecyclerView.Adapter<TorrentAdapter.SostenDe
                         }
                     });
                 } else if (preferences.getBoolean("invitado", false)){
-                    Toast.makeText(context, "Debes iniciar sesión para agregar un torrent a favoritos", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(context, "You must Log In to add favorites", Toast.LENGTH_SHORT).show();
                 } else {
                     DjangoClient.getTorrentsAPI_Interface().deleteFavorite(token, preferences.getString("nombre", ""), torrent.getEnlace()).enqueue(new Callback<Void>() {
                         @Override

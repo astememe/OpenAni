@@ -4,7 +4,7 @@ import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
 public class DjangoClient {
-    public static String BASE_URL = "http://10.210.218.32:8000/api/";
+    public static String BASE_URL = "http://10.0.2.2:8000/api/";
     private static Retrofit retrofit;
     public static Retrofit getRetrofitInstance() {
         if (retrofit == null) {
