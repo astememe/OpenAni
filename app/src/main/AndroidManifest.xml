@@ -17,14 +17,14 @@
         tools:ignore="GoogleAppIndexingWarning">
         <activity
             android:name=".Ventanas.FavoriteView"
-            android:exported="false" />
+            android:exported="true" />
         <activity
             android:name=".Ventanas.RecuperarContrasenaView"
-            android:exported="false" />
+            android:exported="true" />
 
         <uses-library
             android:name="org.apache.http.legacy"
-            android:required="false" />
+            android:required="true" />
 
         <activity
             android:name=".Ventanas.AccountView"
@@ -32,6 +32,11 @@
         <activity
             android:name=".Ventanas.LoginView"
             android:exported="true" />
+        <intent-filter>
+            <action android:name="android.intent.action.MAIN" />
+
+            <category android:name="android.intent.category.LAUNCHER" />
+        </intent-filter>
         <activity
             android:name=".Ventanas.MainActivity"
             android:exported="true" />
@@ -48,11 +53,6 @@
         <activity
             android:name=".Ventanas.SplashScreen"
             android:exported="true">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
         </activity>
         <activity
             android:name=".Ventanas.TorrentView"
