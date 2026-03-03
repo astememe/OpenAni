@@ -226,14 +226,6 @@ public class RegisterView extends AppCompatActivity {
             public void onResponse(Call<UserDataModel> call, Response<UserDataModel> response) {
                 if (response.isSuccessful()) {
                     UserDataModel userDataModel = response.body();
-                    UserDataModel.UserData userData = userDataModel.getUser();
-                    String username = userData.getUsername();
-                    String email = userData.getEmail();
-                    String imagen = userData.getImagen();
-
-                    preferences.edit().putString("nombre", username).apply();
-                    preferences.edit().putString("email", email).apply();
-                    preferences.edit().putString("imagen", imagen).apply();
                     preferences.edit().putString("access", userDataModel.getAccess()).apply();
                     preferences.edit().putString("refresh", userDataModel.getRefresh()).apply();
                     preferences.edit().putBoolean("invitado", false).apply();
