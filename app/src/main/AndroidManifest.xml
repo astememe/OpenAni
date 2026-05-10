@@ -30,7 +30,7 @@
             android:name=".Django_Manager.Models.ChatActivity"
             android:exported="false" />
         <activity
-            android:name=".activity_other_profile"
+            android:name=".Ventanas.OtherProfile"
             android:exported="false" />
         <activity
             android:name=".Ventanas.FavoriteView"
