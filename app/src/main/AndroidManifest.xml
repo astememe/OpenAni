@@ -4,6 +4,14 @@
 
     <uses-permission android:name="android.permission.INTERNET" />
 
+    <queries>
+        <intent>
+            <action android:name="android.intent.action.VIEW" />
+
+            <data android:scheme="magnet" />
+        </intent>
+    </queries>
+
     <application
         android:allowBackup="true"
         android:dataExtractionRules="@xml/data_extraction_rules"
@@ -16,38 +24,44 @@
         android:usesCleartextTraffic="true"
         tools:ignore="GoogleAppIndexingWarning">
         <activity
+            android:name=".Ventanas.Chat"
+            android:exported="false" />
+        <activity
+            android:name=".Django_Manager.Models.ChatActivity"
+            android:exported="false" />
+        <activity
             android:name=".activity_other_profile"
             android:exported="false" />
         <activity
             android:name=".Ventanas.FavoriteView"
-            android:exported="true"></activity>
+            android:exported="false" />
         <activity
             android:name=".Ventanas.RecuperarContrasenaView"
-            android:exported="true" />
+            android:exported="false" />
 
         <uses-library
             android:name="org.apache.http.legacy"
-            android:required="true"></uses-library>
+            android:required="false" />
 
         <activity
             android:name=".Ventanas.AccountView"
-            android:exported="true"></activity>
+            android:exported="true" />
         <activity
             android:name=".Ventanas.LoginView"
-            android:exported="true"></activity>
+            android:exported="true" />
         <activity
             android:name=".Ventanas.MainActivity"
-            android:exported="true"></activity>
+            android:exported="true" />
         <activity
             android:name=".Ventanas.MainAnime"
-            android:exported="true"></activity>
+            android:exported="true" />
         <activity
             android:name=".Ventanas.MainManga"
-            android:exported="true"></activity>
+            android:exported="true" />
         <activity
             android:name=".Ventanas.RegisterView"
             android:exported="true"
-            android:windowSoftInputMode="adjustPan"></activity>
+            android:windowSoftInputMode="adjustPan" />
         <activity
             android:name=".Ventanas.SplashScreen"
             android:exported="true">
@@ -59,7 +73,7 @@
         </activity>
         <activity
             android:name=".Ventanas.TorrentView"
-            android:exported="true"></activity>
+            android:exported="true" />
     </application>
 
 </manifest>
