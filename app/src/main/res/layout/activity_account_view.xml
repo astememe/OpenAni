@@ -411,7 +411,7 @@
                             android:textColor="@color/black"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:text="Password"
+                            android:text="Change password"
                             android:layout_marginHorizontal="40dp"
                             android:fontFamily="@font/zud"
                             android:textSize="20sp"

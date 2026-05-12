@@ -233,9 +233,19 @@
                     android:layout_height="2dp"
                     android:background="@color/azul_header" />
 
+                <TextView
+                    android:id="@+id/chat"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Chat"
+                    android:textSize="40sp"
+                    android:textColor="@color/black"
+                    android:fontFamily="@font/share_bold"
+                    android:textStyle="bold"
+                    android:layout_marginTop="20dp"/>
 
                 <ImageView
-                    android:layout_marginTop="50dp"
+                    android:layout_marginTop="40dp"
                     android:layout_width="match_parent"
                     android:layout_height="200dp"
                     android:src="@drawable/onepunch_sidebar"
