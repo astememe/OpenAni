@@ -24,10 +24,10 @@
         android:usesCleartextTraffic="true"
         tools:ignore="GoogleAppIndexingWarning">
         <activity
-            android:name=".Ventanas.Chat"
+            android:name=".Ventanas.AllChatsActivity"
             android:exported="false" />
         <activity
-            android:name=".Django_Manager.Models.ChatActivity"
+            android:name=".Ventanas.Chat"
             android:exported="false" />
         <activity
             android:name=".Ventanas.OtherProfile"

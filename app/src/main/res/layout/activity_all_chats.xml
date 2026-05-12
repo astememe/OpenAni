@@ -90,6 +90,7 @@
         app:layout_constraintTop_toBottomOf="@id/header"
         app:layout_constraintBottom_toBottomOf="parent"
         android:orientation="vertical"
+        android:background="@color/white"
         >
 
         <ImageView
@@ -98,6 +99,7 @@
             android:src="@drawable/header_anime_fondo"
             android:scaleType="centerCrop"
             android:alpha="0.2"
+            android:backgroundTint="@color/white"
             >
 
         </ImageView>
@@ -150,24 +152,24 @@
                 <ScrollView
                     android:layout_width="match_parent"
                     android:layout_height="match_parent">
-<!--                    <LinearLayout-->
-<!--                        android:layout_width="match_parent"-->
-<!--                        android:layout_height="match_parent"-->
-<!--                        android:orientation="vertical">-->
+                    <!--                    <LinearLayout-->
+                    <!--                        android:layout_width="match_parent"-->
+                    <!--                        android:layout_height="match_parent"-->
+                    <!--                        android:orientation="vertical">-->
 
-<!--                        <include layout="@layout/card_chat_user"-->
-<!--                        <include layout="@layout/card_chat_user"-->
-<!--                        <include layout="@layout/card_chat_user"-->
-<!--                        <include layout="@layout/card_chat_user"-->
-<!--                        <include layout="@layout/card_chat_user"-->
-<!--                        <include layout="@layout/card_chat_user"-->
-<!--                        <include layout="@layout/card_chat_user"-->
-<!--                        <include layout="@layout/card_chat_user"-->
-<!--                        <include layout="@layout/card_chat_user"-->
-<!--                        <include layout="@layout/card_chat_user"-->
-<!--                        <include layout="@layout/card_chat_user"-->
-<!--                        <include layout="@layout/card_chat_user"-->
-<!--                    </LinearLayout>-->
+                    <!--                        <include layout="@layout/card_chat_user"-->
+                    <!--                        <include layout="@layout/card_chat_user"-->
+                    <!--                        <include layout="@layout/card_chat_user"-->
+                    <!--                        <include layout="@layout/card_chat_user"-->
+                    <!--                        <include layout="@layout/card_chat_user"-->
+                    <!--                        <include layout="@layout/card_chat_user"-->
+                    <!--                        <include layout="@layout/card_chat_user"-->
+                    <!--                        <include layout="@layout/card_chat_user"-->
+                    <!--                        <include layout="@layout/card_chat_user"-->
+                    <!--                        <include layout="@layout/card_chat_user"-->
+                    <!--                        <include layout="@layout/card_chat_user"-->
+                    <!--                        <include layout="@layout/card_chat_user"-->
+                    <!--                    </LinearLayout>-->
                     <androidx.recyclerview.widget.RecyclerView
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"

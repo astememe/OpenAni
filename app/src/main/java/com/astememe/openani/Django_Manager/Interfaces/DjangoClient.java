@@ -42,4 +42,8 @@ public class DjangoClient {
     public static TorrentsInterface getTorrentsAPI_Interface() {
         return getRetrofitInstance().create(TorrentsInterface.class);
     }
+
+    public static ChatInterface getMessages_Interface() {
+        return getRetrofitInstance().create(ChatInterface.class);
+    }
 }

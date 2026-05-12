@@ -69,7 +69,7 @@ public class MainAnime extends AppCompatActivity {
     TextView header_categoria;
     TextView header_subcategoria;
 
-    TextView anime, anime_music_video, anime_english, anime_non_english, anime_original, manga, manga_english, manga_non_english, manga_original,  nombre_usuario, favorites;
+    TextView anime, anime_music_video, anime_english, anime_non_english, anime_original, manga, manga_english, manga_non_english, manga_original,  nombre_usuario, favorites, chat;
     ImageView foto_perfil;
     ImageButton boton_descargar;
 
@@ -155,6 +155,7 @@ public class MainAnime extends AppCompatActivity {
                 foto_perfil = menu_lateral.findViewById(R.id.imagen_perfil);
                 nombre_usuario = menu_lateral.findViewById(R.id.nombre_usuario);
                 favorites = menu_lateral.findViewById(R.id.favorites);
+                chat = menu_lateral.findViewById(R.id.chat);
 
                 if (esInvitado()) {
                     nombre_usuario.setText("Invitado");
@@ -184,6 +185,18 @@ public class MainAnime extends AppCompatActivity {
                     public void onClick(View v) {
                         menu_lateral_visible = !menu_lateral_visible;
                         cerrar_menu_lateral(slide_out);
+                    }
+                });
+
+                chat.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        if (esInvitado()) {
+                            errorInvitado();
+                        } else {
+                            Intent intent = new Intent(MainAnime.this, AllChatsActivity.class);
+                            startActivity(intent);
+                        }
                     }
                 });
 
