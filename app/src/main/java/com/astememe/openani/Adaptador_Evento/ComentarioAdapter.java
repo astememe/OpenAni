@@ -1,9 +1,14 @@
 package com.astememe.openani.Adaptador_Evento;
+import static androidx.core.content.ContextCompat.startActivity;
+
+import android.accounts.Account;
 import android.content.Context;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.net.Uri;
 import android.os.Build;
 import android.preference.PreferenceManager;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -15,6 +20,8 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.astememe.openani.Django_Manager.Models.ComentarioModel;
 import com.astememe.openani.R;
+import com.astememe.openani.Ventanas.AccountView;
+import com.astememe.openani.Ventanas.OtherProfile;
 import com.astememe.openani.Ventanas.TorrentView;
 
 import java.time.LocalDate;
@@ -51,6 +58,21 @@ public class ComentarioAdapter extends RecyclerView.Adapter<ComentarioAdapter.So
         holder.img_perfil.setImageURI(uri);
         holder.comentario_texto.setText(comentarioModel.getTexto_usuario());
         holder.comentario_fecha_publicacion.setText(comentarioModel.getFecha());
+
+        holder.nombre_usuario_comentario.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (comentarioModel.getNombre_usuario().equals(preferences.getString("nombre", ""))) {
+                    Intent intent = new Intent(context, AccountView.class);
+                    context.startActivity(intent);
+                }
+                else {
+                    Intent intent = new Intent(context, OtherProfile.class);
+                    intent.putExtra("other_username", comentarioModel.getNombre_usuario());
+                    context.startActivity(intent);
+                }
+            }
+        });
     }
 
     @Override

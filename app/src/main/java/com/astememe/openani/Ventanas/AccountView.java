@@ -7,8 +7,8 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.os.Handler;
-    import android.util.Log;
-    import android.view.LayoutInflater;
+import android.util.Log;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.EditText;
 import android.view.animation.Animation;
@@ -92,8 +92,9 @@ public class AccountView extends AppCompatActivity {
         botonAtras.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(AccountView.this, MainAnime.class);
-                startActivity(intent);
+                finish();
+//                Intent intent = new Intent(AccountView.this, MainAnime.class);
+//                startActivity(intent);
             }
         });
 

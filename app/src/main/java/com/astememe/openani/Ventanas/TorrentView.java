@@ -93,8 +93,8 @@ public class TorrentView extends AppCompatActivity {
         titulo = extras.getString("titulo");
         tamano = extras.getString("tamano");
         fecha = extras.getString("fecha");
-        seeders = extras.getString("seeders");
-        leechers = extras.getString("leechers");
+//        seeders = extras.getString("seeders");
+//        leechers = extras.getString("leechers");
         categoria = extras.getString("categoria");
         enlace = extras.getString("enlace");
 

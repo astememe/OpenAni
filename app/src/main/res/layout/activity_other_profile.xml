@@ -40,6 +40,7 @@
             >
 
             <TextView
+                android:id="@+id/title"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Profile"
@@ -147,21 +148,21 @@
 
                     </ImageView>
 
-                    <EditText
+                    <TextView
                         android:background="#f6f6f6"
                         android:textColor="@color/black"
-                        android:id="@+id/descripcion_perfil"
+                        android:id="@+id/descripcion"
                         android:layout_width="200dp"
                         android:layout_height="100dp"
                         android:layout_gravity="center"
                         android:layout_marginBottom="25dp"
                         android:text="Me gusta el pito"
-                        android:textAlignment="center"
+                        android:gravity="center"
                         android:textSize="18sp"
                         android:fontFamily="@font/share"
                         >
 
-                    </EditText>
+                    </TextView>
 
                     <io.woong.shapedimageview.CircleImageView
                         android:id="@+id/fotoperfil"
@@ -193,6 +194,7 @@
                         >
 
                         <TextView
+                            android:id="@+id/username"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:text="Pepe_Zaracatunga19"
@@ -209,7 +211,7 @@
                 </LinearLayout>
 
                 <LinearLayout
-                    android:id="@+id/buttons"
+                    android:id="@+id/send_message"
                     android:layout_width="220dp"
                     android:layout_height="60dp"
                     android:orientation="horizontal"

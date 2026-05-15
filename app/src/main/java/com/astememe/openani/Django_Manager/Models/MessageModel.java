@@ -18,7 +18,7 @@ public class MessageModel {
         @SerializedName("sender_username")
         private String emisor;
 
-        @SerializedName("message")
+        @SerializedName("text")
         private String contenido;
 
         @SerializedName("timestamp")
