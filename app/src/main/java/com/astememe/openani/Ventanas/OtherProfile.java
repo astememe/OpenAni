@@ -1,5 +1,7 @@
 package com.astememe.openani.Ventanas;
 
+import android.content.Intent;
+import android.content.SharedPreferences;
 import android.content.SharedPreferences;
 import android.net.Uri;
 import android.os.Bundle;
@@ -7,9 +9,14 @@ import android.preference.PreferenceManager;
 import android.util.Log;
 import android.view.View;
 import android.widget.TextView;
+import android.preference.PreferenceManager;
+import android.util.Log;
+import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.cardview.widget.CardView;
 import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.core.graphics.Insets;
@@ -17,8 +24,17 @@ import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
 import com.astememe.openani.Django_Manager.Interfaces.DjangoClient;
+import com.astememe.openani.Django_Manager.Models.RoomModel;
+import com.astememe.openani.Django_Manager.Interfaces.DjangoClient;
 import com.astememe.openani.Django_Manager.Models.UserDataModel;
 import com.astememe.openani.R;
+
+import java.util.HashMap;
+import java.util.Map;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 import java.util.List;
 
@@ -37,11 +53,15 @@ public class OtherProfile extends AppCompatActivity {
     ConstraintLayout flecha_atras;
 
 
+    ConstraintLayout send_message_button;
+    TextView username_otherprofile;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         EdgeToEdge.enable(this);
         setContentView(R.layout.activity_other_profile);
+
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main), (v, insets) -> {
             Insets systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars());
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
@@ -85,5 +105,74 @@ public class OtherProfile extends AppCompatActivity {
 
             }
         });
+
+        send_message_button = findViewById(R.id.send_message_button);
+        username_otherprofile = findViewById(R.id.username);
+
+        send_message_button.setOnClickListener(v -> {
+            String otherUserUsername = username_otherprofile.getText().toString();
+            iniciarChat(otherUserUsername);
+        });
+    }
+
+    private void iniciarChat(String otherUsername) {
+        SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(this);
+        String token = "Bearer " + preferences.getString("token", "");
+
+        DjangoClient.getMessages_Interface().getRooms(token).enqueue(new Callback<RoomModel>() {
+            @Override
+            public void onResponse(Call<RoomModel> call, Response<RoomModel> response) {
+                if (response.isSuccessful() && response.body() != null) {
+                    RoomModel.RoomDetail salaExistente = null;
+
+                    for (RoomModel.RoomDetail sala : response.body().getSalas()) {
+                        if (sala.getNombreOtroUsuario().equals(otherUsername)) {
+                            salaExistente = sala;
+                        }
+                    }
+
+                    if (salaExistente != null) {
+                        irAlChat(salaExistente.getId(), otherUsername);
+                    } else {
+                        crearNuevaSala(token, otherUsername);
+                    }
+                } else {
+                    crearNuevaSala(token, otherUsername);
+                }
+            }
+
+            @Override
+            public void onFailure(Call<RoomModel> call, Throwable t) {
+                crearNuevaSala(token, otherUsername);
+            }
+        });
+    }
+    private void crearNuevaSala(String token, String otherUsername) {
+        Map<String, String> body = new HashMap<>();
+        body.put("other_user_username", otherUsername);
+
+        DjangoClient.getMessages_Interface().createRoom(token, body)
+                .enqueue(new Callback<RoomModel.RoomDetail>() {
+                    @Override
+                    public void onResponse(Call<RoomModel.RoomDetail> call, Response<RoomModel.RoomDetail> response) {
+                        if (response.isSuccessful() && response.body() != null) {
+                            irAlChat(response.body().getId(), otherUsername);
+                        } else {
+                            Toast.makeText(OtherProfile.this, "Error al crear sala", Toast.LENGTH_SHORT).show();
+                        }
+                    }
+
+                    @Override
+                    public void onFailure(Call<RoomModel.RoomDetail> call, Throwable t) {
+                        Toast.makeText(OtherProfile.this, "Error de red", Toast.LENGTH_SHORT).show();
+                    }
+                });
+    }
+
+    private void irAlChat(int roomId, String username) {
+        Intent intent = new Intent(OtherProfile.this, Chat.class);
+        intent.putExtra("ROOM_ID", roomId);
+        intent.putExtra("OTHER_USERNAME", username);
+        startActivity(intent);
     }
 }
