@@ -2,6 +2,7 @@ package com.astememe.openani.Django_Manager.Interfaces;
 import com.astememe.openani.API_Manager.DataModel;
 import com.astememe.openani.Django_Manager.Models.ComentarioModel;
 import com.astememe.openani.Django_Manager.Models.FavoriteModel;
+import com.astememe.openani.Django_Manager.Models.RoomModel;
 import com.astememe.openani.Django_Manager.Models.TorrentsModel;
 
 import retrofit2.Call;
@@ -30,4 +31,5 @@ public interface TorrentsInterface {
 
     @GET("comentarios/")
     Call<ComentarioModel> getComentarios();
+
 }
