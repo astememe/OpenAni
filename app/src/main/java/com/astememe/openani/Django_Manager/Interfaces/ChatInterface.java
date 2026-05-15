@@ -21,7 +21,7 @@ public interface ChatInterface {
     @GET("rooms/")
     Call<RoomModel> getRooms(@Header("Authorization") String token);
 
-    @POST("createroom/")
+    @POST("rooms/")
     Call<RoomModel.RoomDetail> createRoom(
             @Header("Authorization") String token,
             @Body Map<String, String> body

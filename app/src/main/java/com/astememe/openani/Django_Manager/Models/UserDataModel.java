@@ -3,7 +3,10 @@ package com.astememe.openani.Django_Manager.Models;
 
 import com.google.gson.annotations.SerializedName;
 
+import java.util.List;
+
 public class UserDataModel {
+
     @SerializedName("success")
     boolean success;
 
