@@ -42,6 +42,7 @@ public class RoomAdapter extends RecyclerView.Adapter<RoomAdapter.SostenDeVistas
         holder.nombre_otro_usuario.setText(salaActual.getNombreOtroUsuario());
         Uri uri = Uri.parse("android.resource://" + context.getPackageName() + "/drawable/foto_de_perfil_" + salaActual.getImagenOtroUsuario());
         holder.imagen_otro_usuario.setImageURI(uri);
+        holder.ultimo_mensaje.setText(salaActual.getUltimoMensaje());
 
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -60,13 +61,15 @@ public class RoomAdapter extends RecyclerView.Adapter<RoomAdapter.SostenDeVistas
     }
 
     public static class SostenDeVistas_Sala extends RecyclerView.ViewHolder {
-        TextView nombre_otro_usuario, ultimo_mensaje_texto, fecha_ultima_conexion;
+        TextView nombre_otro_usuario, ultimo_mensaje_texto, fecha_ultima_conexion, ultimo_mensaje;
         CircleImageView imagen_otro_usuario;
+
 
         public SostenDeVistas_Sala(@NonNull View itemView) {
             super(itemView);
             nombre_otro_usuario = itemView.findViewById(R.id.nombre_usuario_room);
             imagen_otro_usuario = itemView.findViewById(R.id.img_perfil);
+            ultimo_mensaje = itemView.findViewById(R.id.ultimo_mensaje);
         }
     }
 }
