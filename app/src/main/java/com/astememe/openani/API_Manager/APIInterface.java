@@ -1,5 +1,7 @@
 package com.astememe.openani.API_Manager;
 
+import com.astememe.openani.Django_Manager.Models.ComentarioModel;
+
 import java.util.Map;
 
 import retrofit2.Call;
