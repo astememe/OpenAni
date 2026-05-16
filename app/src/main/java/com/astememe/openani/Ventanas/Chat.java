@@ -91,6 +91,8 @@ public class Chat extends AppCompatActivity {
     private void iniciarWebSocket() {
         OkHttpClient client = new OkHttpClient();
 
+//        String urlWebSocket = "ws://25.43.166.83:8000/ws/chat/" + roomId + "/";
+
         String urlWebSocket = "ws://10.0.2.2:8000/ws/chat/" + roomId + "/";
 
         Request request = new Request.Builder()
