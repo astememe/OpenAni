@@ -92,9 +92,8 @@ public class AccountView extends AppCompatActivity {
         botonAtras.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                finish();
-//                Intent intent = new Intent(AccountView.this, MainAnime.class);
-//                startActivity(intent);
+                Intent intent = new Intent(AccountView.this, MainAnime.class);
+                startActivity(intent);
             }
         });
 

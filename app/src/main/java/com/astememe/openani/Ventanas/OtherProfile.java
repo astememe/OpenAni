@@ -132,7 +132,7 @@ public class OtherProfile extends AppCompatActivity {
                     }
 
                     if (salaExistente != null) {
-                        irAlChat(salaExistente.getId(), otherUsername);
+                        irAlChat(Integer.toString(salaExistente.getId()), otherUsername);
                     } else {
                         crearNuevaSala(token, otherUsername);
                     }
@@ -156,7 +156,7 @@ public class OtherProfile extends AppCompatActivity {
                     @Override
                     public void onResponse(Call<RoomModel.RoomDetail> call, Response<RoomModel.RoomDetail> response) {
                         if (response.isSuccessful() && response.body() != null) {
-                            irAlChat(response.body().getId(), otherUsername);
+                            irAlChat(Integer.toString(response.body().getId()), otherUsername);
                         } else {
                             Toast.makeText(OtherProfile.this, "Error al crear sala", Toast.LENGTH_SHORT).show();
                         }
@@ -169,10 +169,10 @@ public class OtherProfile extends AppCompatActivity {
                 });
     }
 
-    private void irAlChat(int roomId, String username) {
+    private void irAlChat(String roomId, String username) {
         Intent intent = new Intent(OtherProfile.this, Chat.class);
         intent.putExtra("ROOM_ID", roomId);
-        intent.putExtra("OTHER_USERNAME", username);
+        intent.putExtra("other_username", username);
         startActivity(intent);
     }
 }

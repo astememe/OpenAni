@@ -7,6 +7,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
@@ -36,12 +37,13 @@ public class Chat extends AppCompatActivity {
 
     private RecyclerView recyclerView;
     private EditText inputMensaje;
-    private ConstraintLayout btnEnviar;
+    private ConstraintLayout btnEnviar, flecha_atras;
     private List<MessageModel.MessageDetail> listaMensajes = new ArrayList<>();
     private WebSocket webSocket;
     private String roomId;
     private String miUsuario;
     private ChatAdapter adapter;
+    private TextView title;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -56,15 +58,26 @@ public class Chat extends AppCompatActivity {
         SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(this);
 
         roomId = getIntent().getStringExtra("ROOM_ID");
+        String other_username = getIntent().getStringExtra("other_username");
         miUsuario = preferences.getString("nombre", "");
 
         recyclerView = findViewById(R.id.chat_messages_recycler_view);
         inputMensaje = findViewById(R.id.escribir_mensaje);
+        title = findViewById(R.id.username_chat);
+        title.setText(other_username);
         btnEnviar = findViewById(R.id.send_button);
+        flecha_atras = findViewById(R.id.flechaAtrasAcountView);
 
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
         adapter = new ChatAdapter(this, listaMensajes, miUsuario);
         recyclerView.setAdapter(adapter);
+
+        flecha_atras.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
+            }
+        });
 
         iniciarWebSocket();
         btnEnviar.setOnClickListener(new View.OnClickListener() {
