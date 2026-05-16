@@ -23,6 +23,9 @@ public class RoomModel {
         @SerializedName("other_user")
         private String nombreOtroUsuario;
 
+        @SerializedName("other_user_img")
+        private String imagenOtroUsuario;
+
         @SerializedName("last_message")
         private String ultimoMensaje;
 
@@ -30,9 +33,10 @@ public class RoomModel {
         private String fechaUltimoMensaje;
 
         // Constructor
-        public RoomDetail(int id, String nombreOtroUsuario, String ultimoMensaje, String fechaUltimoMensaje) {
+        public RoomDetail(int id, String nombreOtroUsuario, String imagenOtroUsuario, String ultimoMensaje, String fechaUltimoMensaje) {
             this.id = id;
             this.nombreOtroUsuario = nombreOtroUsuario;
+            this.imagenOtroUsuario = imagenOtroUsuario;
             this.ultimoMensaje = ultimoMensaje;
             this.fechaUltimoMensaje = fechaUltimoMensaje;
         }
@@ -40,6 +44,7 @@ public class RoomModel {
         // Getters
         public int getId() { return id; }
         public String getNombreOtroUsuario() { return nombreOtroUsuario; }
+        public String getImagenOtroUsuario() {return imagenOtroUsuario; }
         public String getUltimoMensaje() { return ultimoMensaje; }
         public String getFechaHora() { return fechaUltimoMensaje; }
     }

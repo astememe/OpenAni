@@ -12,8 +12,6 @@ public class MessageModel {
     }
 
     public static class MessageDetail {
-        @SerializedName("id")
-        private int id;
 
         @SerializedName("sender_username")
         private String emisor;
@@ -24,14 +22,12 @@ public class MessageModel {
         @SerializedName("timestamp")
         private String fechaHora;
 
-        public MessageDetail(int id, String emisor, String contenido, String fechaHora) {
-            this.id = id;
+        public MessageDetail(String emisor, String contenido, String fechaHora) {
             this.emisor = emisor;
             this.contenido = contenido;
             this.fechaHora = fechaHora;
         }
 
-        public int getId() { return id; }
         public String getEmisor() { return emisor; }
         public String getContenido() { return contenido; }
         public String getFechaHora() { return fechaHora; }

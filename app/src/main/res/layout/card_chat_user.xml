@@ -59,7 +59,7 @@
                             />
                     </androidx.constraintlayout.widget.ConstraintLayout>
                     <TextView
-                        android:id="@+id/nombre_usuario_comentario"
+                        android:id="@+id/nombre_usuario_room"
                         android:layout_width="wrap_content"
                         android:layout_height="match_parent"
                         android:text="Alejandro_676767"

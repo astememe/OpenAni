@@ -30,7 +30,6 @@ public class AllChatsActivity extends AppCompatActivity {
     RoomAdapter adapter;
     List<RoomModel.RoomDetail> listaSalas = new ArrayList<>();
 
-    @SuppressLint("MissingInflatedId")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -55,9 +54,8 @@ public class AllChatsActivity extends AppCompatActivity {
             @Override
             public void onResponse(Call<RoomModel> call, Response<RoomModel> response) {
                 if (response.isSuccessful() && response.body() != null) {
-                    listaSalas.clear();
                     if (response.body().getSalas().isEmpty()) {
-                        Log.d("DEBUG", "No hay salas de chat disponibles");
+                        Toast.makeText(AllChatsActivity.this, "No hay salas disponibles", Toast.LENGTH_SHORT).show();
                     } else {
                         listaSalas.addAll(response.body().getSalas());
                     }
